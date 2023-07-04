@@ -87,7 +87,16 @@ class DetailsControllerImplementation extends DetailsController {
   @override
   Future<void> addAttachment(context) async {
     FilePickerResult? result = await FilePicker.platform.pickFiles(
-        allowedExtensions: ["jpg", "png", "jpeg", "pdf", "doc", "docx", "txt"],
+        allowedExtensions: [
+          "jpg",
+          "png",
+          "jpeg",
+          "HEIC",
+          "pdf",
+          "doc",
+          "docx",
+          "txt"
+        ],
         allowMultiple: true,
         withData: true,
         type: FileType.media);
