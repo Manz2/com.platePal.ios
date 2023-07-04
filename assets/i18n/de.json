@@ -1,0 +1,105 @@
+{
+  "account": {
+    "language": "Sprache",
+    "chooselanguage": "Sprache wählen",
+    "logout": "Abmelden",
+    "changepic": "Profilbild ändern",
+    "changetheme": "Theme ändern",
+    "editGroup": "Gruppe bearbeiten",
+    "addGroupMemver": "Mitglied hinzufügen",
+    "enterId": "Um ein neues Mitglied hinzuzufügen, geben Sie bitte die Nutzer-ID ein.",
+    "idCopied": "Ihre Nutzer-ID wurde in die Zwischenablage kopiert",
+    "noAccountFound": "Es wurde kein Nutzer mit der ID in der Zwischenablage gefunden",
+    "memberRemoved": "Mitglied entfernt"
+  },
+  "create": {
+    "noValidUrl": "Keine gültige http:// oder https:// URL",
+    "newRecipe": "Neues Rezept erstellen",
+    "notAllFields": "Bitte füllen Sie alle erforderlichen Felder aus",
+    "ingredientFields": "Zutaten oder Menge nicht angegeben",
+    "stepTxt": "Schritt nicht angegeben",
+    "keep": "Behalten",
+    "delete": "Verwerfen",
+    "attention": "Achtung!",
+    "deleteMessage": "Ihre aktuellen Eingaben gehen verloren, wenn Sie fortfahren. Möchten Sie dennoch fortfahren?",
+    "name": "Name",
+    "ingredient": "Zutat",
+    "step": "Schritt",
+    "description": "Beschreibung",
+    "vegan": "Vegan",
+    "vegetarian": "Vegetarisch",
+    "gluten": "Glutenfrei",
+    "create": "Erstellen",
+    "update": "Aktualisieren",
+    "ammount": "Anzahl",
+    "ai": {
+      "estimate": "Geschätzte Zeit: 30 sec",
+      "wait": "Bitte warten",
+      "processing": "Verarbeitung läuft",
+      "cancel": "Abbrechen",
+      "import": "KI-Import",
+      "success": "Import erfolgreich",
+      "failure": "Etwas ist schief gelaufen"
+    }
+  },
+  "details": {
+    "notes": "Notizen",
+    "ingredients": "Zutaten",
+    "instructions": "Zubereitung",
+    "source": "Quelle",
+    "favorite": "Favorit",
+    "add_file": "Datei hinzufügen",
+    "attachments": "Angehängte Dateien:",
+    "attachment_removed": "Anhang entfernt",
+    "edit_recipe": "Rezept bearbeiten",
+    "isSubcription_modalTitle": "Dies ist das Rezept eines Freundes.",
+    "isSubcription_modalText": "Möchtest du eine eigene Kopie erstellen, um es bearbeiten zu können?",
+    "isSubcription_modalConfirmButton": "Kopie erstellen",
+    "isSubcription_modalCancelButton": "Abbrechen"
+  },
+  "favorites": {
+    "none": "Keine Favoriten vorhanden"
+  },
+  "filter": {
+    "filter": "Filter",
+    "vegan": "vegan",
+    "vegetarian": "vegetarisch",
+    "gluten": "glutenfrei"
+  },
+  "home": {
+    "search": "Suche",
+    "none": "Keine Rezepte vorhanden"
+  },
+  "login": {
+    "firstlogin": "Herzlich willkommen! Dies ist Ihr erster Login. Bitte wählen Sie einen Benutzernamen aus.",
+    "signup": "Registrieren",
+    "login": "Einloggen",
+    "password": "Passwort",
+    "email": "E-Mail",
+    "weak-password-title": "Schwaches Passwort",
+    "weak-password-message": "Das angegebene Passwort ist zu schwach. Bitte wähle ein stärkeres Passwort aus.",
+    "email-already-in-use-title": "E-Mail bereits in Verwendung",
+    "email-already-in-use-message": "Es existiert bereits ein Konto für diese E-Mail-Adresse. Bitte verwende eine andere E-Mail-Adresse.",
+    "invalid-email-title": "Ungültige E-Mail-Adresse",
+    "invalid-email-message": "Die E-Mail-Adresse ist ungültig formatiert. Bitte gib eine gültige E-Mail-Adresse ein."
+  },
+  "error": {
+    "upload": {
+      "title": "Datei zu Groß",
+      "message": "Das von Ihnen gewählte bild ist zu groß bitte wählen sie ein bild das kleiner als 2MB groß ist"
+    },
+    "signin": {
+      "title": "Fehler beim Einloggen",
+      "message": "Die Anmeldung ist fehlgeschlagen. Bitte überprüfen Sie Ihre Zugangsdaten und stellen Sie sicher, dass Ihre E-Mail Adresse und Ihr Passwort korrekt sind."
+    },
+    "signup": {
+      "title": "Registrierung nicht verfügbar",
+      "message": "Derzeit ist es Nutzern leider nicht möglich, sich selbst zu registrieren. Bitte wenden Sie sich an einen Administrator von PlatePal"
+    }
+  },
+  "group": {
+    "title": "Gruppe",
+    "recipes": "Rezepte",
+    "recipe": "Rezept"
+  }
+}

@@ -1,0 +1,105 @@
+{
+  "account": {
+    "language": "Language",
+    "chooselanguage": "Choose Language",
+    "logout": "Logout",
+    "changepic": "Change Profile Picture",
+    "changetheme": "Change Theme",
+    "editGroup": "Edit Group",
+    "addGroupMemver": "Add new Member",
+    "enterId": "To add a new member, please enter the user ID.",
+    "idCopied": "Your user ID has been copied to clipboard",
+    "noAccountFound": "No user found with the ID in your clipboard",
+    "memberRemoved": "Member removed"
+  },
+  "create": {
+    "noValidUrl": "Not a valid http:// oder https:// URL",
+    "newRecipe": "Create New Recipe",
+    "notAllFields": "Please fill out all required fields",
+    "ingredientFields": "Ingredient or Quantity missing.",
+    "stepTxt": "Steps missing.",
+    "keep": "Keep",
+    "delete": "Discard",
+    "attention": "Attention!",
+    "deleteMessage": "Your current inputs will be lost if you continue. Do you still want to proceed?",
+    "name": "Name",
+    "ingredient": "Ingredient",
+    "step": "Step",
+    "description": "Description",
+    "vegan": "Vegan",
+    "vegetarian": "Vegetarian",
+    "gluten": "Gluten-free",
+    "create": "Create",
+    "update": "Update",
+    "ammount": "Quantity",
+    "ai": {
+      "estimate": "Estimated Time: 30 sec",
+      "wait": "Please wait",
+      "processing": "Processing in progress",
+      "cancel": "Cancel",
+      "import": "AI-Import",
+      "success": "Import successful",
+      "failure": "Something went wrong"
+    }
+  },
+  "details": {
+    "notes": "Notes",
+    "ingredients": "Ingredients",
+    "instructions": "Instructions",
+    "source": "Source",
+    "favorite": "Favorite",
+    "add_file": "Add File",
+    "attachments": "Attached Files:",
+    "attachment_removed": "Attachment removed",
+    "edit_recipe": "Edit Recipe",
+    "isSubcription_modalTitle": "This is a friend's recipe.",
+    "isSubcription_modalText": "Do you want to create your own copy to be able to edit it?",
+    "isSubcription_modalConfirmButton": "Create Copy",
+    "isSubcription_modalCancelButton": "Cancel"
+  },
+  "favorites": {
+    "none": "No favorites available"
+  },
+  "filter": {
+    "filter": "Filter",
+    "vegan": "vegan",
+    "vegetarian": "vegetarian",
+    "gluten": "gluten free"
+  },
+  "home": {
+    "search": "Search",
+    "none": "No Recipes available"
+  },
+  "login": {
+    "firstlogin": "Welcome! This is your first login. Please choose a username.",
+    "signup": "sign Up",
+    "login": "Login",
+    "password": "Password",
+    "email": "email",
+    "weak-password-title": "Weak Password",
+    "weak-password-message": "The password provided is too weak. Please choose a stronger password.",
+    "email-already-in-use-title": "Email Already in Use",
+    "email-already-in-use-message": "An account already exists for that email. Please use a different email address.",
+    "invalid-email-title": "Invalid Email Address",
+    "invalid-email-message": "The email address is badly formatted. Please enter a valid email address."
+  },
+  "error": {
+    "upload": {
+      "title": "File Too Large",
+      "message": "The image you selected is too large. Please choose an image that is smaller than 2MB."
+    },
+    "signin": {
+      "title": "Login Error",
+      "message": "Login failed. Please check your credentials and make sure your email address and password are correct."
+    },
+    "signup": {
+      "title": "Registration Not Available",
+      "message": "Currently, users are unable to register themselves. Please contact a PlatePal administrator for assistance."
+    }
+  },
+  "group": {
+    "title": "Group",
+    "recipes": "Recipes",
+    "recipe": "Recipe"
+  }
+}
