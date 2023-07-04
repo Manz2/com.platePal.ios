@@ -62,9 +62,9 @@ class AccountControllerImplmentation extends AccountController {
   void changeImage(BuildContext context) async {
     FilePickerResult? result = await FilePicker.platform.pickFiles(
         withData: true,
-        allowedExtensions: ["jpg", "png", "jpeg", "HEIC"],
+        //allowedExtensions: ["jpg", "png", "jpeg", "HEIC"],
         allowMultiple: false,
-        type: FileType.custom);
+        type: FileType.any);
 
     if (result != null) {
       if (result.files.single.size >= 2000000) {
