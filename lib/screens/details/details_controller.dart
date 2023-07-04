@@ -90,7 +90,7 @@ class DetailsControllerImplementation extends DetailsController {
         allowedExtensions: ["jpg", "png", "jpeg", "pdf", "doc", "docx", "txt"],
         allowMultiple: true,
         withData: true,
-        type: FileType.custom);
+        type: FileType.media);
 
     if (result != null) {
       for (PlatformFile importedFile in result.files) {

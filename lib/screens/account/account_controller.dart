@@ -64,7 +64,7 @@ class AccountControllerImplmentation extends AccountController {
         withData: true,
         allowedExtensions: ["jpg", "png"],
         allowMultiple: false,
-        type: FileType.custom);
+        type: FileType.media);
 
     if (result != null) {
       if (result.files.single.size >= 2000000) {
