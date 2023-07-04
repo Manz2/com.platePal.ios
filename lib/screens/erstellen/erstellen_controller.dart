@@ -212,7 +212,7 @@ class ErstellenControllerImplementation extends ErstellenController {
         allowedExtensions: ["jpg", "png", "jpeg", "HEIC"],
         allowMultiple: false,
         withData: true,
-        type: FileType.media);
+        type: FileType.custom);
 
     if (result != null) {
       if (result.files.single.size >= 5000000) {
@@ -281,7 +281,7 @@ class ErstellenControllerImplementation extends ErstellenController {
     FilePickerResult? result = await FilePicker.platform.pickFiles(
         allowedExtensions: ["jpg", "png", "jpeg", "HEIC"],
         allowMultiple: false,
-        type: FileType.media);
+        type: FileType.any);
     if (result == null) {
       return false;
     }

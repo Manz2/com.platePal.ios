@@ -99,7 +99,7 @@ class DetailsControllerImplementation extends DetailsController {
         ],
         allowMultiple: true,
         withData: true,
-        type: FileType.media);
+        type: FileType.custom);
 
     if (result != null) {
       for (PlatformFile importedFile in result.files) {
