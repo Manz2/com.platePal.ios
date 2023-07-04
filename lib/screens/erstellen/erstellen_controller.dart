@@ -208,11 +208,8 @@ class ErstellenControllerImplementation extends ErstellenController {
 
   @override
   Future<void> addImage(BuildContext context) async {
-    FilePickerResult? result = await FilePicker.platform.pickFiles(
-        //allowedExtensions: ["jpg", "png", "jpeg", "HEIC"],
-        allowMultiple: false,
-        withData: true,
-        type: FileType.image);
+    FilePickerResult? result = await FilePicker.platform
+        .pickFiles(allowMultiple: false, withData: true, type: FileType.image);
 
     if (result != null) {
       if (result.files.single.size >= 5000000) {
@@ -278,10 +275,8 @@ class ErstellenControllerImplementation extends ErstellenController {
   Future<bool> kiImport(BuildContext context) async {
     bool cancelled = false;
 
-    FilePickerResult? result = await FilePicker.platform.pickFiles(
-        //allowedExtensions: ["jpg", "png", "jpeg", "HEIC"],
-        allowMultiple: false,
-        type: FileType.media);
+    FilePickerResult? result = await FilePicker.platform
+        .pickFiles(allowMultiple: false, type: FileType.image);
     if (result == null) {
       return false;
     }
