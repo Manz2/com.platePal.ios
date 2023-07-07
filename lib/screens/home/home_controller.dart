@@ -26,7 +26,7 @@ class HomeControllerImplmentation extends HomeController {
   Future<void> search(String term) async {
     await getRecipes(FirebaseAuth.instance.currentUser!.uid);
     List<Recipe> temp = [];
-    for (var rec in state.recipes) {
+    for (Recipe rec in state.recipes) {
       if (rec.title.toLowerCase().contains(term.toLowerCase()) ||
           rec.description.toLowerCase().contains(term.toLowerCase())) {
         //Add ingredients

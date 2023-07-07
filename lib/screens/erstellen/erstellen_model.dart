@@ -1,5 +1,3 @@
-import 'dart:typed_data';
-
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:plate_pal/screens/home/home_model.dart';
 
@@ -16,8 +14,7 @@ class ErstellenModel with _$ErstellenModel {
       required bool glutenfrei,
       required bool vegan,
       required bool vegetarisch,
-      required String fileType,
-      required Future<Uint8List> image,
+      required String image,
       required bool nameNotSet,
       required bool ingridientNotSet,
       required bool stepsNotSet,

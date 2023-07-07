@@ -22,12 +22,12 @@ import 'package:http/http.dart' as http;
 import '../screens/account/account_backend_service.dart';
 
 class BackendService implements BackendServiceAggregator {
-  var logger = Logger();
+  Logger logger = Logger();
   final storageRef = FirebaseStorage.instance.ref("images");
 
-  var veganFilter = false;
-  var vegetarischFilter = false;
-  var glutenfreiFilter = false;
+  bool veganFilter = false;
+  bool vegetarischFilter = false;
+  bool glutenfreiFilter = false;
 
   //Home
   @override
@@ -142,7 +142,7 @@ class BackendService implements BackendServiceAggregator {
 
   Future<List<Recipe>> listToRecipes(DataSnapshot snapshot) async {
     List<Recipe> l = [];
-    for (var element in snapshot.children) {
+    for (DataSnapshot element in snapshot.children) {
       l.add(await getRecipeFrom(element));
     }
     if (glutenfreiFilter || veganFilter || vegetarischFilter) {
@@ -305,13 +305,12 @@ class BackendService implements BackendServiceAggregator {
 
   @override
   Future<bool> updateRecipe(Recipe recipe, String uid) async {
-    pushRecipe(recipe, uid, "", Future.value(Uint8List(0)), true);
+    pushRecipe(recipe, uid, true);
     return true;
   }
 
   @override
-  Future<void> pushRecipe(Recipe recipe, String uid, String fileType,
-      Future<Uint8List> image, bool isEdit) async {
+  Future<void> pushRecipe(Recipe recipe, String uid, bool isEdit) async {
     DatabaseReference ref =
         FirebaseDatabase.instance.ref().child('users/' + uid + "/rezepte/");
     final newPostKey = isEdit
@@ -320,17 +319,12 @@ class BackendService implements BackendServiceAggregator {
     ref.child(newPostKey!).update(recipe.toJson());
     logger.d("created recipe with id:" + newPostKey);
     ref.child(newPostKey).update({"id": newPostKey});
-    if (fileType != "") {
-      String fileName = newPostKey + "." + fileType;
-      await FirebaseStorage.instance
-          .ref("images")
-          .child(fileName)
-          .putData(await image);
-      String downloadUrl = await FirebaseStorage.instance
-          .ref("images")
-          .child(fileName)
-          .getDownloadURL();
-      ref.child(newPostKey).update({"image": downloadUrl});
+    Future<Uint8List?> image =
+        FirebaseStorage.instance.refFromURL(recipe.image).getData();
+    Uint8List? im = await image;
+    if (im != null) {
+      FirebaseStorage.instance.refFromURL(recipe.image).delete();
+      FirebaseStorage.instance.ref("images").child(newPostKey).putData(im);
     }
   }
 
@@ -399,8 +393,7 @@ class BackendService implements BackendServiceAggregator {
         creator: "",
         isSubscription: false,
         privateRecipe: false,
-        image:
-            "https://firebasestorage.googleapis.com/v0/b/platepal-60ea4.appspot.com/o/images%2Fplaceholder.png?alt=media&token=80f4ccf4-1b8e-48a1-b5dd-4eeec66359cf",
+        image: "",
         title: json["title"],
         description: json["description"],
         guideText: json["guideText"],
@@ -416,7 +409,6 @@ class BackendService implements BackendServiceAggregator {
   @override
   ErstellenModel recipeToErstellenModel(Recipe recipe, {bool edit = false}) {
     List<Ingredient> castedIngredients = [];
-    Future<Uint8List> bytes = Future.value(Uint8List(0));
     try {
       for (dynamic i in recipe.ingredients) {
         Map<String, dynamic> json = Map<String, dynamic>.from(i);
@@ -427,9 +419,6 @@ class BackendService implements BackendServiceAggregator {
       for (Ingredient i in recipe.ingredients) {
         castedIngredients.add(i);
       }
-    }
-    if (recipe.image != "") {
-      bytes = readNetworkImage(recipe.image);
     }
     return ErstellenModel(
         id: recipe.id,
@@ -443,14 +432,13 @@ class BackendService implements BackendServiceAggregator {
         glutenfrei: recipe.glutenfrei,
         vegan: recipe.vegan,
         vegetarisch: recipe.vegan,
-        fileType: getFileExtensionFromUrl(recipe.image),
-        image: bytes,
         nameNotSet: false,
         ingridientNotSet: false,
         stepsNotSet: false,
         descriptionNotSet: false,
         weburlNotSet: false,
-        isEdit: edit);
+        isEdit: edit,
+        image: recipe.image);
   }
 
   String getFileExtensionFromUrl(String url) {

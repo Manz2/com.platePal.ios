@@ -63,10 +63,11 @@ class _AddTextFieldWidgetState extends State<AddTextFieldWidgetSteps> {
                 _reorderTextFieldValue(oldIndex, newIndex);
               },
               children: [
-                for (var index = 0; index < widget.steps.length; index++)
+                for (int index = 0; index < widget.steps.length; index++)
                   ListTile(
                     shape: Border.all(
-                      color: currentScheme.getScheme().outline, // Farbe der Border
+                      color:
+                          currentScheme.getScheme().outline, // Farbe der Border
                       width: 1.5, // Breite der Border
                     ),
                     key: Key('$index'),

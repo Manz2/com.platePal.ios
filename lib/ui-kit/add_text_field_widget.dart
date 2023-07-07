@@ -46,7 +46,7 @@ class _AddTextFieldWidgetState extends State<AddTextFieldWidget> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        for (var value in widget.ingredients)
+        for (Ingredient value in widget.ingredients)
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [

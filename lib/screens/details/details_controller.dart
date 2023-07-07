@@ -83,7 +83,7 @@ class DetailsControllerImplementation extends DetailsController {
     _backendService.updateRecipe(state.recipe, uid);
   }
 
-  var attachmentSizeLimit = 5000000; //5MB
+  int attachmentSizeLimit = 5000000; //5MB
   @override
   Future<void> addAttachment(context) async {
     FilePickerResult? result = await FilePicker.platform.pickFiles(

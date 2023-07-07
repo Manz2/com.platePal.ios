@@ -25,8 +25,7 @@ mixin _$ErstellenModel {
   bool get glutenfrei => throw _privateConstructorUsedError;
   bool get vegan => throw _privateConstructorUsedError;
   bool get vegetarisch => throw _privateConstructorUsedError;
-  String get fileType => throw _privateConstructorUsedError;
-  Future<Uint8List> get image => throw _privateConstructorUsedError;
+  String get image => throw _privateConstructorUsedError;
   bool get nameNotSet => throw _privateConstructorUsedError;
   bool get ingridientNotSet => throw _privateConstructorUsedError;
   bool get stepsNotSet => throw _privateConstructorUsedError;
@@ -57,8 +56,7 @@ abstract class $ErstellenModelCopyWith<$Res> {
       bool glutenfrei,
       bool vegan,
       bool vegetarisch,
-      String fileType,
-      Future<Uint8List> image,
+      String image,
       bool nameNotSet,
       bool ingridientNotSet,
       bool stepsNotSet,
@@ -91,7 +89,6 @@ class _$ErstellenModelCopyWithImpl<$Res, $Val extends ErstellenModel>
     Object? glutenfrei = null,
     Object? vegan = null,
     Object? vegetarisch = null,
-    Object? fileType = null,
     Object? image = null,
     Object? nameNotSet = null,
     Object? ingridientNotSet = null,
@@ -136,14 +133,10 @@ class _$ErstellenModelCopyWithImpl<$Res, $Val extends ErstellenModel>
           ? _value.vegetarisch
           : vegetarisch // ignore: cast_nullable_to_non_nullable
               as bool,
-      fileType: null == fileType
-          ? _value.fileType
-          : fileType // ignore: cast_nullable_to_non_nullable
-              as String,
       image: null == image
           ? _value.image
           : image // ignore: cast_nullable_to_non_nullable
-              as Future<Uint8List>,
+              as String,
       nameNotSet: null == nameNotSet
           ? _value.nameNotSet
           : nameNotSet // ignore: cast_nullable_to_non_nullable
@@ -201,8 +194,7 @@ abstract class _$$_ErstellenModelCopyWith<$Res>
       bool glutenfrei,
       bool vegan,
       bool vegetarisch,
-      String fileType,
-      Future<Uint8List> image,
+      String image,
       bool nameNotSet,
       bool ingridientNotSet,
       bool stepsNotSet,
@@ -233,7 +225,6 @@ class __$$_ErstellenModelCopyWithImpl<$Res>
     Object? glutenfrei = null,
     Object? vegan = null,
     Object? vegetarisch = null,
-    Object? fileType = null,
     Object? image = null,
     Object? nameNotSet = null,
     Object? ingridientNotSet = null,
@@ -278,14 +269,10 @@ class __$$_ErstellenModelCopyWithImpl<$Res>
           ? _value.vegetarisch
           : vegetarisch // ignore: cast_nullable_to_non_nullable
               as bool,
-      fileType: null == fileType
-          ? _value.fileType
-          : fileType // ignore: cast_nullable_to_non_nullable
-              as String,
       image: null == image
           ? _value.image
           : image // ignore: cast_nullable_to_non_nullable
-              as Future<Uint8List>,
+              as String,
       nameNotSet: null == nameNotSet
           ? _value.nameNotSet
           : nameNotSet // ignore: cast_nullable_to_non_nullable
@@ -338,7 +325,6 @@ class _$_ErstellenModel implements _ErstellenModel {
       required this.glutenfrei,
       required this.vegan,
       required this.vegetarisch,
-      required this.fileType,
       required this.image,
       required this.nameNotSet,
       required this.ingridientNotSet,
@@ -379,9 +365,7 @@ class _$_ErstellenModel implements _ErstellenModel {
   @override
   final bool vegetarisch;
   @override
-  final String fileType;
-  @override
-  final Future<Uint8List> image;
+  final String image;
   @override
   final bool nameNotSet;
   @override
@@ -403,7 +387,7 @@ class _$_ErstellenModel implements _ErstellenModel {
 
   @override
   String toString() {
-    return 'ErstellenModel(name: $name, id: $id, requiredIngredients: $requiredIngredients, steps: $steps, description: $description, glutenfrei: $glutenfrei, vegan: $vegan, vegetarisch: $vegetarisch, fileType: $fileType, image: $image, nameNotSet: $nameNotSet, ingridientNotSet: $ingridientNotSet, stepsNotSet: $stepsNotSet, descriptionNotSet: $descriptionNotSet, isImport: $isImport, webURL: $webURL, weburlNotSet: $weburlNotSet, isValidUrl: $isValidUrl, isEdit: $isEdit)';
+    return 'ErstellenModel(name: $name, id: $id, requiredIngredients: $requiredIngredients, steps: $steps, description: $description, glutenfrei: $glutenfrei, vegan: $vegan, vegetarisch: $vegetarisch, image: $image, nameNotSet: $nameNotSet, ingridientNotSet: $ingridientNotSet, stepsNotSet: $stepsNotSet, descriptionNotSet: $descriptionNotSet, isImport: $isImport, webURL: $webURL, weburlNotSet: $weburlNotSet, isValidUrl: $isValidUrl, isEdit: $isEdit)';
   }
 
   @override
@@ -423,8 +407,6 @@ class _$_ErstellenModel implements _ErstellenModel {
             (identical(other.vegan, vegan) || other.vegan == vegan) &&
             (identical(other.vegetarisch, vegetarisch) ||
                 other.vegetarisch == vegetarisch) &&
-            (identical(other.fileType, fileType) ||
-                other.fileType == fileType) &&
             (identical(other.image, image) || other.image == image) &&
             (identical(other.nameNotSet, nameNotSet) ||
                 other.nameNotSet == nameNotSet) &&
@@ -445,28 +427,26 @@ class _$_ErstellenModel implements _ErstellenModel {
   }
 
   @override
-  int get hashCode => Object.hashAll([
-        runtimeType,
-        name,
-        id,
-        const DeepCollectionEquality().hash(_requiredIngredients),
-        const DeepCollectionEquality().hash(_steps),
-        description,
-        glutenfrei,
-        vegan,
-        vegetarisch,
-        fileType,
-        image,
-        nameNotSet,
-        ingridientNotSet,
-        stepsNotSet,
-        descriptionNotSet,
-        isImport,
-        webURL,
-        weburlNotSet,
-        isValidUrl,
-        isEdit
-      ]);
+  int get hashCode => Object.hash(
+      runtimeType,
+      name,
+      id,
+      const DeepCollectionEquality().hash(_requiredIngredients),
+      const DeepCollectionEquality().hash(_steps),
+      description,
+      glutenfrei,
+      vegan,
+      vegetarisch,
+      image,
+      nameNotSet,
+      ingridientNotSet,
+      stepsNotSet,
+      descriptionNotSet,
+      isImport,
+      webURL,
+      weburlNotSet,
+      isValidUrl,
+      isEdit);
 
   @JsonKey(ignore: true)
   @override
@@ -485,8 +465,7 @@ abstract class _ErstellenModel implements ErstellenModel {
       required final bool glutenfrei,
       required final bool vegan,
       required final bool vegetarisch,
-      required final String fileType,
-      required final Future<Uint8List> image,
+      required final String image,
       required final bool nameNotSet,
       required final bool ingridientNotSet,
       required final bool stepsNotSet,
@@ -514,9 +493,7 @@ abstract class _ErstellenModel implements ErstellenModel {
   @override
   bool get vegetarisch;
   @override
-  String get fileType;
-  @override
-  Future<Uint8List> get image;
+  String get image;
   @override
   bool get nameNotSet;
   @override

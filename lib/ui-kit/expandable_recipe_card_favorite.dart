@@ -47,12 +47,18 @@ class _MyCardState extends State<ExpandableRecipeCardFavorite> {
                       borderRadius: const BorderRadius.only(
                           topLeft: Radius.circular(8.0),
                           topRight: Radius.circular(8.0)),
-                      child: CachedNetworkImage(
-                        imageUrl: widget.image,
-                        height: 200,
-                        width: double.infinity,
-                        fit: BoxFit.cover,
-                      ))
+                      child: widget.image != ""
+                          ? CachedNetworkImage(
+                              imageUrl: widget.image,
+                              height: 200,
+                              width: double.infinity,
+                              fit: BoxFit.cover,
+                            )
+                          : const Image(
+                              fit: BoxFit.cover,
+                              image:
+                                  AssetImage("assets/images/placeholder.png")),
+                    )
                   : Padding(
                       padding: const EdgeInsets.all(2),
                       child: ListTile(
@@ -61,10 +67,15 @@ class _MyCardState extends State<ExpandableRecipeCardFavorite> {
                           height: 50,
                           child: ClipRRect(
                             borderRadius: BorderRadius.circular(8.0),
-                            child: CachedNetworkImage(
-                              imageUrl: widget.image,
-                              fit: BoxFit.cover,
-                            ),
+                            child: widget.image != ""
+                                ? CachedNetworkImage(
+                                    imageUrl: widget.image,
+                                    fit: BoxFit.cover,
+                                  )
+                                : const Image(
+                                    fit: BoxFit.cover,
+                                    image: AssetImage(
+                                        "assets/images/placeholder.png")),
                           ),
                         ),
                         title: Text(

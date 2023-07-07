@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
@@ -30,6 +31,7 @@ class ErstellenView extends ConsumerWidget {
     }
     _nameController.text = model.name;
     _descriptionController.text = model.description;
+    _linkController.text = model.webURL ?? "";
 
     return Scaffold(
       appBar: AppBar(
@@ -53,38 +55,22 @@ class ErstellenView extends ConsumerWidget {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              if (model.fileType == "")
-                IconButton(
-                    onPressed: () => {controller.addImage(context)},
-                    icon: const Icon(
-                      Icons.add_photo_alternate_outlined,
-                      size: 100,
-                    )),
-              if (model.fileType != "")
-                GestureDetector(
-                  onTap: () => controller.addImage(context),
-                  child: SizedBox(
-                    child: FutureBuilder<Uint8List>(
-                      future: model.image,
-                      builder: (BuildContext context,
-                          AsyncSnapshot<Uint8List> snapshot) {
-                        if (snapshot.connectionState ==
-                            ConnectionState.waiting) {
-                          // Zeige ein Ladeindikator an oder ein Platzhalterbild, während die Daten geladen werden
-                          return const CircularProgressIndicator();
-                        } else if (snapshot.hasError) {
-                          // Zeige eine Fehlermeldung an, falls ein Fehler auftritt
-                          return const Text('Fehler beim Laden der Daten');
-                        } else {
-                          // Zeige das Bild an, sobald die Daten verfügbar sind
-                          return Image.memory(snapshot.data!);
-                        }
-                      },
-                    ),
-                    width: MediaQuery.of(context).size.width - 100,
-                    height: MediaQuery.of(context).size.height / 5,
-                  ),
-                ),
+              model.image != ""
+                  ? GestureDetector(
+                      onTap: () => controller.addImage(context),
+                      child: CachedNetworkImage(
+                        height: MediaQuery.of(context).size.height / 5,
+                        width: MediaQuery.of(context).size.width - 100,
+                        imageUrl: model.image,
+                        fit: BoxFit.cover,
+                      ),
+                    )
+                  : IconButton(
+                      onPressed: () => controller.addImage(context),
+                      icon: Icon(
+                        Icons.add_photo_alternate_outlined,
+                        size: MediaQuery.of(context).size.height / 5,
+                      )),
               const SizedBox(height: 16.0),
               TextField(
                 style: TextStyle(fontSize: currentFontSize.toDouble()),

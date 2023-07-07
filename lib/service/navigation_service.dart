@@ -80,7 +80,7 @@ class NavigationService implements NavigationServiceAggregator {
 
   @override
   void routeBack(BuildContext context) {
-    Navigator.of(context).pop();
+    Beamer.of(context).beamBack();
   }
 
   @override

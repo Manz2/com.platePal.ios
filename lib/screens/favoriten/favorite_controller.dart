@@ -30,7 +30,7 @@ class FavoriteControllerImplmentation extends FavoriteController {
   Future<void> search(String term) async {
     await getFavorites();
     List<Recipe> temp = [];
-    for (var rec in state.favoriten) {
+    for (Recipe rec in state.favoriten) {
       if (rec.title.toLowerCase().contains(term.toLowerCase()) ||
           rec.description.toLowerCase().contains(term.toLowerCase())) {
         //Add ingredients

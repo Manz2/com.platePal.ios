@@ -81,9 +81,7 @@ class FavoriteView extends ConsumerWidget {
       ]),
       body: RefreshIndicator(
         onRefresh: controller.getFavorites,
-        child: /* Expanded(
-          child:  */
-            SingleChildScrollView(
+        child: SingleChildScrollView(
           physics: const AlwaysScrollableScrollPhysics(),
           child: Column(
             children: <Widget>[

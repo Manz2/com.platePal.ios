@@ -24,14 +24,15 @@ class LoginControllerImplmentation extends LoginController {
               username: '',
               passwordVisible: false,
             ));
-  var logger = Logger();
+  Logger logger = Logger();
 
   @override
-  void loginWithMail(dynamic context) async {
+  void loginWithMail(BuildContext context) async {
     bool usernameSet = false;
     try {
-      var user = await FirebaseAuth.instance.signInWithEmailAndPassword(
-          email: state.username, password: state.password);
+      UserCredential user = await FirebaseAuth.instance
+          .signInWithEmailAndPassword(
+              email: state.username, password: state.password);
       if (await _backendService.firstLogin(user.user!.uid)) {
         await showDialog(
                 context: context,

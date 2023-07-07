@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:file_picker/file_picker.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
@@ -27,7 +28,7 @@ class ErstellenControllerImplementation extends ErstellenController {
   })  : _backendService = backendService,
         _navigationService = navigationService,
         super(model ??
-            ErstellenModel(
+            const ErstellenModel(
                 id: '',
                 name: '',
                 description: '',
@@ -37,8 +38,7 @@ class ErstellenControllerImplementation extends ErstellenController {
                 glutenfrei: false,
                 vegan: false,
                 vegetarisch: false,
-                fileType: "",
-                image: Future.value(Uint8List(0)),
+                image: "",
                 nameNotSet: false,
                 ingridientNotSet: false,
                 stepsNotSet: false,
@@ -113,7 +113,7 @@ class ErstellenControllerImplementation extends ErstellenController {
     List<String> tmp = List<String>.from(state.steps);
     tmp.add(step);
     state = state.copyWith(steps: tmp);
-    logger.e("add " + state.steps.toString());
+    logger.d("add " + state.steps.toString());
   }
 
   @override
@@ -121,7 +121,7 @@ class ErstellenControllerImplementation extends ErstellenController {
     List<String> tmp = List<String>.from(state.steps);
     tmp.remove(step);
     state = state.copyWith(steps: tmp);
-    logger.e("delete " + state.steps.toString());
+    logger.d("delete " + state.steps.toString());
   }
 
   @override
@@ -189,19 +189,17 @@ class ErstellenControllerImplementation extends ErstellenController {
         creator: uid,
         isSubscription: false,
         privateRecipe: false,
-        image:
-            "https://firebasestorage.googleapis.com/v0/b/platepal-60ea4.appspot.com/o/images%2Fplaceholder.png?alt=media&token=80f4ccf4-1b8e-48a1-b5dd-4eeec66359cf",
+        image: state.image,
         title: state.name,
         description: state.description,
         guideText: state.steps,
         ingredients: zutaten,
         vegetarisch: state.vegetarisch,
         vegan: state.vegan,
-        glutenfrei: state.vegan,
+        glutenfrei: state.glutenfrei,
         attachments: [],
         webURL: (state.webURL == "") ? null : state.webURL);
-    _backendService.pushRecipe(
-        recipe, uid, state.fileType, state.image, state.isEdit);
+    _backendService.pushRecipe(recipe, uid, state.isEdit);
 
     return true;
   }
@@ -209,7 +207,7 @@ class ErstellenControllerImplementation extends ErstellenController {
   @override
   Future<void> addImage(BuildContext context) async {
     FilePickerResult? result = await FilePicker.platform
-        .pickFiles(allowMultiple: false, withData: true, type: FileType.image);
+        .pickFiles(withData: true, allowMultiple: false, type: FileType.image);
 
     if (result != null) {
       if (result.files.single.size >= 5000000) {
@@ -219,8 +217,22 @@ class ErstellenControllerImplementation extends ErstellenController {
             .display(context);
         return;
       }
-      state = state.copyWith(image: Future.value(result.files.single.bytes!));
-      state = state.copyWith(fileType: result.files.single.extension!);
+
+      Uint8List uploadfile = result.files.single.bytes!;
+      String extension = result.files.single.extension!;
+      String fileName =
+          "temp" + FirebaseAuth.instance.currentUser!.uid + "." + extension;
+      await FirebaseStorage.instance
+          .ref("images")
+          .child(fileName)
+          .putData(uploadfile);
+      String downloadUrl = await FirebaseStorage.instance
+          .ref("images")
+          .child(fileName)
+          .getDownloadURL();
+      state = state.copyWith(image: downloadUrl);
+    } else {
+      logger.d("Failed to get Image");
     }
   }
 
@@ -241,7 +253,7 @@ class ErstellenControllerImplementation extends ErstellenController {
         state.requiredIngredients.isNotEmpty ||
         state.steps.isNotEmpty ||
         state.webURL != "" ||
-        state.fileType != "") {
+        state.image != "") {
       final bool? result = await ErrorDialogChoice(
               ok: FlutterI18n.translate(context, "create.delete"),
               dismiss: FlutterI18n.translate(context, "create.keep"),
@@ -261,8 +273,7 @@ class ErstellenControllerImplementation extends ErstellenController {
         glutenfrei: false,
         vegan: false,
         vegetarisch: false,
-        fileType: "",
-        image: Future.value(Uint8List(0)),
+        image: "",
         nameNotSet: false,
         ingridientNotSet: false,
         stepsNotSet: false,
@@ -347,8 +358,7 @@ class ErstellenControllerImplementation extends ErstellenController {
       creator: "test",
       isSubscription: false,
       privateRecipe: false,
-      image:
-          "https://firebasestorage.googleapis.com/v0/b/platepal-60ea4.appspot.com/o/images%2Fplaceholder.png?alt=media&token=80f4ccf4-1b8e-48a1-b5dd-4eeec66359cf",
+      image: "",
       title: "Rezept von " + DateTime.now().toString(),
       description: "Test Beschreibung",
       guideText: ["Test Step 1", "Test Step 2"],
@@ -370,6 +380,6 @@ class ErstellenControllerImplementation extends ErstellenController {
 
   @override
   void navigateBack(BuildContext context) {
-    _navigationService.routeBack(context);
+    _navigationService.routeHome(context);
   }
 }

@@ -15,7 +15,7 @@ class LoginView extends ConsumerWidget {
     final LoginController controller =
         ref.read(providers.loginControllerProvider.notifier);
     final LoginModel model = ref.watch(providers.loginControllerProvider);
-    var pictures = [
+    List<String> pictures = [
       "assets/images/pizza.jpg",
     ];
     final _random = Random();
@@ -141,7 +141,7 @@ class LoginView extends ConsumerWidget {
 
 abstract class LoginController extends StateNotifier<LoginModel> {
   LoginController(LoginModel state) : super(state);
-  void loginWithMail(dynamic context);
+  void loginWithMail(BuildContext context);
   void pwVissible();
   void setPassword(String password);
   void setUsername(String username);

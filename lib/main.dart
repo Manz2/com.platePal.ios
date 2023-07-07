@@ -42,7 +42,7 @@ class _MyAppState extends ConsumerState {
 
   @override
   Widget build(BuildContext context) {
-    var logger = Logger();
+    Logger logger = Logger();
     MyAppNavigationService _navigationservice = ref.read(
         providers.navigationServiceProvider
             as ProviderListenable<MyAppNavigationService>);

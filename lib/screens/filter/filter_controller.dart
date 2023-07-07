@@ -3,9 +3,9 @@ import 'package:plate_pal/screens/filter/filter_model.dart';
 import 'package:plate_pal/screens/filter/filter_view.dart';
 import 'package:plate_pal/service/my_app_navigation_service.dart';
 
-var veganFilter = false;
-var vegetarischFilter = false;
-var glutenfreiFilter = false;
+bool veganFilter = false;
+bool vegetarischFilter = false;
+bool glutenfreiFilter = false;
 
 class FilterControllerImplmentation extends FilterController {
   final MyAppNavigationService _navigationService;
