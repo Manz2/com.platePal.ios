@@ -32,8 +32,7 @@ mixin _$ErstellenModel {
   bool get descriptionNotSet => throw _privateConstructorUsedError;
   bool get isImport => throw _privateConstructorUsedError;
   String? get webURL => throw _privateConstructorUsedError;
-  bool get weburlNotSet => throw _privateConstructorUsedError;
-  bool get isValidUrl => throw _privateConstructorUsedError;
+  bool get urlInvalid => throw _privateConstructorUsedError;
   bool get isEdit => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -63,8 +62,7 @@ abstract class $ErstellenModelCopyWith<$Res> {
       bool descriptionNotSet,
       bool isImport,
       String? webURL,
-      bool weburlNotSet,
-      bool isValidUrl,
+      bool urlInvalid,
       bool isEdit});
 }
 
@@ -96,8 +94,7 @@ class _$ErstellenModelCopyWithImpl<$Res, $Val extends ErstellenModel>
     Object? descriptionNotSet = null,
     Object? isImport = null,
     Object? webURL = freezed,
-    Object? weburlNotSet = null,
-    Object? isValidUrl = null,
+    Object? urlInvalid = null,
     Object? isEdit = null,
   }) {
     return _then(_value.copyWith(
@@ -161,13 +158,9 @@ class _$ErstellenModelCopyWithImpl<$Res, $Val extends ErstellenModel>
           ? _value.webURL
           : webURL // ignore: cast_nullable_to_non_nullable
               as String?,
-      weburlNotSet: null == weburlNotSet
-          ? _value.weburlNotSet
-          : weburlNotSet // ignore: cast_nullable_to_non_nullable
-              as bool,
-      isValidUrl: null == isValidUrl
-          ? _value.isValidUrl
-          : isValidUrl // ignore: cast_nullable_to_non_nullable
+      urlInvalid: null == urlInvalid
+          ? _value.urlInvalid
+          : urlInvalid // ignore: cast_nullable_to_non_nullable
               as bool,
       isEdit: null == isEdit
           ? _value.isEdit
@@ -201,8 +194,7 @@ abstract class _$$_ErstellenModelCopyWith<$Res>
       bool descriptionNotSet,
       bool isImport,
       String? webURL,
-      bool weburlNotSet,
-      bool isValidUrl,
+      bool urlInvalid,
       bool isEdit});
 }
 
@@ -232,8 +224,7 @@ class __$$_ErstellenModelCopyWithImpl<$Res>
     Object? descriptionNotSet = null,
     Object? isImport = null,
     Object? webURL = freezed,
-    Object? weburlNotSet = null,
-    Object? isValidUrl = null,
+    Object? urlInvalid = null,
     Object? isEdit = null,
   }) {
     return _then(_$_ErstellenModel(
@@ -297,13 +288,9 @@ class __$$_ErstellenModelCopyWithImpl<$Res>
           ? _value.webURL
           : webURL // ignore: cast_nullable_to_non_nullable
               as String?,
-      weburlNotSet: null == weburlNotSet
-          ? _value.weburlNotSet
-          : weburlNotSet // ignore: cast_nullable_to_non_nullable
-              as bool,
-      isValidUrl: null == isValidUrl
-          ? _value.isValidUrl
-          : isValidUrl // ignore: cast_nullable_to_non_nullable
+      urlInvalid: null == urlInvalid
+          ? _value.urlInvalid
+          : urlInvalid // ignore: cast_nullable_to_non_nullable
               as bool,
       isEdit: null == isEdit
           ? _value.isEdit
@@ -332,8 +319,7 @@ class _$_ErstellenModel implements _ErstellenModel {
       required this.descriptionNotSet,
       required this.isImport,
       required this.webURL,
-      required this.weburlNotSet,
-      required this.isValidUrl,
+      required this.urlInvalid,
       required this.isEdit})
       : _requiredIngredients = requiredIngredients,
         _steps = steps;
@@ -379,15 +365,13 @@ class _$_ErstellenModel implements _ErstellenModel {
   @override
   final String? webURL;
   @override
-  final bool weburlNotSet;
-  @override
-  final bool isValidUrl;
+  final bool urlInvalid;
   @override
   final bool isEdit;
 
   @override
   String toString() {
-    return 'ErstellenModel(name: $name, id: $id, requiredIngredients: $requiredIngredients, steps: $steps, description: $description, glutenfrei: $glutenfrei, vegan: $vegan, vegetarisch: $vegetarisch, image: $image, nameNotSet: $nameNotSet, ingridientNotSet: $ingridientNotSet, stepsNotSet: $stepsNotSet, descriptionNotSet: $descriptionNotSet, isImport: $isImport, webURL: $webURL, weburlNotSet: $weburlNotSet, isValidUrl: $isValidUrl, isEdit: $isEdit)';
+    return 'ErstellenModel(name: $name, id: $id, requiredIngredients: $requiredIngredients, steps: $steps, description: $description, glutenfrei: $glutenfrei, vegan: $vegan, vegetarisch: $vegetarisch, image: $image, nameNotSet: $nameNotSet, ingridientNotSet: $ingridientNotSet, stepsNotSet: $stepsNotSet, descriptionNotSet: $descriptionNotSet, isImport: $isImport, webURL: $webURL, urlInvalid: $urlInvalid, isEdit: $isEdit)';
   }
 
   @override
@@ -419,10 +403,8 @@ class _$_ErstellenModel implements _ErstellenModel {
             (identical(other.isImport, isImport) ||
                 other.isImport == isImport) &&
             (identical(other.webURL, webURL) || other.webURL == webURL) &&
-            (identical(other.weburlNotSet, weburlNotSet) ||
-                other.weburlNotSet == weburlNotSet) &&
-            (identical(other.isValidUrl, isValidUrl) ||
-                other.isValidUrl == isValidUrl) &&
+            (identical(other.urlInvalid, urlInvalid) ||
+                other.urlInvalid == urlInvalid) &&
             (identical(other.isEdit, isEdit) || other.isEdit == isEdit));
   }
 
@@ -444,8 +426,7 @@ class _$_ErstellenModel implements _ErstellenModel {
       descriptionNotSet,
       isImport,
       webURL,
-      weburlNotSet,
-      isValidUrl,
+      urlInvalid,
       isEdit);
 
   @JsonKey(ignore: true)
@@ -472,8 +453,7 @@ abstract class _ErstellenModel implements ErstellenModel {
       required final bool descriptionNotSet,
       required final bool isImport,
       required final String? webURL,
-      required final bool weburlNotSet,
-      required final bool isValidUrl,
+      required final bool urlInvalid,
       required final bool isEdit}) = _$_ErstellenModel;
 
   @override
@@ -507,9 +487,7 @@ abstract class _ErstellenModel implements ErstellenModel {
   @override
   String? get webURL;
   @override
-  bool get weburlNotSet;
-  @override
-  bool get isValidUrl;
+  bool get urlInvalid;
   @override
   bool get isEdit;
   @override

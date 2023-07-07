@@ -21,7 +21,6 @@ class ErstellenModel with _$ErstellenModel {
       required bool descriptionNotSet,
       required bool isImport,
       required String? webURL,
-      required bool weburlNotSet,
-      required bool isValidUrl,
+      required bool urlInvalid,
       required bool isEdit}) = _ErstellenModel;
 }

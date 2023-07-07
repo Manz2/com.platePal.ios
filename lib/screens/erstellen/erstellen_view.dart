@@ -12,6 +12,7 @@ import 'package:plate_pal/ui-kit/add_text_field_widget_steps.dart';
 
 class ErstellenView extends ConsumerWidget {
   final ErstellenModel? recipe;
+
   ErstellenView({Key? key, this.recipe}) : super(key: key);
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _descriptionController = TextEditingController();
@@ -29,9 +30,15 @@ class ErstellenView extends ConsumerWidget {
       controller = ref.read(providers.erstellenControllerProvider.notifier);
       model = ref.watch(providers.erstellenControllerProvider);
     }
-    _nameController.text = model.name;
-    _descriptionController.text = model.description;
-    _linkController.text = model.webURL ?? "";
+    if (_nameController.text != model.name) {
+      _nameController.text = model.name;
+    }
+    if (_descriptionController.text != model.description) {
+      _descriptionController.text = model.description;
+    }
+    if (_linkController.text != model.webURL) {
+      _linkController.text = model.webURL ?? "";
+    }
 
     return Scaffold(
       appBar: AppBar(
@@ -57,7 +64,7 @@ class ErstellenView extends ConsumerWidget {
             children: [
               model.image != ""
                   ? GestureDetector(
-                      onTap: () => controller.addImage(context),
+                      onTap: () => controller.addImage(context, model.image),
                       child: CachedNetworkImage(
                         height: MediaQuery.of(context).size.height / 5,
                         width: MediaQuery.of(context).size.width - 100,
@@ -66,7 +73,8 @@ class ErstellenView extends ConsumerWidget {
                       ),
                     )
                   : IconButton(
-                      onPressed: () => controller.addImage(context),
+                      onPressed: () =>
+                          controller.addImage(context, model.image),
                       icon: Icon(
                         Icons.add_photo_alternate_outlined,
                         size: MediaQuery.of(context).size.height / 5,
@@ -127,7 +135,7 @@ class ErstellenView extends ConsumerWidget {
                       vertical: 12.0, horizontal: 16.0),
                   labelStyle: TextStyle(
                     fontSize: currentFontSize.toDouble(),
-                    color: model.descriptionNotSet
+                    color: model.urlInvalid
                         ? currentScheme.getScheme().error
                         : currentScheme.getScheme().onSurfaceVariant,
                   ),
@@ -280,7 +288,7 @@ abstract class ErstellenController extends StateNotifier<ErstellenModel> {
 
   void insertStep(int index, String step);
 
-  void addImage(BuildContext context);
+  void addImage(BuildContext context, String image);
 
   Future<bool> kiImport(BuildContext context);
 

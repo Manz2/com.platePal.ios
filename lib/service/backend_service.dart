@@ -319,13 +319,6 @@ class BackendService implements BackendServiceAggregator {
     ref.child(newPostKey!).update(recipe.toJson());
     logger.d("created recipe with id:" + newPostKey);
     ref.child(newPostKey).update({"id": newPostKey});
-    Future<Uint8List?> image =
-        FirebaseStorage.instance.refFromURL(recipe.image).getData();
-    Uint8List? im = await image;
-    if (im != null) {
-      FirebaseStorage.instance.refFromURL(recipe.image).delete();
-      FirebaseStorage.instance.ref("images").child(newPostKey).putData(im);
-    }
   }
 
   @override
@@ -428,7 +421,6 @@ class BackendService implements BackendServiceAggregator {
         steps: recipe.guideText.map((item) => item as String).toList(),
         description: recipe.description,
         webURL: recipe.webURL ?? "",
-        isValidUrl: false,
         glutenfrei: recipe.glutenfrei,
         vegan: recipe.vegan,
         vegetarisch: recipe.vegan,
@@ -436,7 +428,7 @@ class BackendService implements BackendServiceAggregator {
         ingridientNotSet: false,
         stepsNotSet: false,
         descriptionNotSet: false,
-        weburlNotSet: false,
+        urlInvalid: false,
         isEdit: edit,
         image: recipe.image);
   }

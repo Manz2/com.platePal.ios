@@ -43,7 +43,7 @@ class _AddTextFieldWidgetState extends State<AddTextFieldWidgetSteps> {
       widget.con.insertStep(newIndex, step);
     } else {
       //Falls Element nach unten  wandert verschieben sich die Indizes,
-      // da es zuerst gelöscht wird
+      // da es zuerst gelöscht wurde
       widget.con.insertStep(newIndex - 1, step);
     }
   }
@@ -52,37 +52,26 @@ class _AddTextFieldWidgetState extends State<AddTextFieldWidgetSteps> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Align(
-          alignment: Alignment.centerLeft,
-          child: SizedBox(
-            width: MediaQuery.of(context).size.width *
-                0.8, // 80% des verfügbaren Platzes
-            child: ReorderableListView(
-              shrinkWrap: true,
-              onReorder: (oldIndex, newIndex) {
-                _reorderTextFieldValue(oldIndex, newIndex);
-              },
-              children: [
-                for (int index = 0; index < widget.steps.length; index++)
-                  ListTile(
-                    shape: Border.all(
-                      color:
-                          currentScheme.getScheme().outline, // Farbe der Border
-                      width: 1.5, // Breite der Border
-                    ),
-                    key: Key('$index'),
-                    leading: const Icon(Icons.drag_handle),
-                    title: Text(widget.steps[index],
-                        style: TextStyle(fontSize: currentFontSize.toDouble())),
-                    trailing: IconButton(
-                      icon: const Icon(Icons.delete),
-                      onPressed: () =>
-                          _removeTextFieldValue(widget.steps[index]),
-                    ),
-                  ),
-              ],
-            ),
-          ),
+        ReorderableListView(
+          shrinkWrap: true,
+          scrollController: ScrollController(),
+          physics: const ClampingScrollPhysics(),
+          onReorder: (oldIndex, newIndex) {
+            _reorderTextFieldValue(oldIndex, newIndex);
+          },
+          children: [
+            for (int index = 0; index < widget.steps.length; index++)
+              ListTile(
+                key: Key('$index'),
+                leading: const Icon(Icons.drag_handle),
+                title: Text(widget.steps[index],
+                    style: TextStyle(fontSize: currentFontSize.toDouble())),
+                trailing: IconButton(
+                  icon: const Icon(Icons.delete),
+                  onPressed: () => _removeTextFieldValue(widget.steps[index]),
+                ),
+              ),
+          ],
         ),
         const SizedBox(height: 16.0),
         Row(

@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:file_picker/file_picker.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -15,7 +16,7 @@ import 'package:plate_pal/service/my_app_navigation_service.dart';
 import 'package:plate_pal/ui-kit/error_dialog.dart';
 import 'package:plate_pal/ui-kit/error_dialog_choice.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-
+import 'package:uuid/uuid.dart';
 import '../account/account_controller.dart';
 
 class ErstellenControllerImplementation extends ErstellenController {
@@ -42,9 +43,8 @@ class ErstellenControllerImplementation extends ErstellenController {
                 nameNotSet: false,
                 ingridientNotSet: false,
                 stepsNotSet: false,
-                isValidUrl: false,
                 descriptionNotSet: false,
-                weburlNotSet: false,
+                urlInvalid: false,
                 isImport: false,
                 isEdit: false));
 
@@ -147,11 +147,6 @@ class ErstellenControllerImplementation extends ErstellenController {
     } else {
       state = state.copyWith(descriptionNotSet: false);
     }
-    if (state.webURL == "") {
-      state = state.copyWith(weburlNotSet: true);
-    } else {
-      state = state.copyWith(weburlNotSet: false);
-    }
     if (state.requiredIngredients.isEmpty) {
       state = state.copyWith(ingridientNotSet: true);
       oneNotSet = true;
@@ -168,6 +163,7 @@ class ErstellenControllerImplementation extends ErstellenController {
       return false;
     }
     if (!isValidUrl(state.webURL!) && state.webURL!.isNotEmpty) {
+      state = state.copyWith(urlInvalid: true);
       final snackBar = SnackBar(
         content: Text(FlutterI18n.translate(context, "create.noValidUrl")),
         action: SnackBarAction(
@@ -176,7 +172,9 @@ class ErstellenControllerImplementation extends ErstellenController {
         ),
       );
       ScaffoldMessenger.of(context).showSnackBar(snackBar);
-      return oneNotSet = false;
+      return false;
+    } else {
+      state = state.copyWith(urlInvalid: false);
     }
 
     String uid = FirebaseAuth.instance.currentUser!.uid;
@@ -205,7 +203,8 @@ class ErstellenControllerImplementation extends ErstellenController {
   }
 
   @override
-  Future<void> addImage(BuildContext context) async {
+  Future<void> addImage(BuildContext context, String image) async {
+    Uuid uuid = Uuid();
     FilePickerResult? result = await FilePicker.platform
         .pickFiles(withData: true, allowMultiple: false, type: FileType.image);
 
@@ -220,8 +219,13 @@ class ErstellenControllerImplementation extends ErstellenController {
 
       Uint8List uploadfile = result.files.single.bytes!;
       String extension = result.files.single.extension!;
-      String fileName =
-          "temp" + FirebaseAuth.instance.currentUser!.uid + "." + extension;
+      String? name = uuid.v1();
+      String fileName = name + "." + extension;
+
+      if (image != "") {
+        FirebaseStorage.instance.refFromURL(image).delete();
+      }
+
       await FirebaseStorage.instance
           .ref("images")
           .child(fileName)
@@ -230,6 +234,7 @@ class ErstellenControllerImplementation extends ErstellenController {
           .ref("images")
           .child(fileName)
           .getDownloadURL();
+
       state = state.copyWith(image: downloadUrl);
     } else {
       logger.d("Failed to get Image");
@@ -278,7 +283,7 @@ class ErstellenControllerImplementation extends ErstellenController {
         ingridientNotSet: false,
         stepsNotSet: false,
         descriptionNotSet: false,
-        weburlNotSet: false);
+        urlInvalid: false);
     return true;
   }
 
@@ -316,7 +321,6 @@ class ErstellenControllerImplementation extends ErstellenController {
                 child: Text(FlutterI18n.translate(context, "create.ai.cancel")),
                 onPressed: () {
                   cancelled = true;
-                  logger.e("abbruch button");
                   Navigator.of(dialogContext).pop();
                 },
               ),
@@ -324,22 +328,16 @@ class ErstellenControllerImplementation extends ErstellenController {
           );
         },
       );
-
-      logger.e("try");
       String rawRecipe = await _backendService
           .rawRecipeFromImage(File(result.files.first.path!));
       Recipe recipe = await _backendService.recipeFromGPT(rawRecipe);
       ErstellenModel tmp = _backendService.recipeToErstellenModel(recipe);
-      logger.e("KI-Import ErstellenModel:");
-      debugPrint(tmp.toString());
 
       if (!cancelled) {
-        logger.e("Complete normaly");
         state = tmp;
         Navigator.of(context, rootNavigator: true).pop();
         return true;
       } else {
-        logger.e("Cancelled");
         return false;
       }
     } catch (e) {
