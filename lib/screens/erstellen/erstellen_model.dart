@@ -11,6 +11,7 @@ class ErstellenModel with _$ErstellenModel {
       required List<Ingredient> requiredIngredients,
       required List<String> steps,
       required String description,
+      required List<String> attachments,
       required bool glutenfrei,
       required bool vegan,
       required bool vegetarisch,

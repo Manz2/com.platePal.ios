@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:plate_pal/config.dart';
-import 'details_config.dart';
+import '../screens/details/details_constants.dart';
 
 const double symHorizontalPadding = 10;
 Padding globalSidePadding({required Widget child}) {

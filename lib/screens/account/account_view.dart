@@ -5,7 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:plate_pal/common/providers.dart';
 import 'package:plate_pal/config.dart';
 import 'package:plate_pal/ui-kit/button_list.dart';
-import 'package:plate_pal/ui-kit/details_config.dart';
+import 'package:plate_pal/screens/details/details_constants.dart';
 import 'account_model.dart';
 
 class AccountView extends ConsumerWidget {

@@ -25,10 +25,9 @@ Recipe emptyRecipe() {
     creator: "unknown",
     privateRecipe: false,
     isSubscription: false,
-    image:
-        "https://firebasestorage.googleapis.com/v0/b/platepal-60ea4.appspot.com/o/images%2Fplaceholder.png?alt=media&token=80f4ccf4-1b8e-48a1-b5dd-4eeec66359cf",
+    image: "",
     description: "please wait...",
-    guideText: ["add #Ingredient", "and add a second #Ingredient"],
+    guideText: ["add Ingredient", "and add a second Ingredient"],
     ingredients: [],
     attachments: [],
     webURL: null,

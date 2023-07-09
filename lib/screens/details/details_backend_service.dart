@@ -1,6 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:plate_pal/screens/erstellen/erstellen_model.dart';
 
+import 'package:plate_pal/screens/erstellen/erstellen_model.dart';
 import '../home/home_model.dart';
 
 part 'details_backend_service.freezed.dart';

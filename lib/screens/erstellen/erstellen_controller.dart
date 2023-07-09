@@ -2,7 +2,6 @@ import 'dart:io';
 
 import 'package:file_picker/file_picker.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -35,6 +34,7 @@ class ErstellenControllerImplementation extends ErstellenController {
                 description: '',
                 webURL: '',
                 requiredIngredients: [],
+                attachments: [],
                 steps: [],
                 glutenfrei: false,
                 vegan: false,
@@ -129,7 +129,7 @@ class ErstellenControllerImplementation extends ErstellenController {
     List<String> tmp = List<String>.from(state.steps);
     tmp.insert(index, step);
     state = state.copyWith(steps: tmp);
-    logger.e("insert " + state.steps.toString());
+    logger.d("insert " + state.steps.toString());
   }
 
   @override
@@ -167,7 +167,7 @@ class ErstellenControllerImplementation extends ErstellenController {
       final snackBar = SnackBar(
         content: Text(FlutterI18n.translate(context, "create.noValidUrl")),
         action: SnackBarAction(
-          label: 'OK',
+          label: FlutterI18n.translate(context, "details.ok"),
           onPressed: () {},
         ),
       );
@@ -195,7 +195,7 @@ class ErstellenControllerImplementation extends ErstellenController {
         vegetarisch: state.vegetarisch,
         vegan: state.vegan,
         glutenfrei: state.glutenfrei,
-        attachments: [],
+        attachments: state.attachments,
         webURL: (state.webURL == "") ? null : state.webURL);
     _backendService.pushRecipe(recipe, uid, state.isEdit);
 
@@ -204,7 +204,7 @@ class ErstellenControllerImplementation extends ErstellenController {
 
   @override
   Future<void> addImage(BuildContext context, String image) async {
-    Uuid uuid = Uuid();
+    Uuid uuid = const Uuid();
     FilePickerResult? result = await FilePicker.platform
         .pickFiles(withData: true, allowMultiple: false, type: FileType.image);
 
@@ -269,12 +269,16 @@ class ErstellenControllerImplementation extends ErstellenController {
         return false;
       }
     }
+    if (!state.isEdit && state.image != "") {
+      FirebaseStorage.instance.refFromURL(state.image).delete();
+    }
     state = state.copyWith(
         name: '',
         description: '',
         webURL: '',
         requiredIngredients: [],
         steps: [],
+        attachments: [],
         glutenfrei: false,
         vegan: false,
         vegetarisch: false,

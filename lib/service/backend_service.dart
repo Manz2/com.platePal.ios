@@ -1,9 +1,15 @@
+import 'dart:io';
 import 'dart:convert';
 
+import 'package:flutter/foundation.dart';
 import 'package:dart_openai/dart_openai.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/foundation.dart';
+import 'package:firebase_database/firebase_database.dart';
+import 'package:firebase_storage/firebase_storage.dart';
+import 'package:logger/logger.dart';
+import 'package:http/http.dart' as http;
 import 'package:google_mlkit_text_recognition/google_mlkit_text_recognition.dart';
+import 'package:plate_pal/config.dart';
 import 'package:plate_pal/screens/details/details_backend_service.dart';
 import 'package:plate_pal/screens/details/details_model.dart';
 import 'package:plate_pal/screens/erstellen/erstellen_model.dart';
@@ -14,11 +20,6 @@ import 'package:plate_pal/screens/home/home_backend_service.dart';
 import 'package:plate_pal/secrets.dart';
 import 'package:plate_pal/service/backend_service_aggregator.dart';
 import 'package:plate_pal/screens/home/home_model.dart';
-import 'package:firebase_database/firebase_database.dart';
-import 'package:logger/logger.dart';
-import 'package:firebase_storage/firebase_storage.dart';
-import 'dart:io';
-import 'package:http/http.dart' as http;
 import '../screens/account/account_backend_service.dart';
 
 class BackendService implements BackendServiceAggregator {
@@ -29,7 +30,6 @@ class BackendService implements BackendServiceAggregator {
   bool vegetarischFilter = false;
   bool glutenfreiFilter = false;
 
-  //Home
   @override
   Future<HomeServiceReturn> getAllRecipes(String uid) async {
     DatabaseReference ref = FirebaseDatabase.instance.ref();
@@ -42,8 +42,8 @@ class BackendService implements BackendServiceAggregator {
       recipes.addAll(await listToRecipes(snapshot));
       recipes.addAll(await getGroupRecipes(snapshotGroup, ref));
     } else {
-      logger.d(
-          "When attempting to retrieve all recipes, the database could not be accessed! Perhaps there are none available");
+      logger.d("When attempting to retrieve all recipes, the database"
+          " could not be accessed! Perhaps there are none available");
       return const HomeServiceReturn(recipes: []);
     }
     return HomeServiceReturn(recipes: recipes);
@@ -68,7 +68,6 @@ class BackendService implements BackendServiceAggregator {
     glutenfreiFilter = gl;
     return getAllRecipes(uid);
   }
-  //!Home
 
   @override
   Future<bool> firstLogin(String uid) async {
@@ -93,7 +92,6 @@ class BackendService implements BackendServiceAggregator {
     }
   }
 
-  //Account Service
   @override
   Future<AccountServiceReturn> getUserName(String uid) async {
     DatabaseReference ref = FirebaseDatabase.instance.ref();
@@ -111,7 +109,8 @@ class BackendService implements BackendServiceAggregator {
       return snapshot.value.toString();
     } else {
       logger.d(
-          "Error while attempting to retrieve the user image, it appears that none has been uploaded yet.");
+          "Error while attempting to retrieve the user image, it appears that"
+          " none has been uploaded yet.");
       return "";
     }
   }
@@ -122,7 +121,6 @@ class BackendService implements BackendServiceAggregator {
     DatabaseReference ref = FirebaseDatabase.instance.ref();
     await ref.child('users').child(uid).update({"image": imageString});
   }
-  //!AccountService
 
   @override
   void createUser(String uid, String name) async {
@@ -175,7 +173,7 @@ class BackendService implements BackendServiceAggregator {
               elemente.value.toString() +
               '/rezepte/' +
               elemente.key.toString())
-          .get(); //THE ISSUE IS THAT element.value == null
+          .get();
       if (element.value == null) {
         logger.e("element.value of fetched Favorite Recipe is null");
       } else {
@@ -211,8 +209,8 @@ class BackendService implements BackendServiceAggregator {
     if (snapshot.exists) {
       return DetailsServiceReturn(recipe: await getRecipeFrom(snapshot));
     } else {
-      logger.e(
-          "Failed to access the database while attempting to retrieve the recipe!");
+      logger.e("Failed to access the database while attempting to retrieve the"
+          " recipe!");
       return DetailsServiceReturn(recipe: emptyRecipe());
     }
   }
@@ -335,37 +333,8 @@ class BackendService implements BackendServiceAggregator {
 
   @override
   Future<Recipe> recipeFromGPT(String rezept) async {
-    String p1 = "Hier ist ein Rezept beschrieben:\n $rezept";
-    String p2 = '''
-    Hier ist eine beispielhafte Darstellung, wie ein Rezept im JSON Format aussehen soll:
-
-    {
-    "title": "Titel",
-    "description": "beschreibung",
-    "guideText": [
-    "Zwiebeln schneiden",
-    "Tomate schneiden"
-    ],
-    "ingredients": [
-    {
-    "amount": "1 Stück",
-    "name": "Tomate"
-    },
-    {
-    "amount": "1 Stück",
-    "name": "Zwiebeln"
-    }
-    ]
-    }
-    
-    Suche  folgende  Elemente im FLießtext und trage sie im JSON ein:
-    Identifiziere falls möglich eine Kurzbeschreibung und trage es unter description ein.
-    Identifiziere falls möglich die Anleitung zur zubereitung und trage sie unter guideText ein.
-    Identifiziere falls möglich die Zutatenund trage sie unter ingredients ein.
-    Identifiziere falls möglich den Namen des Rezepts und trage ihn unter title ein.
-    Wichtig: Antworte nur mit dem neuen JSON String, der die Informationen aus dem Fließtext enthält, keine Erklärung."
-    ''';
-    String prompt = p1 + p2;
+    String prompt = promptOne + "\n$rezept\n" + promptTwo;
+    logger.d(prompt);
     OpenAI.apiKey = openAiKey;
     final chatCompletion = await OpenAI.instance.chat.create(
       presencePenalty: -2.0,
@@ -378,9 +347,9 @@ class BackendService implements BackendServiceAggregator {
       ],
     );
     String jsonString = chatCompletion.choices.first.message.content;
-    logger.e("Rezept von GPT");
+    logger.d("Rezept von GPT");
     Map<String, dynamic> json = jsonDecode(jsonString);
-    logger.e(json);
+    logger.d(json);
     Recipe recipe = Recipe(
         id: "",
         creator: "",
@@ -422,6 +391,7 @@ class BackendService implements BackendServiceAggregator {
         description: recipe.description,
         webURL: recipe.webURL ?? "",
         glutenfrei: recipe.glutenfrei,
+        attachments: recipe.attachments ?? [],
         vegan: recipe.vegan,
         vegetarisch: recipe.vegan,
         nameNotSet: false,

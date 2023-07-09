@@ -51,7 +51,8 @@ class ErstellenView extends ConsumerWidget {
           icon: const Icon(Icons.arrow_back_sharp),
         ),
         title: Text(
-          FlutterI18n.translate(context, "create.newRecipe"),
+          FlutterI18n.translate(context,
+              (model.isEdit) ? "create.editRecipe" : "create.newRecipe"),
           style: TextStyle(
               fontSize: currentFontSize.toDouble() + 5,
               fontWeight: FontWeight.bold),

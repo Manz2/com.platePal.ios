@@ -1,12 +1,12 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:plate_pal/config.dart';
-import 'package:plate_pal/ui-kit/details_config.dart';
+import 'package:plate_pal/screens/details/details_constants.dart';
 
 class RecipeStepBody extends StatelessWidget {
   final bool highlighted;
-  final double normalFontSize = currentFontSize.toDouble(); //16;
-  final double highlightedFontSize = currentFontSize.toDouble(); //16;
+  final double normalFontSize = currentFontSize.toDouble();
+  final double highlightedFontSize = currentFontSize.toDouble();
   final List<TextSpan> richTextSpans;
   final String stepText;
   final GestureRecognizer? recognizer;

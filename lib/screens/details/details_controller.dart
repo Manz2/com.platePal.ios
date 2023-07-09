@@ -1,21 +1,22 @@
 import 'dart:io';
 import 'dart:typed_data';
 
-import 'package:file_picker/file_picker.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:file_picker/file_picker.dart';
+import 'package:universal_platform/universal_platform.dart';
 import 'package:logger/logger.dart';
+import 'package:open_file/open_file.dart';
+
 import 'package:plate_pal/config.dart';
 import 'package:plate_pal/screens/details/details_model.dart';
 import 'package:plate_pal/screens/details/details_view.dart';
 import 'package:plate_pal/screens/erstellen/erstellen_model.dart';
 import 'package:plate_pal/screens/home/home_model.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:open_file/open_file.dart';
 import 'package:plate_pal/service/my_app_navigation_service.dart';
-import 'package:plate_pal/ui-kit/details_config.dart';
-import 'package:universal_platform/universal_platform.dart';
+import 'package:plate_pal/screens/details/details_constants.dart';
 import '../../ui-kit/error_dialog.dart';
 import 'details_backend_service.dart';
 
@@ -55,18 +56,18 @@ class DetailsControllerImplementation extends DetailsController {
 
     state = state.copyWith(
         recipe: returnModel.recipe,
+        isFavorite: isFavorite,
         ingredients: castedIngredients,
         currentlySearchedIngredient: null, // init
         amountScale: 1, // init
         isInEditMode: false, // init
-        scaledIngredients: castedIngredients, // init
-        isFavorite: isFavorite);
+        scaledIngredients: castedIngredients // init
+        );
 
     List<String> castedGuideTextSteps = [];
     for (String s in returnModel.recipe.guideText) {
       castedGuideTextSteps.add(s);
     }
-    //info: wenns im model schon als dynamic drin is is es hier zu spät ums per from zu casten; man müsste es direkt im BackendService mit from casten und im model dann im richtigen Datentyp speichern
     createIngredientReferences(castedGuideTextSteps);
   }
 
@@ -263,7 +264,7 @@ class DetailsControllerImplementation extends DetailsController {
       content:
           Text(FlutterI18n.translate(context, "details.attachment_removed")),
       action: SnackBarAction(
-        label: 'OK',
+        label: FlutterI18n.translate(context, "details.ok"),
         onPressed: () {},
       ),
     ));
@@ -271,7 +272,7 @@ class DetailsControllerImplementation extends DetailsController {
   }
 
   @override
-  void toggleIngredientFocus(String ingredientName) {
+  void toggleIngredientHighlightingFocus(String ingredientName) {
     for (Ingredient ingredient in state.ingredients) {
       if (ingredient.name == ingredientName) {
         if (state.currentlySearchedIngredient == ingredient) {
@@ -292,7 +293,7 @@ class DetailsControllerImplementation extends DetailsController {
     }
     state = state.copyWith(isInEditMode: !state.isInEditMode);
     if (!state.isInEditMode) {
-      //user just left the edit mode
+      // user just left the edit mode:
       uploadMyRecipe();
       scaleIngredientState();
     }
@@ -337,14 +338,10 @@ class DetailsControllerImplementation extends DetailsController {
     );
   }
 
-  //isSubscription ist dann wenn true automatisch auch true
   bool recipeIsNotMine() {
     return state.recipe.creator != uid;
   }
 
-  //only needs new id if we don't follow our constraints and create an identical copy of the creators recipe with the same id
-  //or needs new id if we want to show the subscribed recipe next to the adjusted and edited one.
-  //current decision: show only the relevant version of the recipe
   void takeOwnershipOfRecipe() {
     state = state.copyWith(
         recipe: state.recipe.copyWith(creator: uid, isSubscription: false));
@@ -352,20 +349,13 @@ class DetailsControllerImplementation extends DetailsController {
 
   @override
   void ingredientAmountChanged(String ingredientName, String newAmount) {
-    // get Ingredient from old name:
-    /* Es gibt das Problem, dass wenn der ingredientName verändert wird,
-     ein späterer changeAmount Call das Ingredient nicht mehr findet.
-     Da im EditMode scaledIngredients keinen Zweck erfüllt und beim Verlassen
-     sowieso neu generiert wird, wird es bei ListOrderChanges mit consistent 
-     gehalten und dient somit als zuverlässiger index-finder*/
     for (Ingredient ingredient in state.scaledIngredients) {
       if (ingredient.name == ingredientName.replaceAll(" ", "")) {
         int indexOfIngredient = state.scaledIngredients.indexOf(ingredient);
         List<Ingredient> updatedIngredients = copyList(state.ingredients);
-        updatedIngredients[indexOfIngredient] =
-            state.ingredients[indexOfIngredient].copyWith(
-                amount: newAmount.replaceAll(RegExp(r'^\s+'),
-                    '')); // Replace the ingredient at the found index
+        updatedIngredients[indexOfIngredient] = state
+            .ingredients[indexOfIngredient]
+            .copyWith(amount: newAmount.replaceAll(RegExp(r'^\s+'), ""));
         state = state.copyWith(ingredients: updatedIngredients);
         return;
       }
@@ -378,10 +368,9 @@ class DetailsControllerImplementation extends DetailsController {
       if (ingredient.name == ingredientName.replaceAll(" ", "")) {
         int indexOfIngredient = state.ingredients.indexOf(ingredient);
         List<Ingredient> updatedIngredients = copyList(state.ingredients);
-        updatedIngredients[indexOfIngredient] =
-            state.ingredients[indexOfIngredient].copyWith(
-                name: newName.replaceAll(RegExp(r'^\s+'),
-                    '')); // Replace the ingredient at the found index
+        updatedIngredients[indexOfIngredient] = state
+            .ingredients[indexOfIngredient]
+            .copyWith(name: newName.replaceAll(RegExp(r'^\s+'), ""));
         state = state.copyWith(ingredients: updatedIngredients);
         return;
       }
@@ -447,6 +436,7 @@ class DetailsControllerImplementation extends DetailsController {
           double number = double.parse(currentNumber.toString());
           double scaledNumber = number * scalingFactor;
           if (scaledNumber % 1 == 0) {
+            //als int darstellbar
             resultBuffer.write(scaledNumber.toInt());
           } else {
             resultBuffer.write(scaledNumber);
@@ -496,5 +486,10 @@ class DetailsControllerImplementation extends DetailsController {
   @override
   ErstellenModel recipeToErstellenModel(Recipe recipe) {
     return _backendService.recipeToErstellenModel(recipe, edit: true);
+  }
+
+  @override
+  void navigateBack(BuildContext context) {
+    _navigationService.routeBack(context);
   }
 }

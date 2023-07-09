@@ -1,5 +1,5 @@
 import 'package:flutter/services.dart';
-import 'package:plate_pal/ui-kit/details_config.dart';
+import 'package:plate_pal/screens/details/details_constants.dart';
 import 'package:universal_platform/universal_platform.dart';
 import 'package:flutter/material.dart';
 import 'package:plate_pal/config.dart';
@@ -45,7 +45,7 @@ class _IngredientCardState extends State<IngredientListElem> {
     Color crossedColor = ObjectSecondaryColor.withOpacity(0.35);
     Color uncrossedColor = ObjectPrimaryColor;
     int androidWidthThatToggles = 240; //270 emulator, 244 real device
-    int browserWidthThatToggles = 200; //was 250 first
+    int browserWidthThatToggles = 200;
     int iosWidthThatToggles = 250;
 
     int widthLimit = 0;
@@ -60,7 +60,10 @@ class _IngredientCardState extends State<IngredientListElem> {
     crossOnTap() => {
           toggleCrossed(),
           if (widget.isHighlighting)
-            {widget.controller.toggleIngredientFocus(widget.ingredientName)},
+            {
+              widget.controller
+                  .toggleIngredientHighlightingFocus(widget.ingredientName)
+            },
         };
 
     return GestureDetector(
@@ -112,10 +115,7 @@ class _IngredientCardState extends State<IngredientListElem> {
                       children: [
                         //SMALL SCREENS:
                         LineText(
-                          widget
-                              .ingredientName /* +
-                              constraints.maxWidth.toString() */
-                          ,
+                          widget.ingredientName,
                           TextStyle(
                             color: isCrossed ? crossedColor : uncrossedColor,
                             fontSize: currentFontSize.toDouble(),
@@ -146,11 +146,7 @@ class _IngredientCardState extends State<IngredientListElem> {
                       alignment: WrapAlignment.spaceBetween,
                       children: [
                         LineText(
-                          " " +
-                              widget
-                                  .ingredientName /* +
-                              constraints.maxWidth.toString() */
-                          ,
+                          " " + widget.ingredientName,
                           TextStyle(
                             color: isCrossed ? crossedColor : uncrossedColor,
                             fontSize: currentFontSize.toDouble(),
@@ -194,7 +190,8 @@ class _IngredientCardState extends State<IngredientListElem> {
                   ? !isCrossed
                       ? () => {
                             controller //highlight Steps of this ingredient
-                                .toggleIngredientFocus(widget.ingredientName)
+                                .toggleIngredientHighlightingFocus(
+                                    widget.ingredientName)
                           }
                       : null // do nothing when crossed out and not editable,
                   : null // otherwise move ingredient order
@@ -207,7 +204,7 @@ class _IngredientCardState extends State<IngredientListElem> {
     );
   }
 
-  //Ich brauche diese Funktion um meinen LineText als stateless zu erhalten.
+  //benötige diese Funktion um LineText stateless zu halten.
   void functionWrapperForAmount(
       String ingredientName, String oldAmount, String newAmount) {
     widget.controller.ingredientAmountChanged(ingredientName, newAmount);
@@ -215,16 +212,24 @@ class _IngredientCardState extends State<IngredientListElem> {
 }
 
 FocusNode focusNode = FocusNode(); //only one cursor at a time
-// agiert wie ein Material Widget und ist daher großgeschrieben:
+
+// Diese Funktion agiert wie ein Material Widget und ist daher großgeschrieben:
 // ignore: non_constant_identifier_names
-LineText(String text, TextStyle style,
+Widget LineText(String text, TextStyle style,
     {TextAlign? align,
     TextOverflow? overflow,
     bool? isEditable,
-    Function? onSubmit, //set either only this,
+    Function? onSubmit, //set either this,
     Function? onSubmitWithContext, //or both of these:
     Object? context}) {
   String latestText = text;
+
+  callParentFunction(newText) => {
+        if (onSubmit != null)
+          {onSubmit(text, newText)}
+        else if (onSubmitWithContext != null)
+          {onSubmitWithContext(context, text, newText)}
+      };
 
   if (!(isEditable ?? false)) {
     return Text(
@@ -236,36 +241,31 @@ LineText(String text, TextStyle style,
     );
   } else {
     return Focus(
-        focusNode: focusNode,
-        onFocusChange: (hasFocus) {
-          if (!hasFocus) {
-            if (onSubmit != null) {
-              onSubmit(text, latestText);
-            } else if (onSubmitWithContext != null) {
-              onSubmitWithContext(context, text, latestText);
-            }
-          }
-        },
-        child: EditableText(
-            controller: TextEditingController(text: text),
-            maxLines: 1,
-            style: style,
-            textAlign: align ?? TextAlign.left,
-            backgroundCursorColor:
-                BackgroundColor, //required but not doing anything
-            cursorColor: ObjectPrimaryColor,
-            focusNode: FocusNode(),
-            onChanged: (value) => {latestText = value},
-            onSubmitted: (value) {
-              if (onSubmit != null) {
-                onSubmit(text, value);
-              } else if (onSubmitWithContext != null) {
-                onSubmitWithContext(context, text, value);
-              }
-            }));
+      focusNode: focusNode,
+      onFocusChange: (hasFocus) {
+        if (!hasFocus) callParentFunction(latestText);
+      },
+      child: EditableText(
+        controller: TextEditingController(text: text),
+        maxLines: 1,
+        style: style,
+        textAlign: align ?? TextAlign.left,
+        backgroundCursorColor: BackgroundColor,
+        cursorColor: ObjectPrimaryColor,
+        focusNode: FocusNode(),
+        onChanged: (value) => latestText = value,
+        onSubmitted: (value) => callParentFunction(value),
+      ),
+    );
   }
 }
 /* info: 
-  LineText kann global ausgelagert werden 
-  und dann auch in anderen Klassen verwendet werden.
-  Es hat absichtlich keine Dependencies zur Klasse ingredient_list_elem.dart */
+  LineText ist ein Widget dass zu einem editierbaren Text mutieren kann,
+  während sich der Stil der Textanzeige innerhalb einer Zeile nicht ändert.
+  Es wird die Funktion aufgerufen, die in onSubmit übergeben wird,
+  wenn der Text geändert wird oder der Fokus verloren geht. 
+  LineText kann global:
+   ausgelagert werden um auch in anderen Klassen verwendet zu werden und hat 
+   daher absichtlich keine Dependencies zur Klasse ingredient_list_elem.dart
+  Es wurde evaluiert LineText als StatefulWidget zu implementieren jedoch ist
+  z.B. initState() und die restliche Syntax unnötige zusätzliche Komplexität */

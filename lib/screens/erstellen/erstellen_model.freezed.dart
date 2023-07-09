@@ -22,6 +22,7 @@ mixin _$ErstellenModel {
       throw _privateConstructorUsedError;
   List<String> get steps => throw _privateConstructorUsedError;
   String get description => throw _privateConstructorUsedError;
+  List<String> get attachments => throw _privateConstructorUsedError;
   bool get glutenfrei => throw _privateConstructorUsedError;
   bool get vegan => throw _privateConstructorUsedError;
   bool get vegetarisch => throw _privateConstructorUsedError;
@@ -52,6 +53,7 @@ abstract class $ErstellenModelCopyWith<$Res> {
       List<Ingredient> requiredIngredients,
       List<String> steps,
       String description,
+      List<String> attachments,
       bool glutenfrei,
       bool vegan,
       bool vegetarisch,
@@ -84,6 +86,7 @@ class _$ErstellenModelCopyWithImpl<$Res, $Val extends ErstellenModel>
     Object? requiredIngredients = null,
     Object? steps = null,
     Object? description = null,
+    Object? attachments = null,
     Object? glutenfrei = null,
     Object? vegan = null,
     Object? vegetarisch = null,
@@ -118,6 +121,10 @@ class _$ErstellenModelCopyWithImpl<$Res, $Val extends ErstellenModel>
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
               as String,
+      attachments: null == attachments
+          ? _value.attachments
+          : attachments // ignore: cast_nullable_to_non_nullable
+              as List<String>,
       glutenfrei: null == glutenfrei
           ? _value.glutenfrei
           : glutenfrei // ignore: cast_nullable_to_non_nullable
@@ -184,6 +191,7 @@ abstract class _$$_ErstellenModelCopyWith<$Res>
       List<Ingredient> requiredIngredients,
       List<String> steps,
       String description,
+      List<String> attachments,
       bool glutenfrei,
       bool vegan,
       bool vegetarisch,
@@ -214,6 +222,7 @@ class __$$_ErstellenModelCopyWithImpl<$Res>
     Object? requiredIngredients = null,
     Object? steps = null,
     Object? description = null,
+    Object? attachments = null,
     Object? glutenfrei = null,
     Object? vegan = null,
     Object? vegetarisch = null,
@@ -248,6 +257,10 @@ class __$$_ErstellenModelCopyWithImpl<$Res>
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
               as String,
+      attachments: null == attachments
+          ? _value._attachments
+          : attachments // ignore: cast_nullable_to_non_nullable
+              as List<String>,
       glutenfrei: null == glutenfrei
           ? _value.glutenfrei
           : glutenfrei // ignore: cast_nullable_to_non_nullable
@@ -309,6 +322,7 @@ class _$_ErstellenModel implements _ErstellenModel {
       required final List<Ingredient> requiredIngredients,
       required final List<String> steps,
       required this.description,
+      required final List<String> attachments,
       required this.glutenfrei,
       required this.vegan,
       required this.vegetarisch,
@@ -322,7 +336,8 @@ class _$_ErstellenModel implements _ErstellenModel {
       required this.urlInvalid,
       required this.isEdit})
       : _requiredIngredients = requiredIngredients,
-        _steps = steps;
+        _steps = steps,
+        _attachments = attachments;
 
   @override
   final String name;
@@ -344,6 +359,13 @@ class _$_ErstellenModel implements _ErstellenModel {
 
   @override
   final String description;
+  final List<String> _attachments;
+  @override
+  List<String> get attachments {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_attachments);
+  }
+
   @override
   final bool glutenfrei;
   @override
@@ -371,7 +393,7 @@ class _$_ErstellenModel implements _ErstellenModel {
 
   @override
   String toString() {
-    return 'ErstellenModel(name: $name, id: $id, requiredIngredients: $requiredIngredients, steps: $steps, description: $description, glutenfrei: $glutenfrei, vegan: $vegan, vegetarisch: $vegetarisch, image: $image, nameNotSet: $nameNotSet, ingridientNotSet: $ingridientNotSet, stepsNotSet: $stepsNotSet, descriptionNotSet: $descriptionNotSet, isImport: $isImport, webURL: $webURL, urlInvalid: $urlInvalid, isEdit: $isEdit)';
+    return 'ErstellenModel(name: $name, id: $id, requiredIngredients: $requiredIngredients, steps: $steps, description: $description, attachments: $attachments, glutenfrei: $glutenfrei, vegan: $vegan, vegetarisch: $vegetarisch, image: $image, nameNotSet: $nameNotSet, ingridientNotSet: $ingridientNotSet, stepsNotSet: $stepsNotSet, descriptionNotSet: $descriptionNotSet, isImport: $isImport, webURL: $webURL, urlInvalid: $urlInvalid, isEdit: $isEdit)';
   }
 
   @override
@@ -386,6 +408,8 @@ class _$_ErstellenModel implements _ErstellenModel {
             const DeepCollectionEquality().equals(other._steps, _steps) &&
             (identical(other.description, description) ||
                 other.description == description) &&
+            const DeepCollectionEquality()
+                .equals(other._attachments, _attachments) &&
             (identical(other.glutenfrei, glutenfrei) ||
                 other.glutenfrei == glutenfrei) &&
             (identical(other.vegan, vegan) || other.vegan == vegan) &&
@@ -416,6 +440,7 @@ class _$_ErstellenModel implements _ErstellenModel {
       const DeepCollectionEquality().hash(_requiredIngredients),
       const DeepCollectionEquality().hash(_steps),
       description,
+      const DeepCollectionEquality().hash(_attachments),
       glutenfrei,
       vegan,
       vegetarisch,
@@ -443,6 +468,7 @@ abstract class _ErstellenModel implements ErstellenModel {
       required final List<Ingredient> requiredIngredients,
       required final List<String> steps,
       required final String description,
+      required final List<String> attachments,
       required final bool glutenfrei,
       required final bool vegan,
       required final bool vegetarisch,
@@ -466,6 +492,8 @@ abstract class _ErstellenModel implements ErstellenModel {
   List<String> get steps;
   @override
   String get description;
+  @override
+  List<String> get attachments;
   @override
   bool get glutenfrei;
   @override

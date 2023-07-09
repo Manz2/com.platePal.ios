@@ -174,7 +174,7 @@ mixin _$Recipe {
   List<dynamic> get guideText => throw _privateConstructorUsedError; //String
   List<dynamic> get ingredients =>
       throw _privateConstructorUsedError; //Map<String, dynamic>
-  List<String>? get attachments => throw _privateConstructorUsedError; //String
+  List<String>? get attachments => throw _privateConstructorUsedError;
   bool get vegetarisch => throw _privateConstructorUsedError;
   bool get vegan => throw _privateConstructorUsedError;
   bool get glutenfrei => throw _privateConstructorUsedError;
@@ -474,7 +474,6 @@ class _$_Recipe implements _Recipe {
     return EqualUnmodifiableListView(value);
   }
 
-//String
   @override
   final bool vegetarisch;
   @override
@@ -590,7 +589,7 @@ abstract class _Recipe implements Recipe {
   List<dynamic> get ingredients;
   @override //Map<String, dynamic>
   List<String>? get attachments;
-  @override //String
+  @override
   bool get vegetarisch;
   @override
   bool get vegan;

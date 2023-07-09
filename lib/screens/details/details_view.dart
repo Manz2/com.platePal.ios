@@ -1,34 +1,23 @@
-import 'package:flutter/material.dart' hide ReorderableList;
+import 'dart:math' as math;
+
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter/services.dart';
+import 'package:url_launcher/url_launcher_string.dart';
+
 import 'package:plate_pal/common/providers.dart';
 import 'package:plate_pal/config.dart';
-import 'package:plate_pal/ui-kit/details_config.dart';
+import 'package:plate_pal/screens/details/details_constants.dart';
 import 'package:plate_pal/ui-kit/details_generic_card.dart';
 import 'package:plate_pal/ui-kit/recipe_step_body.dart';
-import 'package:url_launcher/url_launcher_string.dart';
-import 'dart:math' as math;
+import '../../ui-kit/ingredient_list_elem.dart';
 import '../erstellen/erstellen_model.dart';
 import '../home/home_model.dart';
 import 'details_model.dart';
-import '../../ui-kit/ingredient_list_elem.dart';
 
 bool initController = false;
 late final DetailsController controller;
-late String recipeIdGlobal;
-
-void loadColors() {
-  //this is just a copy. never edit here - edit the original only
-  BackgroundColor = currentScheme.getScheme().background /* Colors.white */;
-  ForegroundColor = currentScheme.getScheme().surface /* Colors.white */;
-  ObjectBackgroundColor =
-      currentScheme.getScheme().background /* Colors.black */;
-  ObjectPrimaryColor = currentScheme.getScheme().primary /* Colors.black */;
-  ObjectSecondaryColor = currentScheme.getScheme().secondary;
-  ObjectVariantColor = currentScheme.getScheme().onSurfaceVariant;
-  //it is needed as the variables don't get updated in time
-}
 
 class DetailsView extends ConsumerWidget {
   final String recipeId;
@@ -45,9 +34,14 @@ class DetailsView extends ConsumerWidget {
       controller.fetchRecipeDetails(recipeId);
     }
     loadColors();
-    recipeIdGlobal = recipeId;
     return Scaffold(
       appBar: AppBar(
+          leading: IconButton(
+            onPressed: () async {
+              controller.navigateBack(context);
+            },
+            icon: const Icon(Icons.arrow_back_sharp),
+          ),
           title: LineText(
               model.recipe.title,
               TextStyle(
@@ -62,7 +56,7 @@ class DetailsView extends ConsumerWidget {
                   onPressed: controller.removePersonAmount),
               Text(model.amountScale.toString().replaceAll(RegExp(r'\.0$'), ''),
                   style: TextStyle(
-                      fontSize: 20,
+                      fontSize: currentFontSize.toDouble() - 3,
                       fontWeight: FontWeight.bold,
                       color: ObjectPrimaryColor)),
               IconButton(
@@ -108,14 +102,14 @@ class RecipeBody extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     DetailsModel model = ref.watch(providers.detailsViewControllerProvider);
-    int myID = 1;
+    int myIngredientID = 1;
 
     List<Widget> _ingredientListElements = [
       for (Ingredient i
           in (model.isInEditMode) ? model.ingredients : model.scaledIngredients)
         IngredientListElem(
-            key: Key('$myID'),
-            ingredientNumber: myID++,
+            key: Key('$myIngredientID'),
+            ingredientNumber: myIngredientID++,
             ingredientName: i.name,
             ingredientAmount: i.amount,
             isInEditMode: model.isInEditMode,
@@ -166,7 +160,7 @@ class RecipeBody extends ConsumerWidget {
                           ),
                           padding: const EdgeInsets.fromLTRB(5, 0, 0, 4)),
                     ),
-                  if (model.recipe.id != "-1")
+                  if (model.recipe.id != emptyRecipe().id)
                     GenericCard(
                         icon: symPadding(
                             Transform.rotate(
@@ -208,7 +202,7 @@ class RecipeBody extends ConsumerWidget {
           ),
         ],
       ),
-      onRefresh: () => controller.fetchRecipeDetails(recipeIdGlobal),
+      onRefresh: () => controller.fetchRecipeDetails(model.recipe.id),
     );
   }
 
@@ -255,17 +249,18 @@ abstract class DetailsController extends StateNotifier<DetailsModel> {
   Future<void> fetchRecipeDetails(String id);
   void toggleFavorite();
   void openAttachment(String fileName);
-  void removeFromAttachments(String fileName, context);
-  void toggleIngredientFocus(String ingredientName);
   void addAttachment(BuildContext context);
-  void navigateCreate(BuildContext context, ErstellenModel model);
+  void removeFromAttachments(String fileName, context);
+  void toggleIngredientHighlightingFocus(String ingredientName);
   List<bool> buildHighlightList();
   void toggleEditMode(context);
   void renameRecipe(String newName);
   void ingredientNameChanged(String ingredientName, String newName);
   void ingredientAmountChanged(String ingredientName, String newAmount);
-  void removePersonAmount();
-  void addPersonAmount();
   void moveIngredient(int oldIndex, int newIndex);
+  void addPersonAmount();
+  void removePersonAmount();
+  void navigateCreate(BuildContext context, ErstellenModel model);
+  void navigateBack(BuildContext context);
   ErstellenModel recipeToErstellenModel(Recipe recipe);
 }
