@@ -13,27 +13,27 @@ dependencies:
   flutter_riverpod: ^2.0.0-dev.0
   freezed_annotation: ^2.0.1
   cupertino_icons: ^1.0.2
-  http: ^1.1.0
+  http: ^0.13.4
   json_serializable: ^6.2.0
-  dio: ^5.3.2
+  dio: ^4.0.6
   hive: ^2.2.1
   hive_flutter: ^1.1.0
   file: ^6.1.4
   firebase_core: ^2.13.1
   firebase_database: ^10.2.2
   cloud_firestore: ^4.8.0
-  logger: ^2.0.1
+  logger: ^1.3.0
   firebase_storage: ^11.2.2
   flutter_svg: ^2.0.6
-  cached_network_image: ^3.2.3
+  cached_network_image: ^3.2.1
   firebase_auth: ^4.6.2
   sign_in_button: ^3.2.0
   file_picker: ^5.3.1
   restart_app: ^1.2.0
   shared_preferences: ^2.1.1
-  flutter_i18n: ^0.34.0
-  google_mlkit_text_recognition: ^0.10.0
-  dart_openai: ^4.0.0
+  flutter_i18n: ^0.33.0
+  google_mlkit_text_recognition: ^0.8.1
+  dart_openai: 2.0.0
   beamer: ^1.5.5
   flutter_reorderable_list: ^1.3.1
   webview_flutter: ^4.2.2
@@ -48,10 +48,10 @@ dev_dependencies:
     sdk: flutter
   build_runner: ^2.1.10
   freezed: ^2.0.2
-  flutter_lints: ^2.0.3
+  flutter_lints: ^1.0.0
   hive_generator: ^2.0.0
-  flutter_launcher_icons: ^0.13.1
-  analyzer: ^6.2.0
+  flutter_launcher_icons: ^0.10.0
+  analyzer: ^5.0.0
 
 flutter_icons:
   android: "launcher_icon"
