@@ -64,3 +64,4 @@ storage.rules
 lib/firebase_options.dart
 pubspec.lock
 firebase.json
+android/app/google-services.json
