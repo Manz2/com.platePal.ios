@@ -201,46 +201,52 @@ class ErstellenView extends ConsumerWidget {
                 ],
               ),
               const SizedBox(height: 16.0),
-              ElevatedButton(
-                onPressed: () {
-                  if (controller.createRecipe(context)) {
-                    controller.navigateBack(context);
-                  } else {
-                    final snackBar = SnackBar(
-                      content: Text(FlutterI18n.translate(
-                          context, "create.notAllFields")),
-                      action: SnackBarAction(
-                        label: 'OK',
-                        onPressed: () {},
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  if (!kIsWeb && !model.isEdit)
+                    Padding(
+                      padding: const EdgeInsets.only(right: 20),
+                      child: ElevatedButton(
+                        onPressed: () async {
+                          if (await controller.kiImport(context)) {
+                            final snackBar = SnackBar(
+                              content: Text(FlutterI18n.translate(
+                                  context, "create.ai.success")),
+                              action: SnackBarAction(
+                                label: 'OK',
+                                onPressed: () {},
+                              ),
+                            );
+                            ScaffoldMessenger.of(context)
+                                .showSnackBar(snackBar);
+                          } else {
+                            final snackBar = SnackBar(
+                              content: Text(FlutterI18n.translate(
+                                  context, "create.ai.failure")),
+                              action: SnackBarAction(
+                                label: 'OK',
+                                onPressed: () {},
+                              ),
+                            );
+                            ScaffoldMessenger.of(context)
+                                .showSnackBar(snackBar);
+                          }
+                        },
+                        child: Text(
+                            FlutterI18n.translate(context, "create.ai.import"),
+                            style: TextStyle(
+                                fontSize: currentFontSize.toDouble())),
                       ),
-                    );
-                    ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                  }
-                },
-                child: Text(
-                    FlutterI18n.translate(context,
-                        model.isEdit ? "create.update" : "create.create"),
-                    style: TextStyle(fontSize: currentFontSize.toDouble())),
-              ),
-              if (!kIsWeb && !model.isEdit)
-                Padding(
-                  padding: const EdgeInsets.only(top: 20),
-                  child: ElevatedButton(
-                    onPressed: () async {
-                      if (await controller.kiImport(context)) {
-                        final snackBar = SnackBar(
-                          content: Text(FlutterI18n.translate(
-                              context, "create.ai.success")),
-                          action: SnackBarAction(
-                            label: 'OK',
-                            onPressed: () {},
-                          ),
-                        );
-                        ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                    ),
+                  ElevatedButton(
+                    onPressed: () {
+                      if (controller.createRecipe(context)) {
+                        controller.navigateBack(context);
                       } else {
                         final snackBar = SnackBar(
                           content: Text(FlutterI18n.translate(
-                              context, "create.ai.failure")),
+                              context, "create.notAllFields")),
                           action: SnackBarAction(
                             label: 'OK',
                             onPressed: () {},
@@ -250,10 +256,12 @@ class ErstellenView extends ConsumerWidget {
                       }
                     },
                     child: Text(
-                        FlutterI18n.translate(context, "create.ai.import"),
+                        FlutterI18n.translate(context,
+                            model.isEdit ? "create.update" : "create.create"),
                         style: TextStyle(fontSize: currentFontSize.toDouble())),
                   ),
-                ),
+                ],
+              ),
             ],
           ),
         ),
