@@ -55,5 +55,7 @@
 	<string>This app needs access to your photo library to upload and share photos.</string>
 	<key>UIFileSharingEnabled</key>
 	<true/>
+	<key>ITSAppUsesNonExemptEncryption</key>
+	<false/>
 </dict>
 </plist>
