@@ -8,6 +8,7 @@ import 'package:plate_pal/screens/erstellen/erstellen_view.dart';
 import 'package:plate_pal/screens/favoriten/favorite_view.dart';
 import 'package:plate_pal/screens/filter/filter_view.dart';
 import 'package:plate_pal/screens/gruppe/gruppe_view.dart';
+import 'package:plate_pal/screens/home/home_model.dart';
 import 'package:plate_pal/screens/home/home_view.dart';
 import 'package:plate_pal/screens/login/login_view.dart';
 import 'package:plate_pal/service/navigation_service_aggregator.dart';
@@ -31,7 +32,7 @@ class NavigationService implements NavigationServiceAggregator {
         '/filter': (context, state, data) =>
             FilterView(function: data as Function(List<bool>)),
         '/details': (context, state, data) =>
-            DetailsView(recipeId: data as String),
+            DetailsView(recipe: data as Recipe),
       },
     ),
   );
@@ -57,8 +58,8 @@ class NavigationService implements NavigationServiceAggregator {
   }
 
   @override
-  void routeDetails(BuildContext context, String recipeId) {
-    Beamer.of(context).beamToNamed('/details', data: recipeId);
+  void routeDetails(BuildContext context, Recipe recipe) {
+    Beamer.of(context).beamToNamed('/details', data: recipe);
   }
 
   @override

@@ -1,17 +1,15 @@
 import 'dart:io';
 import 'dart:convert';
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:dart_openai/dart_openai.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:logger/logger.dart';
 import 'package:http/http.dart' as http;
 import 'package:google_mlkit_text_recognition/google_mlkit_text_recognition.dart';
 import 'package:plate_pal/config.dart';
-import 'package:plate_pal/screens/details/details_backend_service.dart';
-import 'package:plate_pal/screens/details/details_model.dart';
 import 'package:plate_pal/screens/erstellen/erstellen_model.dart';
 import 'package:plate_pal/screens/favoriten/favoriten_backend_service.dart';
 import 'package:plate_pal/screens/gruppe/gruppe_backend_service.dart';
@@ -202,20 +200,6 @@ class BackendService implements BackendServiceAggregator {
   }
 
   @override
-  Future<DetailsServiceReturn> getRecipe(String id, String uid) async {
-    DatabaseReference ref = FirebaseDatabase.instance.ref();
-    final snapshot =
-        await ref.child('users/' + uid + '/rezepte').child(id).get();
-    if (snapshot.exists) {
-      return DetailsServiceReturn(recipe: await getRecipeFrom(snapshot));
-    } else {
-      logger.e("Failed to access the database while attempting to retrieve the"
-          " recipe!");
-      return DetailsServiceReturn(recipe: emptyRecipe());
-    }
-  }
-
-  @override
   Future<GruppeServiceReturn> getGroupMembers(String uid) async {
     List<Member> list = [];
     DatabaseReference ref = FirebaseDatabase.instance.ref();
@@ -299,12 +283,6 @@ class BackendService implements BackendServiceAggregator {
       isSubscription: element.child("isSubscription").value as bool,
       privateRecipe: element.child("privateRecipe").value as bool,
     );
-  }
-
-  @override
-  Future<bool> updateRecipe(Recipe recipe, String uid) async {
-    pushRecipe(recipe, uid, true);
-    return true;
   }
 
   @override
@@ -423,12 +401,16 @@ class BackendService implements BackendServiceAggregator {
   }
 
   @override
-  Future<void> toggleFavorite(
-      String id, bool isCurrentlyFavorite, String creator) async {
-    if (isCurrentlyFavorite) {
-      removeFavorites(FirebaseAuth.instance.currentUser!.uid, id);
-    } else {
-      addFavorites(FirebaseAuth.instance.currentUser!.uid, id, creator);
+  void deleteRecipe(Recipe recipe) {
+    DatabaseReference ref = FirebaseDatabase.instance.ref();
+    if (recipe.image != "") {
+      FirebaseStorage.instance.refFromURL(recipe.image).delete();
     }
+    ref
+        .child("users")
+        .child(FirebaseAuth.instance.currentUser!.uid)
+        .child('rezepte')
+        .child(recipe.id)
+        .remove();
   }
 }

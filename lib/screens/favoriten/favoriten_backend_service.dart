@@ -6,6 +6,7 @@ abstract class FavoritenBackendService {
   Future<FavoritenServiceReturn> filterFavorites(
       String id, bool vegan, bool vege, bool gl);
   Future<FavoritenServiceReturn> getFavorites(String uid);
+  Future<bool> isFavorite(String id, String uid);
 }
 
 @freezed

@@ -6,11 +6,8 @@ import '../home/home_model.dart';
 part 'details_backend_service.freezed.dart';
 
 abstract class DetailsBackendService {
-  Future<DetailsServiceReturn> getRecipe(String id, String uid);
-  Future<bool> updateRecipe(Recipe recipe, String uid);
-  Future<void> toggleFavorite(String id, bool isFavorite, String creator);
-  Future<bool> isFavorite(String id, String uid);
   ErstellenModel recipeToErstellenModel(Recipe recipe, {bool edit = false});
+  void deleteRecipe(Recipe recipe);
 }
 
 @freezed

@@ -1,26 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:plate_pal/screens/home/home_model.dart';
 import 'package:plate_pal/service/backend_service.dart';
 import 'package:plate_pal/service/my_app_navigation_service.dart';
 import '../config.dart';
 
 class ExpandableRecipeCard extends StatefulWidget {
-  final String image;
-  final String title;
-  final String description;
-  final String id;
-  final String creator;
-  final bool isPrivate;
+  final Recipe recipe;
   final MyAppNavigationService navigationService;
 
   const ExpandableRecipeCard({
-    required this.id,
-    required this.image,
-    required this.title,
-    required this.description,
-    required this.creator,
-    required this.isPrivate,
+    required this.recipe,
     required this.navigationService,
     Key? key,
   }) : super(key: key);
@@ -49,7 +40,7 @@ class _MyCardState extends State<ExpandableRecipeCard> {
           InkWell(
               onTap: () async {
                 bool f = await BackendService().isFavorite(
-                    FirebaseAuth.instance.currentUser!.uid, widget.id);
+                    FirebaseAuth.instance.currentUser!.uid, widget.recipe.id);
                 setState(() {
                   isFavorite = f;
                   isExpanded = !isExpanded;
@@ -60,9 +51,9 @@ class _MyCardState extends State<ExpandableRecipeCard> {
                       borderRadius: const BorderRadius.only(
                           topLeft: Radius.circular(8.0),
                           topRight: Radius.circular(8.0)),
-                      child: widget.image != ""
+                      child: widget.recipe.image != ""
                           ? CachedNetworkImage(
-                              imageUrl: widget.image,
+                              imageUrl: widget.recipe.image,
                               height: 200,
                               width: double.infinity,
                               fit: BoxFit.cover,
@@ -81,9 +72,9 @@ class _MyCardState extends State<ExpandableRecipeCard> {
                           height: 50,
                           child: ClipRRect(
                             borderRadius: BorderRadius.circular(8.0),
-                            child: widget.image != ""
+                            child: widget.recipe.image != ""
                                 ? CachedNetworkImage(
-                                    imageUrl: widget.image,
+                                    imageUrl: widget.recipe.image,
                                     fit: BoxFit.cover,
                                   )
                                 : const Image(
@@ -95,13 +86,13 @@ class _MyCardState extends State<ExpandableRecipeCard> {
                           ),
                         ),
                         title: Text(
-                          widget.title,
+                          widget.recipe.title,
                           style: TextStyle(
                               fontSize: currentFontSize.toDouble(),
                               fontWeight: FontWeight.bold),
                         ),
                         subtitle: currentFontSize <= 22
-                            ? Text(widget.description)
+                            ? Text(widget.recipe.description)
                             : null,
                       ),
                     )),
@@ -113,13 +104,13 @@ class _MyCardState extends State<ExpandableRecipeCard> {
                   children: [
                     ListTile(
                       title: Text(
-                        widget.title,
+                        widget.recipe.title,
                         style: TextStyle(
                             fontSize: currentFontSize.toDouble(),
                             fontWeight: FontWeight.bold),
                         overflow: TextOverflow.ellipsis,
                       ),
-                      subtitle: Text(widget.description),
+                      subtitle: Text(widget.recipe.description),
                       trailing: Row(mainAxisSize: MainAxisSize.min, children: [
                         IconButton(
                           iconSize: 30,
@@ -128,13 +119,13 @@ class _MyCardState extends State<ExpandableRecipeCard> {
                               if (isFavorite) {
                                 BackendService().removeFavorites(
                                     FirebaseAuth.instance.currentUser!.uid,
-                                    widget.id);
+                                    widget.recipe.id);
                                 isFavorite = !isFavorite;
                               } else {
                                 BackendService().addFavorites(
                                     FirebaseAuth.instance.currentUser!.uid,
-                                    widget.id,
-                                    widget.creator);
+                                    widget.recipe.id,
+                                    widget.recipe.creator);
                                 isFavorite = !isFavorite;
                               }
                             });
@@ -148,7 +139,7 @@ class _MyCardState extends State<ExpandableRecipeCard> {
                           iconSize: 30,
                           onPressed: () {
                             widget.navigationService
-                                .routeDetails(context, widget.id);
+                                .routeDetails(context, widget.recipe);
                           },
                           icon: const Icon(Icons.info),
                         ),

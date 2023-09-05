@@ -44,20 +44,13 @@
     }
   },
   "details": {
-    "notes": "Notizen",
-    "ingredients": "Zutaten",
+    "delete_Title": "Rezept löschen",
     "instructions": "Zubereitung",
-    "source": "Quelle",
-    "favorite": "Favorit",
-    "add_file": "Datei hinzufügen",
-    "attachments": "Angehängte Dateien:",
-    "attachment_removed": "Anhang entfernt",
-    "edit_recipe": "Rezept bearbeiten",
-    "isSubcription_modalTitle": "Dies ist das Rezept eines Freundes.",
-    "isSubcription_modalText": "Möchtest du eine eigene Kopie erstellen, um es bearbeiten zu können?",
-    "isSubcription_modalConfirmButton": "Kopie erstellen",
-    "isSubcription_modalCancelButton": "Abbrechen",
-    "ok": "OK"
+    "ok_detete": "Löschen",
+    "CancelButton": "Abbrechen",
+    "delete": "Sind Sie sicher, dass Sie das Rezept löschen möchten?",
+    "deleted": "Das Rezept wurde gelöscht.",
+    "undo": "Undo"
   },
   "favorites": {
     "none": "Keine Favoriten vorhanden"

@@ -95,12 +95,7 @@ class HomeView extends ConsumerWidget {
               for (Recipe rec in model.recipes)
                 ExpandableRecipeCard(
                   navigationService: controller.getNavigationservice(),
-                  id: rec.id,
-                  description: rec.description,
-                  image: rec.image,
-                  title: rec.title,
-                  creator: rec.creator,
-                  isPrivate: rec.privateRecipe,
+                  recipe: rec,
                 ),
             ],
           ),
@@ -119,6 +114,6 @@ abstract class HomeController extends StateNotifier<HomeModel> {
   void navigateAccount(BuildContext context);
   void navigateFavorites(BuildContext context);
   void navigateCreate(BuildContext context);
-  void navigateDetail(BuildContext context, String recipeId);
+  void navigateDetail(BuildContext context, Recipe recipe);
   MyAppNavigationService getNavigationservice();
 }

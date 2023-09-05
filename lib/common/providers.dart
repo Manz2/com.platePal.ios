@@ -113,9 +113,9 @@ class Providers {
     ),
   );
 
-  final StateNotifierProvider<DetailsController, DetailsModel>
+  final AutoDisposeStateNotifierProvider<DetailsController, DetailsModel>
       detailsViewControllerProvider =
-      StateNotifierProvider<DetailsController, DetailsModel>(
+      StateNotifierProvider.autoDispose<DetailsController, DetailsModel>(
           (StateNotifierProviderRef ref) => DetailsControllerImplementation(
                 backendService: ref.read(providers.backendServiceProvider
                     as ProviderListenable<DetailsBackendService>),

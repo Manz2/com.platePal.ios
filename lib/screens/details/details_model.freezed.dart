@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'details_model.dart';
 
@@ -16,16 +16,8 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$DetailsModel {
+  List<int> get checked => throw _privateConstructorUsedError;
   Recipe get recipe => throw _privateConstructorUsedError;
-  bool get isFavorite => throw _privateConstructorUsedError;
-  List<Ingredient> get ingredients => throw _privateConstructorUsedError;
-  List<Ingredient> get scaledIngredients => throw _privateConstructorUsedError;
-  List<List<TextSpan>> get guideTextWidgets =>
-      throw _privateConstructorUsedError;
-  bool get isInEditMode => throw _privateConstructorUsedError;
-  double get amountScale => throw _privateConstructorUsedError;
-  Ingredient? get currentlySearchedIngredient =>
-      throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $DetailsModelCopyWith<DetailsModel> get copyWith =>
@@ -38,18 +30,9 @@ abstract class $DetailsModelCopyWith<$Res> {
           DetailsModel value, $Res Function(DetailsModel) then) =
       _$DetailsModelCopyWithImpl<$Res, DetailsModel>;
   @useResult
-  $Res call(
-      {Recipe recipe,
-      bool isFavorite,
-      List<Ingredient> ingredients,
-      List<Ingredient> scaledIngredients,
-      List<List<TextSpan>> guideTextWidgets,
-      bool isInEditMode,
-      double amountScale,
-      Ingredient? currentlySearchedIngredient});
+  $Res call({List<int> checked, Recipe recipe});
 
   $RecipeCopyWith<$Res> get recipe;
-  $IngredientCopyWith<$Res>? get currentlySearchedIngredient;
 }
 
 /// @nodoc
@@ -65,48 +48,18 @@ class _$DetailsModelCopyWithImpl<$Res, $Val extends DetailsModel>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? checked = null,
     Object? recipe = null,
-    Object? isFavorite = null,
-    Object? ingredients = null,
-    Object? scaledIngredients = null,
-    Object? guideTextWidgets = null,
-    Object? isInEditMode = null,
-    Object? amountScale = null,
-    Object? currentlySearchedIngredient = freezed,
   }) {
     return _then(_value.copyWith(
+      checked: null == checked
+          ? _value.checked
+          : checked // ignore: cast_nullable_to_non_nullable
+              as List<int>,
       recipe: null == recipe
           ? _value.recipe
           : recipe // ignore: cast_nullable_to_non_nullable
               as Recipe,
-      isFavorite: null == isFavorite
-          ? _value.isFavorite
-          : isFavorite // ignore: cast_nullable_to_non_nullable
-              as bool,
-      ingredients: null == ingredients
-          ? _value.ingredients
-          : ingredients // ignore: cast_nullable_to_non_nullable
-              as List<Ingredient>,
-      scaledIngredients: null == scaledIngredients
-          ? _value.scaledIngredients
-          : scaledIngredients // ignore: cast_nullable_to_non_nullable
-              as List<Ingredient>,
-      guideTextWidgets: null == guideTextWidgets
-          ? _value.guideTextWidgets
-          : guideTextWidgets // ignore: cast_nullable_to_non_nullable
-              as List<List<TextSpan>>,
-      isInEditMode: null == isInEditMode
-          ? _value.isInEditMode
-          : isInEditMode // ignore: cast_nullable_to_non_nullable
-              as bool,
-      amountScale: null == amountScale
-          ? _value.amountScale
-          : amountScale // ignore: cast_nullable_to_non_nullable
-              as double,
-      currentlySearchedIngredient: freezed == currentlySearchedIngredient
-          ? _value.currentlySearchedIngredient
-          : currentlySearchedIngredient // ignore: cast_nullable_to_non_nullable
-              as Ingredient?,
     ) as $Val);
   }
 
@@ -115,19 +68,6 @@ class _$DetailsModelCopyWithImpl<$Res, $Val extends DetailsModel>
   $RecipeCopyWith<$Res> get recipe {
     return $RecipeCopyWith<$Res>(_value.recipe, (value) {
       return _then(_value.copyWith(recipe: value) as $Val);
-    });
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $IngredientCopyWith<$Res>? get currentlySearchedIngredient {
-    if (_value.currentlySearchedIngredient == null) {
-      return null;
-    }
-
-    return $IngredientCopyWith<$Res>(_value.currentlySearchedIngredient!,
-        (value) {
-      return _then(_value.copyWith(currentlySearchedIngredient: value) as $Val);
     });
   }
 }
@@ -140,20 +80,10 @@ abstract class _$$_DetailsModelCopyWith<$Res>
       __$$_DetailsModelCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {Recipe recipe,
-      bool isFavorite,
-      List<Ingredient> ingredients,
-      List<Ingredient> scaledIngredients,
-      List<List<TextSpan>> guideTextWidgets,
-      bool isInEditMode,
-      double amountScale,
-      Ingredient? currentlySearchedIngredient});
+  $Res call({List<int> checked, Recipe recipe});
 
   @override
   $RecipeCopyWith<$Res> get recipe;
-  @override
-  $IngredientCopyWith<$Res>? get currentlySearchedIngredient;
 }
 
 /// @nodoc
@@ -167,48 +97,18 @@ class __$$_DetailsModelCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? checked = null,
     Object? recipe = null,
-    Object? isFavorite = null,
-    Object? ingredients = null,
-    Object? scaledIngredients = null,
-    Object? guideTextWidgets = null,
-    Object? isInEditMode = null,
-    Object? amountScale = null,
-    Object? currentlySearchedIngredient = freezed,
   }) {
     return _then(_$_DetailsModel(
+      checked: null == checked
+          ? _value._checked
+          : checked // ignore: cast_nullable_to_non_nullable
+              as List<int>,
       recipe: null == recipe
           ? _value.recipe
           : recipe // ignore: cast_nullable_to_non_nullable
               as Recipe,
-      isFavorite: null == isFavorite
-          ? _value.isFavorite
-          : isFavorite // ignore: cast_nullable_to_non_nullable
-              as bool,
-      ingredients: null == ingredients
-          ? _value._ingredients
-          : ingredients // ignore: cast_nullable_to_non_nullable
-              as List<Ingredient>,
-      scaledIngredients: null == scaledIngredients
-          ? _value._scaledIngredients
-          : scaledIngredients // ignore: cast_nullable_to_non_nullable
-              as List<Ingredient>,
-      guideTextWidgets: null == guideTextWidgets
-          ? _value._guideTextWidgets
-          : guideTextWidgets // ignore: cast_nullable_to_non_nullable
-              as List<List<TextSpan>>,
-      isInEditMode: null == isInEditMode
-          ? _value.isInEditMode
-          : isInEditMode // ignore: cast_nullable_to_non_nullable
-              as bool,
-      amountScale: null == amountScale
-          ? _value.amountScale
-          : amountScale // ignore: cast_nullable_to_non_nullable
-              as double,
-      currentlySearchedIngredient: freezed == currentlySearchedIngredient
-          ? _value.currentlySearchedIngredient
-          : currentlySearchedIngredient // ignore: cast_nullable_to_non_nullable
-              as Ingredient?,
     ));
   }
 }
@@ -217,53 +117,23 @@ class __$$_DetailsModelCopyWithImpl<$Res>
 
 class _$_DetailsModel implements _DetailsModel {
   const _$_DetailsModel(
-      {required this.recipe,
-      required this.isFavorite,
-      required final List<Ingredient> ingredients,
-      required final List<Ingredient> scaledIngredients,
-      required final List<List<TextSpan>> guideTextWidgets,
-      required this.isInEditMode,
-      required this.amountScale,
-      this.currentlySearchedIngredient})
-      : _ingredients = ingredients,
-        _scaledIngredients = scaledIngredients,
-        _guideTextWidgets = guideTextWidgets;
+      {required final List<int> checked, required this.recipe})
+      : _checked = checked;
+
+  final List<int> _checked;
+  @override
+  List<int> get checked {
+    if (_checked is EqualUnmodifiableListView) return _checked;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_checked);
+  }
 
   @override
   final Recipe recipe;
-  @override
-  final bool isFavorite;
-  final List<Ingredient> _ingredients;
-  @override
-  List<Ingredient> get ingredients {
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_ingredients);
-  }
-
-  final List<Ingredient> _scaledIngredients;
-  @override
-  List<Ingredient> get scaledIngredients {
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_scaledIngredients);
-  }
-
-  final List<List<TextSpan>> _guideTextWidgets;
-  @override
-  List<List<TextSpan>> get guideTextWidgets {
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_guideTextWidgets);
-  }
-
-  @override
-  final bool isInEditMode;
-  @override
-  final double amountScale;
-  @override
-  final Ingredient? currentlySearchedIngredient;
 
   @override
   String toString() {
-    return 'DetailsModel(recipe: $recipe, isFavorite: $isFavorite, ingredients: $ingredients, scaledIngredients: $scaledIngredients, guideTextWidgets: $guideTextWidgets, isInEditMode: $isInEditMode, amountScale: $amountScale, currentlySearchedIngredient: $currentlySearchedIngredient)';
+    return 'DetailsModel(checked: $checked, recipe: $recipe)';
   }
 
   @override
@@ -271,36 +141,13 @@ class _$_DetailsModel implements _DetailsModel {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_DetailsModel &&
-            (identical(other.recipe, recipe) || other.recipe == recipe) &&
-            (identical(other.isFavorite, isFavorite) ||
-                other.isFavorite == isFavorite) &&
-            const DeepCollectionEquality()
-                .equals(other._ingredients, _ingredients) &&
-            const DeepCollectionEquality()
-                .equals(other._scaledIngredients, _scaledIngredients) &&
-            const DeepCollectionEquality()
-                .equals(other._guideTextWidgets, _guideTextWidgets) &&
-            (identical(other.isInEditMode, isInEditMode) ||
-                other.isInEditMode == isInEditMode) &&
-            (identical(other.amountScale, amountScale) ||
-                other.amountScale == amountScale) &&
-            (identical(other.currentlySearchedIngredient,
-                    currentlySearchedIngredient) ||
-                other.currentlySearchedIngredient ==
-                    currentlySearchedIngredient));
+            const DeepCollectionEquality().equals(other._checked, _checked) &&
+            (identical(other.recipe, recipe) || other.recipe == recipe));
   }
 
   @override
   int get hashCode => Object.hash(
-      runtimeType,
-      recipe,
-      isFavorite,
-      const DeepCollectionEquality().hash(_ingredients),
-      const DeepCollectionEquality().hash(_scaledIngredients),
-      const DeepCollectionEquality().hash(_guideTextWidgets),
-      isInEditMode,
-      amountScale,
-      currentlySearchedIngredient);
+      runtimeType, const DeepCollectionEquality().hash(_checked), recipe);
 
   @JsonKey(ignore: true)
   @override
@@ -311,31 +158,13 @@ class _$_DetailsModel implements _DetailsModel {
 
 abstract class _DetailsModel implements DetailsModel {
   const factory _DetailsModel(
-      {required final Recipe recipe,
-      required final bool isFavorite,
-      required final List<Ingredient> ingredients,
-      required final List<Ingredient> scaledIngredients,
-      required final List<List<TextSpan>> guideTextWidgets,
-      required final bool isInEditMode,
-      required final double amountScale,
-      final Ingredient? currentlySearchedIngredient}) = _$_DetailsModel;
+      {required final List<int> checked,
+      required final Recipe recipe}) = _$_DetailsModel;
 
   @override
+  List<int> get checked;
+  @override
   Recipe get recipe;
-  @override
-  bool get isFavorite;
-  @override
-  List<Ingredient> get ingredients;
-  @override
-  List<Ingredient> get scaledIngredients;
-  @override
-  List<List<TextSpan>> get guideTextWidgets;
-  @override
-  bool get isInEditMode;
-  @override
-  double get amountScale;
-  @override
-  Ingredient? get currentlySearchedIngredient;
   @override
   @JsonKey(ignore: true)
   _$$_DetailsModelCopyWith<_$_DetailsModel> get copyWith =>

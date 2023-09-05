@@ -65,8 +65,8 @@ class FavoriteControllerImplmentation extends FavoriteController {
   }
 
   @override
-  void navigateDetail(BuildContext context, String recipeId) {
-    _navigationService.routeDetails(context, recipeId);
+  void navigateDetail(BuildContext context, Recipe recipe) {
+    _navigationService.routeDetails(context, recipe);
   }
 
   @override

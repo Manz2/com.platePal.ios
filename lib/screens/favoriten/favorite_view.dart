@@ -95,10 +95,7 @@ class FavoriteView extends ConsumerWidget {
               for (Recipe rec in model.favoriten)
                 ExpandableRecipeCardFavorite(
                   controller: controller,
-                  id: rec.id,
-                  description: rec.description,
-                  image: rec.image,
-                  title: rec.title,
+                  recipe: rec,
                 ),
             ],
           ),
@@ -116,5 +113,5 @@ abstract class FavoriteController extends StateNotifier<FavoriteModel> {
   void filter(BuildContext context);
   void navigateHome(BuildContext context);
   void navigateCreate(BuildContext context);
-  void navigateDetail(BuildContext context, String recipeId);
+  void navigateDetail(BuildContext context, Recipe recipe);
 }

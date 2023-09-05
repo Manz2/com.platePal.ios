@@ -44,20 +44,13 @@
     }
   },
   "details": {
-    "notes": "Notes",
-    "ingredients": "Ingredients",
+    "delete_Title": "Delete Recipe",
     "instructions": "Instructions",
-    "source": "Source",
-    "favorite": "Favorite",
-    "add_file": "Add File",
-    "attachments": "Attached Files:",
-    "attachment_removed": "Attachment removed",
-    "edit_recipe": "Edit Recipe",
-    "isSubcription_modalTitle": "This is a friend's recipe.",
-    "isSubcription_modalText": "Do you want to create your own copy to be able to edit it?",
-    "isSubcription_modalConfirmButton": "Create Copy",
-    "isSubcription_modalCancelButton": "Cancel",
-    "ok": "OK"
+    "ok_detete": "Delete",
+    "CancelButton": "Cancel",
+    "delete": "Are you sure you want to delete the recipe?",
+    "deleted": "The recipe was deleted.",
+    "undo": "Undo"
   },
   "favorites": {
     "none": "No favorites available"
