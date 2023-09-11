@@ -11,10 +11,10 @@ class AddTextFieldWidgetSteps extends StatefulWidget {
       {super.key, required this.con, required this.steps});
 
   @override
-  _AddTextFieldWidgetState createState() => _AddTextFieldWidgetState();
+  AddTextFieldWidgetState createState() => AddTextFieldWidgetState();
 }
 
-class _AddTextFieldWidgetState extends State<AddTextFieldWidgetSteps> {
+class AddTextFieldWidgetState extends State<AddTextFieldWidgetSteps> {
   final TextEditingController _textEditingController = TextEditingController();
 
   void _addTextFieldValue() {

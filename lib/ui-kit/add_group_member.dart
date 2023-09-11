@@ -8,7 +8,7 @@ class AddGroupMemberController extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final TextEditingController _idController = TextEditingController();
+    final TextEditingController idController = TextEditingController();
     String enteredName;
     return AlertDialog(
       title: Text(FlutterI18n.translate(context, "account.addGroupMemver")),
@@ -17,7 +17,7 @@ class AddGroupMemberController extends StatelessWidget {
         children: [
           Text(FlutterI18n.translate(context, "account.enterId")),
           TextField(
-            controller: _idController,
+            controller: idController,
             decoration: const InputDecoration(
               hintText: 'id',
             ),
@@ -31,7 +31,7 @@ class AddGroupMemberController extends StatelessWidget {
         ),
         TextButton(
           onPressed: () => {
-            enteredName = _idController.text,
+            enteredName = idController.text,
             Navigator.pop(context, enteredName),
           },
           child: const Text('OK'),

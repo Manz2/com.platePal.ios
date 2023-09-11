@@ -149,9 +149,8 @@ class DetailsView extends ConsumerWidget {
                 child: ListTile(
                   leading: const Icon(Icons.link),
                   title: Text(
-                      "  " +
-                          recipe.webURL!
-                              .substring(recipe.webURL!.indexOf("://") + 3),
+                      "  ${recipe.webURL!
+                              .substring(recipe.webURL!.indexOf("://") + 3)}",
                       style: TextStyle(
                           color: Colors.blue,
                           fontStyle: FontStyle.italic,

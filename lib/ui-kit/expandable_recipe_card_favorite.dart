@@ -17,10 +17,10 @@ class ExpandableRecipeCardFavorite extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  _MyCardState createState() => _MyCardState();
+  MyCardState createState() => MyCardState();
 }
 
-class _MyCardState extends State<ExpandableRecipeCardFavorite> {
+class MyCardState extends State<ExpandableRecipeCardFavorite> {
   bool isExpanded = false;
   bool isFavorite = true;
 

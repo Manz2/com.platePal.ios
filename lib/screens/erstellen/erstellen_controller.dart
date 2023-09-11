@@ -12,7 +12,6 @@ import 'package:plate_pal/screens/erstellen/erstellen_model.dart';
 import 'package:plate_pal/screens/erstellen/erstellen_view.dart';
 import 'package:plate_pal/screens/home/home_model.dart';
 import 'package:plate_pal/service/my_app_navigation_service.dart';
-import 'package:plate_pal/ui-kit/error_dialog.dart';
 import 'package:plate_pal/ui-kit/error_dialog_choice.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:uuid/uuid.dart';
@@ -113,7 +112,7 @@ class ErstellenControllerImplementation extends ErstellenController {
     List<String> tmp = List<String>.from(state.steps);
     tmp.add(step);
     state = state.copyWith(steps: tmp);
-    logger.d("add " + state.steps.toString());
+    logger.d("add ${state.steps}");
   }
 
   @override
@@ -121,7 +120,7 @@ class ErstellenControllerImplementation extends ErstellenController {
     List<String> tmp = List<String>.from(state.steps);
     tmp.remove(step);
     state = state.copyWith(steps: tmp);
-    logger.d("delete " + state.steps.toString());
+    logger.d("delete ${state.steps}");
   }
 
   @override
@@ -129,7 +128,7 @@ class ErstellenControllerImplementation extends ErstellenController {
     List<String> tmp = List<String>.from(state.steps);
     tmp.insert(index, step);
     state = state.copyWith(steps: tmp);
-    logger.d("insert " + state.steps.toString());
+    logger.d("insert ${state.steps}");
   }
 
   @override
@@ -203,24 +202,20 @@ class ErstellenControllerImplementation extends ErstellenController {
   }
 
   @override
-  Future<void> addImage(BuildContext context, String image) async {
+  Future<bool> addImage(String image) async {
     Uuid uuid = const Uuid();
     FilePickerResult? result = await FilePicker.platform
         .pickFiles(withData: true, allowMultiple: false, type: FileType.image);
 
     if (result != null) {
       if (result.files.single.size >= 5000000) {
-        ErrorDialog(
-                message: FlutterI18n.translate(context, "error.upload.message"),
-                title: FlutterI18n.translate(context, "error.upload.title"))
-            .display(context);
-        return;
+        return false;
       }
 
       Uint8List uploadfile = result.files.single.bytes!;
       String extension = result.files.single.extension!;
       String? name = uuid.v1();
-      String fileName = name + "." + extension;
+      String fileName = "$name.$extension";
 
       if (image != "") {
         FirebaseStorage.instance.refFromURL(image).delete();
@@ -236,8 +231,10 @@ class ErstellenControllerImplementation extends ErstellenController {
           .getDownloadURL();
 
       state = state.copyWith(image: downloadUrl);
+      return true;
     } else {
       logger.d("Failed to get Image");
+      return false;
     }
   }
 
@@ -292,7 +289,7 @@ class ErstellenControllerImplementation extends ErstellenController {
   }
 
   @override
-  Future<bool> kiImport(BuildContext context) async {
+  Future<bool> kiImport(BuildContext context, NavigatorState navigator) async {
     bool cancelled = false;
 
     FilePickerResult? result = await FilePicker.platform
@@ -317,7 +314,7 @@ class ErstellenControllerImplementation extends ErstellenController {
                 ),
                 const SizedBox(height: 16.0),
                 Text(FlutterI18n.translate(context, "create.ai.estimate")),
-                Text(FlutterI18n.translate(context, "create.ai.wait") + "..."),
+                Text("${FlutterI18n.translate(context, "create.ai.wait")}..."),
               ],
             ),
             actions: <Widget>[
@@ -325,7 +322,7 @@ class ErstellenControllerImplementation extends ErstellenController {
                 child: Text(FlutterI18n.translate(context, "create.ai.cancel")),
                 onPressed: () {
                   cancelled = true;
-                  Navigator.of(dialogContext).pop();
+                  navigator.pop();
                 },
               ),
             ],
@@ -339,7 +336,7 @@ class ErstellenControllerImplementation extends ErstellenController {
 
       if (!cancelled) {
         state = tmp;
-        Navigator.of(context, rootNavigator: true).pop();
+        navigator.pop();
         return true;
       } else {
         return false;
@@ -347,7 +344,7 @@ class ErstellenControllerImplementation extends ErstellenController {
     } catch (e) {
       logger.e(e.toString());
       if (!cancelled) {
-        Navigator.of(context, rootNavigator: true).pop();
+        navigator.pop();
       }
       return false;
     }
@@ -361,7 +358,7 @@ class ErstellenControllerImplementation extends ErstellenController {
       isSubscription: false,
       privateRecipe: false,
       image: "",
-      title: "Rezept von " + DateTime.now().toString(),
+      title: "Rezept von ${DateTime.now()}",
       description: "Test Beschreibung",
       guideText: ["Test Step 1", "Test Step 2"],
       ingredients: [
@@ -376,7 +373,7 @@ class ErstellenControllerImplementation extends ErstellenController {
     );
     ErstellenModel tmp = _backendService.recipeToErstellenModel(recipe);
     logger.e("Helper ErstellenModel");
-    debugPrint(tmp.toString() + "/n");
+    debugPrint("$tmp/n");
     state = tmp;
   }
 

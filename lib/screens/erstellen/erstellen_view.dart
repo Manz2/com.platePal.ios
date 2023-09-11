@@ -9,6 +9,7 @@ import 'package:plate_pal/screens/erstellen/erstellen_model.dart';
 import 'package:plate_pal/screens/home/home_model.dart';
 import 'package:plate_pal/ui-kit/add_text_field_widget.dart';
 import 'package:plate_pal/ui-kit/add_text_field_widget_steps.dart';
+import 'package:plate_pal/ui-kit/error_dialog.dart';
 
 class ErstellenView extends ConsumerWidget {
   final ErstellenModel? recipe;
@@ -65,7 +66,19 @@ class ErstellenView extends ConsumerWidget {
             children: [
               model.image != ""
                   ? GestureDetector(
-                      onTap: () => controller.addImage(context, model.image),
+                      onTap: () =>
+                          controller.addImage(model.image).then((value) => {
+                                if (!value)
+                                  {
+                                    ErrorDialog(
+                                            message: FlutterI18n.translate(
+                                                context,
+                                                "error.upload.message"),
+                                            title: FlutterI18n.translate(
+                                                context, "error.upload.title"))
+                                        .display(context),
+                                  }
+                              }),
                       child: CachedNetworkImage(
                         height: MediaQuery.of(context).size.height / 5,
                         width: MediaQuery.of(context).size.width - 100,
@@ -75,7 +88,18 @@ class ErstellenView extends ConsumerWidget {
                     )
                   : IconButton(
                       onPressed: () =>
-                          controller.addImage(context, model.image),
+                          controller.addImage(model.image).then((value) => {
+                                if (!value)
+                                  {
+                                    ErrorDialog(
+                                            message: FlutterI18n.translate(
+                                                context,
+                                                "error.upload.message"),
+                                            title: FlutterI18n.translate(
+                                                context, "error.upload.title"))
+                                        .display(context)
+                                  }
+                              }),
                       icon: Icon(
                         Icons.add_photo_alternate_outlined,
                         size: MediaQuery.of(context).size.height / 5,
@@ -209,28 +233,31 @@ class ErstellenView extends ConsumerWidget {
                       padding: const EdgeInsets.only(right: 20),
                       child: ElevatedButton(
                         onPressed: () async {
-                          if (await controller.kiImport(context)) {
+                          Text successText = Text(FlutterI18n.translate(
+                              context, "create.ai.success"));
+                          Text failureText = Text(FlutterI18n.translate(
+                              context, "create.ai.failure"));
+                          ScaffoldMessengerState scaffoldManager =
+                              ScaffoldMessenger.of(context);
+                          if (await controller.kiImport(context,
+                              Navigator.of(context, rootNavigator: true))) {
                             final snackBar = SnackBar(
-                              content: Text(FlutterI18n.translate(
-                                  context, "create.ai.success")),
+                              content: successText,
                               action: SnackBarAction(
                                 label: 'OK',
                                 onPressed: () {},
                               ),
                             );
-                            ScaffoldMessenger.of(context)
-                                .showSnackBar(snackBar);
+                            scaffoldManager.showSnackBar(snackBar);
                           } else {
                             final snackBar = SnackBar(
-                              content: Text(FlutterI18n.translate(
-                                  context, "create.ai.failure")),
+                              content: failureText,
                               action: SnackBarAction(
                                 label: 'OK',
                                 onPressed: () {},
                               ),
                             );
-                            ScaffoldMessenger.of(context)
-                                .showSnackBar(snackBar);
+                            scaffoldManager.showSnackBar(snackBar);
                           }
                         },
                         child: Text(
@@ -297,9 +324,9 @@ abstract class ErstellenController extends StateNotifier<ErstellenModel> {
 
   void insertStep(int index, String step);
 
-  void addImage(BuildContext context, String image);
+  Future<bool> addImage(String image);
 
-  Future<bool> kiImport(BuildContext context);
+  Future<bool> kiImport(BuildContext context, NavigatorState navigator);
 
   bool getIngridientsNotSet();
 

@@ -5,6 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:plate_pal/common/providers.dart';
 import 'package:plate_pal/config.dart';
 import 'package:plate_pal/ui-kit/button_list.dart';
+import 'package:plate_pal/ui-kit/error_dialog.dart';
 import 'account_model.dart';
 
 class AccountView extends ConsumerWidget {
@@ -34,9 +35,17 @@ class AccountView extends ConsumerWidget {
                 if (model.image == "null" || model.image == "") ...[
                   GestureDetector(
                     behavior: HitTestBehavior.translucent,
-                    onLongPress: () => controller.changeImage(context),
-                    onTap: () => controller.changeImage(context),
-                    onDoubleTap: () => controller.changeImage(context),
+                    onTap: () => controller.changeImage().then((value) => {
+                          if (!value)
+                            {
+                              ErrorDialog(
+                                      message: FlutterI18n.translate(
+                                          context, "error.upload.message"),
+                                      title: FlutterI18n.translate(
+                                          context, "error.upload.title"))
+                                  .display(context)
+                            }
+                        }),
                     child: Stack(
                       alignment: Alignment.bottomRight,
                       children: [
@@ -69,9 +78,17 @@ class AccountView extends ConsumerWidget {
                 ] else ...[
                   GestureDetector(
                       behavior: HitTestBehavior.translucent,
-                      onLongPress: () => controller.changeImage(context),
-                      onTap: () => controller.changeImage(context),
-                      onDoubleTap: () => controller.changeImage(context),
+                      onTap: () => controller.changeImage().then((value) => {
+                            if (!value)
+                              {
+                                ErrorDialog(
+                                        message: FlutterI18n.translate(
+                                            context, "error.upload.message"),
+                                        title: FlutterI18n.translate(
+                                            context, "error.upload.title"))
+                                    .display(context)
+                              }
+                          }),
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(1000),
                         child: CachedNetworkImage(
@@ -316,7 +333,7 @@ abstract class AccountController extends StateNotifier<AccountModel> {
   void init();
   Future<void> getUsername();
   Future<void> getUserImage();
-  void changeImage(BuildContext context);
+  Future<bool> changeImage();
   void logout(BuildContext context);
   void setFontSize(int fontSize);
   void navigateHome(BuildContext context);

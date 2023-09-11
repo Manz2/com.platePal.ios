@@ -123,17 +123,17 @@ class BackendService implements BackendServiceAggregator {
   @override
   void createUser(String uid, String name) async {
     DatabaseReference ref = FirebaseDatabase.instance.ref();
-    await ref.child('users/' + uid).update({"name": name});
+    await ref.child('users/$uid').update({"name": name});
   }
 
   void addFavorites(String uid, String rezept, String creator) async {
     DatabaseReference ref = FirebaseDatabase.instance.ref();
-    await ref.child('users/' + uid + '/favoriten').update({rezept: creator});
+    await ref.child('users/$uid/favoriten').update({rezept: creator});
   }
 
   void removeFavorites(String uid, String rezept) async {
     DatabaseReference ref = FirebaseDatabase.instance.ref();
-    await ref.child('users/' + uid + '/favoriten').child(rezept).remove();
+    await ref.child('users/$uid/favoriten').child(rezept).remove();
   }
 
   Future<List<Recipe>> listToRecipes(DataSnapshot snapshot) async {
@@ -162,15 +162,12 @@ class BackendService implements BackendServiceAggregator {
 
   Future<List<Recipe>> getFavoriteNames(String uid) async {
     DatabaseReference ref = FirebaseDatabase.instance.ref();
-    final snapshot = await ref.child('users/' + uid + '/favoriten').get();
+    final snapshot = await ref.child('users/$uid/favoriten').get();
     //Favorites are saved like: key(recipeID) -> value (creatorUID)
     List<Recipe> l = [];
     for (dynamic elemente in snapshot.children) {
       DataSnapshot element = await ref
-          .child('users/' +
-              elemente.value.toString() +
-              '/rezepte/' +
-              elemente.key.toString())
+          .child('users/${elemente.value}/rezepte/${elemente.key}')
           .get();
       if (element.value == null) {
         logger.e("element.value of fetched Favorite Recipe is null");
@@ -203,10 +200,10 @@ class BackendService implements BackendServiceAggregator {
   Future<GruppeServiceReturn> getGroupMembers(String uid) async {
     List<Member> list = [];
     DatabaseReference ref = FirebaseDatabase.instance.ref();
-    final snapshot = await ref.child('users/' + uid + '/gruppe').get();
+    final snapshot = await ref.child('users/$uid/gruppe').get();
     for (dynamic element in snapshot.children) {
       DataSnapshot snaphotMember =
-          await ref.child('users/' + element.key.toString()).get();
+          await ref.child('users/${element.key}').get();
       String name = snaphotMember.child("name").value.toString();
       String imageName = snaphotMember.child("image").value.toString();
       if (imageName == "null") {
@@ -230,33 +227,30 @@ class BackendService implements BackendServiceAggregator {
   @override
   Future<bool> addNewMember(String id, String ownId) async {
     DatabaseReference ref = FirebaseDatabase.instance.ref();
-    DataSnapshot snapshot = await ref.child('users/' + id).get();
+    DataSnapshot snapshot = await ref.child('users/$id').get();
     if (id == ownId) {
       return false;
     }
     if (!snapshot.exists) {
       return false;
     }
-    await ref.child('users/' + ownId + '/gruppe').update({id: true});
+    await ref.child('users/$ownId/gruppe').update({id: true});
     return true;
   }
 
   @override
   Future<bool> removeMember(String id, String ownId) async {
     DatabaseReference ref = FirebaseDatabase.instance.ref();
-    DataSnapshot snapshot =
-        await ref.child('users/' + ownId + '/gruppe/' + id).get();
+    DataSnapshot snapshot = await ref.child('users/$ownId/gruppe/$id').get();
     if (!snapshot.exists) {
       return false;
     }
-    await ref.child('users/' + ownId + '/gruppe/' + id).remove();
+    await ref.child('users/$ownId/gruppe/$id').remove();
     DataSnapshot snapshotFavorites =
-        await ref.child('users/' + ownId + '/favoriten').get();
+        await ref.child('users/$ownId/favoriten').get();
     for (DataSnapshot favorit in snapshotFavorites.children) {
       if (favorit.value.toString() == id) {
-        await ref
-            .child('users/' + ownId + '/favoriten/' + favorit.key.toString())
-            .remove();
+        await ref.child('users/$ownId/favoriten/${favorit.key}').remove();
       }
     }
 
@@ -288,12 +282,12 @@ class BackendService implements BackendServiceAggregator {
   @override
   Future<void> pushRecipe(Recipe recipe, String uid, bool isEdit) async {
     DatabaseReference ref =
-        FirebaseDatabase.instance.ref().child('users/' + uid + "/rezepte/");
+        FirebaseDatabase.instance.ref().child("users/$uid/rezepte/");
     final newPostKey = isEdit
         ? recipe.id
         : FirebaseDatabase.instance.ref().child('posts').push().key;
     ref.child(newPostKey!).update(recipe.toJson());
-    logger.d("created recipe with id:" + newPostKey);
+    logger.d("created recipe with id:$newPostKey");
     ref.child(newPostKey).update({"id": newPostKey});
   }
 
@@ -311,7 +305,7 @@ class BackendService implements BackendServiceAggregator {
 
   @override
   Future<Recipe> recipeFromGPT(String rezept) async {
-    String prompt = promptOne + "\n$rezept\n" + promptTwo;
+    String prompt = "$promptOne\n$rezept\n$promptTwo";
     logger.d(prompt);
     OpenAI.apiKey = openAiKey;
     final chatCompletion = await OpenAI.instance.chat.create(

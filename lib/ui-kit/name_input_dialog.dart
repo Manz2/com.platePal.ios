@@ -8,7 +8,7 @@ class NameInputController extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final TextEditingController _nameController = TextEditingController();
+    final TextEditingController nameController = TextEditingController();
     String enteredName;
     return AlertDialog(
       title: const Text(
@@ -19,7 +19,7 @@ class NameInputController extends StatelessWidget {
         children: [
           Text(FlutterI18n.translate(context, "login.firstlogin")),
           TextField(
-            controller: _nameController,
+            controller: nameController,
             decoration: const InputDecoration(
               hintText: 'Name',
             ),
@@ -33,7 +33,7 @@ class NameInputController extends StatelessWidget {
         ),
         TextButton(
           onPressed: () => {
-            enteredName = _nameController.text,
+            enteredName = nameController.text,
             Navigator.pop(context, enteredName),
           },
           child: const Text('OK'),

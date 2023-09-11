@@ -18,8 +18,8 @@ class LoginView extends ConsumerWidget {
     List<String> pictures = [
       "assets/images/pizza.jpg",
     ];
-    final _random = Random();
-    int index = _random.nextInt(pictures.length);
+    final random = Random();
+    int index = random.nextInt(pictures.length);
 
     return Scaffold(
       appBar: null,

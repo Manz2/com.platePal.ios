@@ -43,7 +43,7 @@ class _MyAppState extends ConsumerState {
   @override
   Widget build(BuildContext context) {
     Logger logger = Logger();
-    MyAppNavigationService _navigationservice = ref.read(
+    MyAppNavigationService navigationservice = ref.read(
         providers.navigationServiceProvider
             as ProviderListenable<MyAppNavigationService>);
 
@@ -70,7 +70,7 @@ class _MyAppState extends ConsumerState {
         GlobalWidgetsLocalizations.delegate
       ],
       routeInformationParser: BeamerParser(),
-      routerDelegate: _navigationservice.getRouterDelegate,
+      routerDelegate: navigationservice.getRouterDelegate,
     );
   }
 }

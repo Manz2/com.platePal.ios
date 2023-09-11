@@ -15,8 +15,8 @@ class HomeView extends ConsumerWidget {
     final HomeController controller =
         ref.read(providers.homeControllerProvider.notifier);
     final HomeModel model = ref.watch(providers.homeControllerProvider);
-    TextEditingController? _searchController;
-    final _focusNode = FocusNode();
+    TextEditingController? searchController;
+    final focusNode = FocusNode();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       if (!model.hasFetchedOnInit) {
         controller.getRecipes(FirebaseAuth.instance.currentUser!.uid);
@@ -38,8 +38,8 @@ class HomeView extends ConsumerWidget {
                 hintText: FlutterI18n.translate(context, "home.search"),
                 constraints: BoxConstraints(
                     maxWidth: (MediaQuery.of(context).size.width) - 140),
-                controller: _searchController,
-                focusNode: _focusNode,
+                controller: searchController,
+                focusNode: focusNode,
                 onChanged: (text) {
                   controller.search(text);
                 },

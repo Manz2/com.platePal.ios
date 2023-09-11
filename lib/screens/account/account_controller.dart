@@ -2,7 +2,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:logger/logger.dart';
 import 'package:plate_pal/config.dart';
 import 'package:plate_pal/screens/account/account_backend_service.dart';
@@ -10,7 +9,6 @@ import 'package:plate_pal/screens/account/account_model.dart';
 import 'package:plate_pal/screens/account/account_view.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:plate_pal/service/my_app_navigation_service.dart';
-import 'package:plate_pal/ui-kit/error_dialog.dart';
 
 bool setup = false;
 bool setup2 = false;
@@ -59,17 +57,13 @@ class AccountControllerImplmentation extends AccountController {
   }
 
   @override
-  void changeImage(BuildContext context) async {
+  Future<bool> changeImage() async {
     FilePickerResult? result = await FilePicker.platform
         .pickFiles(withData: true, allowMultiple: false, type: FileType.image);
 
     if (result != null) {
       if (result.files.single.size >= 2000000) {
-        ErrorDialog(
-                message: FlutterI18n.translate(context, "error.upload.message"),
-                title: FlutterI18n.translate(context, "error.upload.title"))
-            .display(context);
-        return;
+        return false;
       }
       String cp = await _backendService.getUserImage(
           userId: FirebaseAuth.instance.currentUser!.uid);
@@ -80,8 +74,7 @@ class AccountControllerImplmentation extends AccountController {
 
       Uint8List uploadfile = result.files.single.bytes!;
       String extension = result.files.single.extension!;
-      String fileName =
-          FirebaseAuth.instance.currentUser!.uid + "." + extension;
+      String fileName = "${FirebaseAuth.instance.currentUser!.uid}.$extension";
       await FirebaseStorage.instance
           .ref("userImages")
           .child(fileName)
@@ -91,14 +84,16 @@ class AccountControllerImplmentation extends AccountController {
 
       setup2 = false;
       getUserImage();
+      return true;
     } else {
       logger.d("Failed to get Image");
+      return false;
     }
   }
 
   @override
-  Future<void> logout(context) async {
-    await FirebaseAuth.instance.signOut();
+  void logout(context) {
+    FirebaseAuth.instance.signOut();
     setup = false;
     setup2 = false;
     _navigationService.routeLogin(context);

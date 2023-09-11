@@ -64,13 +64,9 @@ class GruppeView extends ConsumerWidget {
                         padding: const EdgeInsets.only(right: 70),
                         child: Text(
                           (member.ammount == 1)
-                              ? member.ammount.toString() +
-                                  "   " +
-                                  FlutterI18n.translate(context, "group.recipe")
-                              : member.ammount.toString() +
-                                  "   " +
-                                  FlutterI18n.translate(
-                                      context, "group.recipes"),
+                              ? "${member.ammount}   ${FlutterI18n.translate(context, "group.recipe")}"
+                              : "${member.ammount}   ${FlutterI18n.translate(
+                                      context, "group.recipes")}",
                           style: TextStyle(
                               fontSize: currentFontSize.toDouble() - 10,
                               fontWeight: FontWeight.bold),
@@ -99,7 +95,10 @@ class GruppeView extends ConsumerWidget {
                       icon: const Icon(Icons.share)),
                 ),
                 IconButton(
-                    onPressed: () => controller.pasteIdQuickly(context),
+                    onPressed: () => controller.pasteIdQuickly(
+                        ScaffoldMessenger.of(context),
+                        FlutterI18n.translate(
+                            context, "account.noAccountFound")),
                     icon: const Icon(Icons.group_add))
               ],
             ),
@@ -116,7 +115,8 @@ abstract class GruppeController extends StateNotifier<GruppeModel> {
   void setSetup();
   void newMember(BuildContext context);
   void copyMyId(BuildContext context);
-  void pasteIdQuickly(BuildContext context);
+  void pasteIdQuickly(
+      ScaffoldMessengerState scaffoldMessengerState, String failureText);
   void removeMember(String id, BuildContext context);
   void navigateAccount(BuildContext context);
 }

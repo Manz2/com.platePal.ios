@@ -10,10 +10,10 @@ class AddTextFieldWidget extends StatefulWidget {
   const AddTextFieldWidget(
       {super.key, required this.con, required this.ingredients});
   @override
-  _AddTextFieldWidgetState createState() => _AddTextFieldWidgetState();
+  AddTextFieldWidgetState createState() => AddTextFieldWidgetState();
 }
 
-class _AddTextFieldWidgetState extends State<AddTextFieldWidget> {
+class AddTextFieldWidgetState extends State<AddTextFieldWidget> {
   final TextEditingController _textEditingController = TextEditingController();
   final TextEditingController _textEditingControllerAmmount =
       TextEditingController();
@@ -52,7 +52,7 @@ class _AddTextFieldWidgetState extends State<AddTextFieldWidget> {
             children: [
               Flexible(
                 child: Text(
-                  value.name + "   " + value.amount,
+                  "${value.name}   ${value.amount}",
                   style: TextStyle(fontSize: currentFontSize.toDouble()),
                 ),
               ),

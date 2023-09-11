@@ -15,8 +15,8 @@ class FavoriteView extends ConsumerWidget {
     final FavoriteController controller =
         ref.read(providers.favoriteControllerProvider.notifier);
     final FavoriteModel model = ref.watch(providers.favoriteControllerProvider);
-    TextEditingController? _searchController;
-    final _focusNode = FocusNode();
+    TextEditingController? searchController;
+    final focusNode = FocusNode();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       if (!model.hasFetchedOnInit) {
         controller.getFavorites();
@@ -38,8 +38,8 @@ class FavoriteView extends ConsumerWidget {
                 hintText: FlutterI18n.translate(context, "home.search"),
                 constraints: BoxConstraints(
                     maxWidth: (MediaQuery.of(context).size.width) - 140),
-                controller: _searchController,
-                focusNode: _focusNode,
+                controller: searchController,
+                focusNode: focusNode,
                 onChanged: (text) {
                   controller.search(text);
                 },
