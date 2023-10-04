@@ -2,7 +2,8 @@
 ![ChatGPT](https://img.shields.io/badge/chatGPT-74aa9c?style=for-the-badge&logo=openai&logoColor=white)
 ![Firebase](https://img.shields.io/badge/Firebase-039BE5?style=for-the-badge&logo=Firebase&logoColor=white)
 <br>
-# com.platePal.ios
+# PlatePal - Kochbuch
+<br>
 [![Codemagic build status](https://api.codemagic.io/apps/64a455e28ec6af9e99a705ff/64a455e28ec6af9e99a705fe/status_badge.svg)](https://codemagic.io/apps/64a455e28ec6af9e99a705ff/64a455e28ec6af9e99a705fe/latest_build)
 PlatePal recipe app for ios and android
 
