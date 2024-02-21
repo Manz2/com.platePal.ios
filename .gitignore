@@ -38,7 +38,9 @@ d2250437cd2797886fcf0d3395b1b8f5.cache.dill.track.dill
 .packages
 .pub-cache/
 .pub/
+.firebase/
 /build/
+/public/
 /windows/flutter
 PlatePal/windows/flutter
 
