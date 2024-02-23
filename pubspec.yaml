@@ -2,7 +2,7 @@ name: plate_pal
 description: PlatePal is a mobile application that allows users to organize their recipes effectively.
 
 publish_to: 'none' 
-version: 2.0.2+2
+version: 2.0.2+3
 
 environment:
   sdk: '>=3.0.1 <4.0.0'
@@ -14,36 +14,36 @@ dependencies:
     sdk: flutter
   flutter_riverpod: ^2.4.0
   freezed_annotation: ^2.4.1
-  http: ^1.1.0
+  http: ^1.2.0
   json_serializable: ^6.7.1
-  firebase_core: ^2.15.1
-  firebase_database: ^10.2.5
+  firebase_core: ^2.25.1
+  firebase_database: ^10.4.5
   logger: ^2.0.2
-  firebase_storage: ^11.2.6
-  flutter_svg: ^2.0.7
-  cached_network_image: ^3.2.3
-  firebase_auth: ^4.9.0
+  firebase_storage: ^11.6.6
+  flutter_svg: ^2.0.10
+  cached_network_image: ^3.3.1
+  firebase_auth: ^4.17.0
   sign_in_button: ^3.2.0
-  file_picker: ^5.5.0
+  file_picker: ^6.1.0
   shared_preferences: ^2.2.1
-  flutter_i18n: ^0.34.0
-  google_mlkit_text_recognition: ^0.10.0
+  flutter_i18n: ^0.35.0
+  google_mlkit_text_recognition: ^0.11.0
   dart_openai: 4.0.0
-  beamer: ^1.5.6
-  url_launcher: ^6.1.14
+  beamer: ^1.6.0
+  url_launcher: ^6.2.5
   flutter_spinkit: ^5.2.0
-  flutter_localization: ^0.1.13
+  flutter_localization: ^0.2.0
   intl: ^0.18.1
-  uuid: ^4.0.0
+  uuid: ^4.3.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  build_runner: ^2.1.10
-  freezed: ^2.0.2
-  flutter_lints: ^2.0.3
+  build_runner: ^2.4.8
+  freezed: ^2.4.7
+  flutter_lints: ^3.0.1
   flutter_launcher_icons: ^0.13.1
-  dependency_validator: ^3.2.2
+  dependency_validator: ^3.2.3
 
 flutter_icons:
   android: "launcher_icon"
