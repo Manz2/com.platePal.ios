@@ -1,6 +1,6 @@
 {
-    "name": "myapp",
-    "short_name": "myapp",
+    "name": "plate_pal",
+    "short_name": "plate_pal",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
