@@ -1,4 +1,4 @@
-package com.example.plate_pal
+package com.platepal.android
 
 import io.flutter.embedding.android.FlutterActivity
 
