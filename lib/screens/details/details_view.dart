@@ -11,7 +11,7 @@ import 'package:url_launcher/url_launcher_string.dart';
 
 class DetailsView extends ConsumerWidget {
   final Recipe recipe;
-  const DetailsView({Key? key, required this.recipe}) : super(key: key);
+  const DetailsView({super.key, required this.recipe});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -199,7 +199,7 @@ class DetailsView extends ConsumerWidget {
 }
 
 abstract class DetailsController extends StateNotifier<DetailsModel> {
-  DetailsController(DetailsModel state) : super(state);
+  DetailsController(super.state);
   void navigateCreate(BuildContext context, ErstellenModel model);
   void navigateBack(BuildContext context);
   void check(int index);

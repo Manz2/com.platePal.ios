@@ -34,7 +34,7 @@ class NavigationService implements NavigationServiceAggregator {
         '/details': (context, state, data) =>
             DetailsView(recipe: data as Recipe),
       },
-    ),
+    ).call,
   );
 
   @override

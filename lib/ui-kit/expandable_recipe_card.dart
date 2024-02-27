@@ -13,8 +13,8 @@ class ExpandableRecipeCard extends StatefulWidget {
   const ExpandableRecipeCard({
     required this.recipe,
     required this.navigationService,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   MyCardState createState() => MyCardState();

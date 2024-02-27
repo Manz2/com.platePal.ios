@@ -8,7 +8,7 @@ import 'package:plate_pal/service/my_app_navigation_service.dart';
 import '../../ui-kit/expandable_recipe_card.dart';
 
 class HomeView extends ConsumerWidget {
-  const HomeView({Key? key}) : super(key: key);
+  const HomeView({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -106,7 +106,7 @@ class HomeView extends ConsumerWidget {
 }
 
 abstract class HomeController extends StateNotifier<HomeModel> {
-  HomeController(HomeModel state) : super(state);
+  HomeController(super.state);
   void getRecipes(String uid);
   void search(String term);
   void filter(BuildContext context);

@@ -7,7 +7,7 @@ import 'package:flutter_i18n/flutter_i18n.dart';
 import '../../config.dart';
 
 class GruppeView extends ConsumerWidget {
-  const GruppeView({Key? key}) : super(key: key);
+  const GruppeView({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -110,7 +110,7 @@ class GruppeView extends ConsumerWidget {
 }
 
 abstract class GruppeController extends StateNotifier<GruppeModel> {
-  GruppeController(GruppeModel state) : super(state);
+  GruppeController(super.state);
   void getGroupMembers();
   void setSetup();
   void newMember(BuildContext context);

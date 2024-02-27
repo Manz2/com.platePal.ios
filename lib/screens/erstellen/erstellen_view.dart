@@ -14,7 +14,7 @@ import 'package:plate_pal/ui-kit/error_dialog.dart';
 class ErstellenView extends ConsumerWidget {
   final ErstellenModel? recipe;
 
-  ErstellenView({Key? key, this.recipe}) : super(key: key);
+  ErstellenView({super.key, this.recipe});
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _descriptionController = TextEditingController();
   final TextEditingController _linkController = TextEditingController();
@@ -298,7 +298,7 @@ class ErstellenView extends ConsumerWidget {
 }
 
 abstract class ErstellenController extends StateNotifier<ErstellenModel> {
-  ErstellenController(ErstellenModel state) : super(state);
+  ErstellenController(super.state);
 
   bool createRecipe(BuildContext context);
 

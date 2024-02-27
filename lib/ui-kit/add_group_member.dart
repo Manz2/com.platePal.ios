@@ -3,8 +3,8 @@ import 'package:flutter_i18n/flutter_i18n.dart';
 
 class AddGroupMemberController extends StatelessWidget {
   const AddGroupMemberController({
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {

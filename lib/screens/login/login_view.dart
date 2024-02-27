@@ -8,7 +8,7 @@ import '../../config.dart';
 import 'dart:math';
 
 class LoginView extends ConsumerWidget {
-  const LoginView({Key? key}) : super(key: key);
+  const LoginView({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -140,7 +140,7 @@ class LoginView extends ConsumerWidget {
 }
 
 abstract class LoginController extends StateNotifier<LoginModel> {
-  LoginController(LoginModel state) : super(state);
+  LoginController(super.state);
   void loginWithMail(BuildContext context);
   void pwVissible();
   void setPassword(String password);
