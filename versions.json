@@ -28,6 +28,10 @@
             "4" : {
                 "author" : "Manz2",
                 "description" : "Rebuild freezed with new Version"
+            },
+            "5" : {
+                "author" : "Manz2",
+                "description" : "removed memCacheWidth for image aspect ratio"
             }
         }
     }
