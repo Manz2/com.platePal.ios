@@ -12,7 +12,7 @@ part of 'details_model.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$DetailsModel {
@@ -73,11 +73,11 @@ class _$DetailsModelCopyWithImpl<$Res, $Val extends DetailsModel>
 }
 
 /// @nodoc
-abstract class _$$_DetailsModelCopyWith<$Res>
+abstract class _$$DetailsModelImplCopyWith<$Res>
     implements $DetailsModelCopyWith<$Res> {
-  factory _$$_DetailsModelCopyWith(
-          _$_DetailsModel value, $Res Function(_$_DetailsModel) then) =
-      __$$_DetailsModelCopyWithImpl<$Res>;
+  factory _$$DetailsModelImplCopyWith(
+          _$DetailsModelImpl value, $Res Function(_$DetailsModelImpl) then) =
+      __$$DetailsModelImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({List<int> checked, Recipe recipe});
@@ -87,11 +87,11 @@ abstract class _$$_DetailsModelCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_DetailsModelCopyWithImpl<$Res>
-    extends _$DetailsModelCopyWithImpl<$Res, _$_DetailsModel>
-    implements _$$_DetailsModelCopyWith<$Res> {
-  __$$_DetailsModelCopyWithImpl(
-      _$_DetailsModel _value, $Res Function(_$_DetailsModel) _then)
+class __$$DetailsModelImplCopyWithImpl<$Res>
+    extends _$DetailsModelCopyWithImpl<$Res, _$DetailsModelImpl>
+    implements _$$DetailsModelImplCopyWith<$Res> {
+  __$$DetailsModelImplCopyWithImpl(
+      _$DetailsModelImpl _value, $Res Function(_$DetailsModelImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -100,7 +100,7 @@ class __$$_DetailsModelCopyWithImpl<$Res>
     Object? checked = null,
     Object? recipe = null,
   }) {
-    return _then(_$_DetailsModel(
+    return _then(_$DetailsModelImpl(
       checked: null == checked
           ? _value._checked
           : checked // ignore: cast_nullable_to_non_nullable
@@ -115,8 +115,8 @@ class __$$_DetailsModelCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_DetailsModel implements _DetailsModel {
-  const _$_DetailsModel(
+class _$DetailsModelImpl implements _DetailsModel {
+  const _$DetailsModelImpl(
       {required final List<int> checked, required this.recipe})
       : _checked = checked;
 
@@ -137,10 +137,10 @@ class _$_DetailsModel implements _DetailsModel {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_DetailsModel &&
+            other is _$DetailsModelImpl &&
             const DeepCollectionEquality().equals(other._checked, _checked) &&
             (identical(other.recipe, recipe) || other.recipe == recipe));
   }
@@ -152,14 +152,14 @@ class _$_DetailsModel implements _DetailsModel {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_DetailsModelCopyWith<_$_DetailsModel> get copyWith =>
-      __$$_DetailsModelCopyWithImpl<_$_DetailsModel>(this, _$identity);
+  _$$DetailsModelImplCopyWith<_$DetailsModelImpl> get copyWith =>
+      __$$DetailsModelImplCopyWithImpl<_$DetailsModelImpl>(this, _$identity);
 }
 
 abstract class _DetailsModel implements DetailsModel {
   const factory _DetailsModel(
       {required final List<int> checked,
-      required final Recipe recipe}) = _$_DetailsModel;
+      required final Recipe recipe}) = _$DetailsModelImpl;
 
   @override
   List<int> get checked;
@@ -167,6 +167,6 @@ abstract class _DetailsModel implements DetailsModel {
   Recipe get recipe;
   @override
   @JsonKey(ignore: true)
-  _$$_DetailsModelCopyWith<_$_DetailsModel> get copyWith =>
+  _$$DetailsModelImplCopyWith<_$DetailsModelImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

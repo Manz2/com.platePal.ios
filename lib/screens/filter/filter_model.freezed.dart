@@ -12,7 +12,7 @@ part of 'filter_model.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$FilterModel {
@@ -69,22 +69,22 @@ class _$FilterModelCopyWithImpl<$Res, $Val extends FilterModel>
 }
 
 /// @nodoc
-abstract class _$$_FilterModelCopyWith<$Res>
+abstract class _$$FilterModelImplCopyWith<$Res>
     implements $FilterModelCopyWith<$Res> {
-  factory _$$_FilterModelCopyWith(
-          _$_FilterModel value, $Res Function(_$_FilterModel) then) =
-      __$$_FilterModelCopyWithImpl<$Res>;
+  factory _$$FilterModelImplCopyWith(
+          _$FilterModelImpl value, $Res Function(_$FilterModelImpl) then) =
+      __$$FilterModelImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({bool vegan, bool vegetarisch, bool glutenfrei});
 }
 
 /// @nodoc
-class __$$_FilterModelCopyWithImpl<$Res>
-    extends _$FilterModelCopyWithImpl<$Res, _$_FilterModel>
-    implements _$$_FilterModelCopyWith<$Res> {
-  __$$_FilterModelCopyWithImpl(
-      _$_FilterModel _value, $Res Function(_$_FilterModel) _then)
+class __$$FilterModelImplCopyWithImpl<$Res>
+    extends _$FilterModelCopyWithImpl<$Res, _$FilterModelImpl>
+    implements _$$FilterModelImplCopyWith<$Res> {
+  __$$FilterModelImplCopyWithImpl(
+      _$FilterModelImpl _value, $Res Function(_$FilterModelImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -94,7 +94,7 @@ class __$$_FilterModelCopyWithImpl<$Res>
     Object? vegetarisch = null,
     Object? glutenfrei = null,
   }) {
-    return _then(_$_FilterModel(
+    return _then(_$FilterModelImpl(
       vegan: null == vegan
           ? _value.vegan
           : vegan // ignore: cast_nullable_to_non_nullable
@@ -113,8 +113,8 @@ class __$$_FilterModelCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_FilterModel implements _FilterModel {
-  const _$_FilterModel(
+class _$FilterModelImpl implements _FilterModel {
+  const _$FilterModelImpl(
       {required this.vegan,
       required this.vegetarisch,
       required this.glutenfrei});
@@ -132,10 +132,10 @@ class _$_FilterModel implements _FilterModel {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_FilterModel &&
+            other is _$FilterModelImpl &&
             (identical(other.vegan, vegan) || other.vegan == vegan) &&
             (identical(other.vegetarisch, vegetarisch) ||
                 other.vegetarisch == vegetarisch) &&
@@ -149,15 +149,15 @@ class _$_FilterModel implements _FilterModel {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_FilterModelCopyWith<_$_FilterModel> get copyWith =>
-      __$$_FilterModelCopyWithImpl<_$_FilterModel>(this, _$identity);
+  _$$FilterModelImplCopyWith<_$FilterModelImpl> get copyWith =>
+      __$$FilterModelImplCopyWithImpl<_$FilterModelImpl>(this, _$identity);
 }
 
 abstract class _FilterModel implements FilterModel {
   const factory _FilterModel(
       {required final bool vegan,
       required final bool vegetarisch,
-      required final bool glutenfrei}) = _$_FilterModel;
+      required final bool glutenfrei}) = _$FilterModelImpl;
 
   @override
   bool get vegan;
@@ -167,6 +167,6 @@ abstract class _FilterModel implements FilterModel {
   bool get glutenfrei;
   @override
   @JsonKey(ignore: true)
-  _$$_FilterModelCopyWith<_$_FilterModel> get copyWith =>
+  _$$FilterModelImplCopyWith<_$FilterModelImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

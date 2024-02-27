@@ -12,7 +12,7 @@ part of 'account_model.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$AccountModel {
@@ -69,22 +69,22 @@ class _$AccountModelCopyWithImpl<$Res, $Val extends AccountModel>
 }
 
 /// @nodoc
-abstract class _$$_AccountModelCopyWith<$Res>
+abstract class _$$AccountModelImplCopyWith<$Res>
     implements $AccountModelCopyWith<$Res> {
-  factory _$$_AccountModelCopyWith(
-          _$_AccountModel value, $Res Function(_$_AccountModel) then) =
-      __$$_AccountModelCopyWithImpl<$Res>;
+  factory _$$AccountModelImplCopyWith(
+          _$AccountModelImpl value, $Res Function(_$AccountModelImpl) then) =
+      __$$AccountModelImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String name, String image, int fontSize});
 }
 
 /// @nodoc
-class __$$_AccountModelCopyWithImpl<$Res>
-    extends _$AccountModelCopyWithImpl<$Res, _$_AccountModel>
-    implements _$$_AccountModelCopyWith<$Res> {
-  __$$_AccountModelCopyWithImpl(
-      _$_AccountModel _value, $Res Function(_$_AccountModel) _then)
+class __$$AccountModelImplCopyWithImpl<$Res>
+    extends _$AccountModelCopyWithImpl<$Res, _$AccountModelImpl>
+    implements _$$AccountModelImplCopyWith<$Res> {
+  __$$AccountModelImplCopyWithImpl(
+      _$AccountModelImpl _value, $Res Function(_$AccountModelImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -94,7 +94,7 @@ class __$$_AccountModelCopyWithImpl<$Res>
     Object? image = null,
     Object? fontSize = null,
   }) {
-    return _then(_$_AccountModel(
+    return _then(_$AccountModelImpl(
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -113,8 +113,8 @@ class __$$_AccountModelCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_AccountModel implements _AccountModel {
-  const _$_AccountModel(
+class _$AccountModelImpl implements _AccountModel {
+  const _$AccountModelImpl(
       {required this.name, required this.image, required this.fontSize});
 
   @override
@@ -130,10 +130,10 @@ class _$_AccountModel implements _AccountModel {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_AccountModel &&
+            other is _$AccountModelImpl &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.image, image) || other.image == image) &&
             (identical(other.fontSize, fontSize) ||
@@ -146,15 +146,15 @@ class _$_AccountModel implements _AccountModel {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_AccountModelCopyWith<_$_AccountModel> get copyWith =>
-      __$$_AccountModelCopyWithImpl<_$_AccountModel>(this, _$identity);
+  _$$AccountModelImplCopyWith<_$AccountModelImpl> get copyWith =>
+      __$$AccountModelImplCopyWithImpl<_$AccountModelImpl>(this, _$identity);
 }
 
 abstract class _AccountModel implements AccountModel {
   const factory _AccountModel(
       {required final String name,
       required final String image,
-      required final int fontSize}) = _$_AccountModel;
+      required final int fontSize}) = _$AccountModelImpl;
 
   @override
   String get name;
@@ -164,6 +164,6 @@ abstract class _AccountModel implements AccountModel {
   int get fontSize;
   @override
   @JsonKey(ignore: true)
-  _$$_AccountModelCopyWith<_$_AccountModel> get copyWith =>
+  _$$AccountModelImplCopyWith<_$AccountModelImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

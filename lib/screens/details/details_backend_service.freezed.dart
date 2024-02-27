@@ -12,7 +12,7 @@ part of 'details_backend_service.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$DetailsServiceReturn {
@@ -68,11 +68,11 @@ class _$DetailsServiceReturnCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_DetailsServiceReturnCopyWith<$Res>
+abstract class _$$DetailsServiceReturnImplCopyWith<$Res>
     implements $DetailsServiceReturnCopyWith<$Res> {
-  factory _$$_DetailsServiceReturnCopyWith(_$_DetailsServiceReturn value,
-          $Res Function(_$_DetailsServiceReturn) then) =
-      __$$_DetailsServiceReturnCopyWithImpl<$Res>;
+  factory _$$DetailsServiceReturnImplCopyWith(_$DetailsServiceReturnImpl value,
+          $Res Function(_$DetailsServiceReturnImpl) then) =
+      __$$DetailsServiceReturnImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({Recipe recipe});
@@ -82,11 +82,11 @@ abstract class _$$_DetailsServiceReturnCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_DetailsServiceReturnCopyWithImpl<$Res>
-    extends _$DetailsServiceReturnCopyWithImpl<$Res, _$_DetailsServiceReturn>
-    implements _$$_DetailsServiceReturnCopyWith<$Res> {
-  __$$_DetailsServiceReturnCopyWithImpl(_$_DetailsServiceReturn _value,
-      $Res Function(_$_DetailsServiceReturn) _then)
+class __$$DetailsServiceReturnImplCopyWithImpl<$Res>
+    extends _$DetailsServiceReturnCopyWithImpl<$Res, _$DetailsServiceReturnImpl>
+    implements _$$DetailsServiceReturnImplCopyWith<$Res> {
+  __$$DetailsServiceReturnImplCopyWithImpl(_$DetailsServiceReturnImpl _value,
+      $Res Function(_$DetailsServiceReturnImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -94,7 +94,7 @@ class __$$_DetailsServiceReturnCopyWithImpl<$Res>
   $Res call({
     Object? recipe = null,
   }) {
-    return _then(_$_DetailsServiceReturn(
+    return _then(_$DetailsServiceReturnImpl(
       recipe: null == recipe
           ? _value.recipe
           : recipe // ignore: cast_nullable_to_non_nullable
@@ -105,8 +105,8 @@ class __$$_DetailsServiceReturnCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_DetailsServiceReturn implements _DetailsServiceReturn {
-  const _$_DetailsServiceReturn({required this.recipe});
+class _$DetailsServiceReturnImpl implements _DetailsServiceReturn {
+  const _$DetailsServiceReturnImpl({required this.recipe});
 
   @override
   final Recipe recipe;
@@ -117,10 +117,10 @@ class _$_DetailsServiceReturn implements _DetailsServiceReturn {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_DetailsServiceReturn &&
+            other is _$DetailsServiceReturnImpl &&
             (identical(other.recipe, recipe) || other.recipe == recipe));
   }
 
@@ -130,19 +130,20 @@ class _$_DetailsServiceReturn implements _DetailsServiceReturn {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_DetailsServiceReturnCopyWith<_$_DetailsServiceReturn> get copyWith =>
-      __$$_DetailsServiceReturnCopyWithImpl<_$_DetailsServiceReturn>(
-          this, _$identity);
+  _$$DetailsServiceReturnImplCopyWith<_$DetailsServiceReturnImpl>
+      get copyWith =>
+          __$$DetailsServiceReturnImplCopyWithImpl<_$DetailsServiceReturnImpl>(
+              this, _$identity);
 }
 
 abstract class _DetailsServiceReturn implements DetailsServiceReturn {
   const factory _DetailsServiceReturn({required final Recipe recipe}) =
-      _$_DetailsServiceReturn;
+      _$DetailsServiceReturnImpl;
 
   @override
   Recipe get recipe;
   @override
   @JsonKey(ignore: true)
-  _$$_DetailsServiceReturnCopyWith<_$_DetailsServiceReturn> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$DetailsServiceReturnImplCopyWith<_$DetailsServiceReturnImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }

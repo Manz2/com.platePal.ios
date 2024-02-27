@@ -6,7 +6,7 @@ part of 'home_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_Recipe _$$_RecipeFromJson(Map<String, dynamic> json) => _$_Recipe(
+_$RecipeImpl _$$RecipeImplFromJson(Map<String, dynamic> json) => _$RecipeImpl(
       id: json['id'] as String,
       creator: json['creator'] as String,
       isSubscription: json['isSubscription'] as bool,
@@ -25,7 +25,8 @@ _$_Recipe _$$_RecipeFromJson(Map<String, dynamic> json) => _$_Recipe(
       webURL: json['webURL'] as String?,
     );
 
-Map<String, dynamic> _$$_RecipeToJson(_$_Recipe instance) => <String, dynamic>{
+Map<String, dynamic> _$$RecipeImplToJson(_$RecipeImpl instance) =>
+    <String, dynamic>{
       'id': instance.id,
       'creator': instance.creator,
       'isSubscription': instance.isSubscription,
@@ -42,13 +43,13 @@ Map<String, dynamic> _$$_RecipeToJson(_$_Recipe instance) => <String, dynamic>{
       'webURL': instance.webURL,
     };
 
-_$_Ingredient _$$_IngredientFromJson(Map<String, dynamic> json) =>
-    _$_Ingredient(
+_$IngredientImpl _$$IngredientImplFromJson(Map<String, dynamic> json) =>
+    _$IngredientImpl(
       name: json['name'] as String,
       amount: json['amount'] as String,
     );
 
-Map<String, dynamic> _$$_IngredientToJson(_$_Ingredient instance) =>
+Map<String, dynamic> _$$IngredientImplToJson(_$IngredientImpl instance) =>
     <String, dynamic>{
       'name': instance.name,
       'amount': instance.amount,

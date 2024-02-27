@@ -12,7 +12,7 @@ part of 'home_backend_service.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$HomeServiceReturn {
@@ -57,22 +57,22 @@ class _$HomeServiceReturnCopyWithImpl<$Res, $Val extends HomeServiceReturn>
 }
 
 /// @nodoc
-abstract class _$$_HomeServiceReturnCopyWith<$Res>
+abstract class _$$HomeServiceReturnImplCopyWith<$Res>
     implements $HomeServiceReturnCopyWith<$Res> {
-  factory _$$_HomeServiceReturnCopyWith(_$_HomeServiceReturn value,
-          $Res Function(_$_HomeServiceReturn) then) =
-      __$$_HomeServiceReturnCopyWithImpl<$Res>;
+  factory _$$HomeServiceReturnImplCopyWith(_$HomeServiceReturnImpl value,
+          $Res Function(_$HomeServiceReturnImpl) then) =
+      __$$HomeServiceReturnImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({List<Recipe> recipes});
 }
 
 /// @nodoc
-class __$$_HomeServiceReturnCopyWithImpl<$Res>
-    extends _$HomeServiceReturnCopyWithImpl<$Res, _$_HomeServiceReturn>
-    implements _$$_HomeServiceReturnCopyWith<$Res> {
-  __$$_HomeServiceReturnCopyWithImpl(
-      _$_HomeServiceReturn _value, $Res Function(_$_HomeServiceReturn) _then)
+class __$$HomeServiceReturnImplCopyWithImpl<$Res>
+    extends _$HomeServiceReturnCopyWithImpl<$Res, _$HomeServiceReturnImpl>
+    implements _$$HomeServiceReturnImplCopyWith<$Res> {
+  __$$HomeServiceReturnImplCopyWithImpl(_$HomeServiceReturnImpl _value,
+      $Res Function(_$HomeServiceReturnImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -80,7 +80,7 @@ class __$$_HomeServiceReturnCopyWithImpl<$Res>
   $Res call({
     Object? recipes = null,
   }) {
-    return _then(_$_HomeServiceReturn(
+    return _then(_$HomeServiceReturnImpl(
       recipes: null == recipes
           ? _value._recipes
           : recipes // ignore: cast_nullable_to_non_nullable
@@ -91,8 +91,8 @@ class __$$_HomeServiceReturnCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_HomeServiceReturn implements _HomeServiceReturn {
-  const _$_HomeServiceReturn({required final List<Recipe> recipes})
+class _$HomeServiceReturnImpl implements _HomeServiceReturn {
+  const _$HomeServiceReturnImpl({required final List<Recipe> recipes})
       : _recipes = recipes;
 
   final List<Recipe> _recipes;
@@ -109,10 +109,10 @@ class _$_HomeServiceReturn implements _HomeServiceReturn {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_HomeServiceReturn &&
+            other is _$HomeServiceReturnImpl &&
             const DeepCollectionEquality().equals(other._recipes, _recipes));
   }
 
@@ -123,19 +123,19 @@ class _$_HomeServiceReturn implements _HomeServiceReturn {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_HomeServiceReturnCopyWith<_$_HomeServiceReturn> get copyWith =>
-      __$$_HomeServiceReturnCopyWithImpl<_$_HomeServiceReturn>(
+  _$$HomeServiceReturnImplCopyWith<_$HomeServiceReturnImpl> get copyWith =>
+      __$$HomeServiceReturnImplCopyWithImpl<_$HomeServiceReturnImpl>(
           this, _$identity);
 }
 
 abstract class _HomeServiceReturn implements HomeServiceReturn {
   const factory _HomeServiceReturn({required final List<Recipe> recipes}) =
-      _$_HomeServiceReturn;
+      _$HomeServiceReturnImpl;
 
   @override
   List<Recipe> get recipes;
   @override
   @JsonKey(ignore: true)
-  _$$_HomeServiceReturnCopyWith<_$_HomeServiceReturn> get copyWith =>
+  _$$HomeServiceReturnImplCopyWith<_$HomeServiceReturnImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

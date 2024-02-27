@@ -12,7 +12,7 @@ part of 'account_backend_service.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$AccountServiceReturn {
@@ -58,22 +58,22 @@ class _$AccountServiceReturnCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_AccountServiceReturnCopyWith<$Res>
+abstract class _$$AccountServiceReturnImplCopyWith<$Res>
     implements $AccountServiceReturnCopyWith<$Res> {
-  factory _$$_AccountServiceReturnCopyWith(_$_AccountServiceReturn value,
-          $Res Function(_$_AccountServiceReturn) then) =
-      __$$_AccountServiceReturnCopyWithImpl<$Res>;
+  factory _$$AccountServiceReturnImplCopyWith(_$AccountServiceReturnImpl value,
+          $Res Function(_$AccountServiceReturnImpl) then) =
+      __$$AccountServiceReturnImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String name});
 }
 
 /// @nodoc
-class __$$_AccountServiceReturnCopyWithImpl<$Res>
-    extends _$AccountServiceReturnCopyWithImpl<$Res, _$_AccountServiceReturn>
-    implements _$$_AccountServiceReturnCopyWith<$Res> {
-  __$$_AccountServiceReturnCopyWithImpl(_$_AccountServiceReturn _value,
-      $Res Function(_$_AccountServiceReturn) _then)
+class __$$AccountServiceReturnImplCopyWithImpl<$Res>
+    extends _$AccountServiceReturnCopyWithImpl<$Res, _$AccountServiceReturnImpl>
+    implements _$$AccountServiceReturnImplCopyWith<$Res> {
+  __$$AccountServiceReturnImplCopyWithImpl(_$AccountServiceReturnImpl _value,
+      $Res Function(_$AccountServiceReturnImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -81,7 +81,7 @@ class __$$_AccountServiceReturnCopyWithImpl<$Res>
   $Res call({
     Object? name = null,
   }) {
-    return _then(_$_AccountServiceReturn(
+    return _then(_$AccountServiceReturnImpl(
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -92,8 +92,8 @@ class __$$_AccountServiceReturnCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_AccountServiceReturn implements _AccountServiceReturn {
-  const _$_AccountServiceReturn({required this.name});
+class _$AccountServiceReturnImpl implements _AccountServiceReturn {
+  const _$AccountServiceReturnImpl({required this.name});
 
   @override
   final String name;
@@ -104,10 +104,10 @@ class _$_AccountServiceReturn implements _AccountServiceReturn {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_AccountServiceReturn &&
+            other is _$AccountServiceReturnImpl &&
             (identical(other.name, name) || other.name == name));
   }
 
@@ -117,19 +117,20 @@ class _$_AccountServiceReturn implements _AccountServiceReturn {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_AccountServiceReturnCopyWith<_$_AccountServiceReturn> get copyWith =>
-      __$$_AccountServiceReturnCopyWithImpl<_$_AccountServiceReturn>(
-          this, _$identity);
+  _$$AccountServiceReturnImplCopyWith<_$AccountServiceReturnImpl>
+      get copyWith =>
+          __$$AccountServiceReturnImplCopyWithImpl<_$AccountServiceReturnImpl>(
+              this, _$identity);
 }
 
 abstract class _AccountServiceReturn implements AccountServiceReturn {
   const factory _AccountServiceReturn({required final String name}) =
-      _$_AccountServiceReturn;
+      _$AccountServiceReturnImpl;
 
   @override
   String get name;
   @override
   @JsonKey(ignore: true)
-  _$$_AccountServiceReturnCopyWith<_$_AccountServiceReturn> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$AccountServiceReturnImplCopyWith<_$AccountServiceReturnImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }

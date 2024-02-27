@@ -12,7 +12,7 @@ part of 'erstellen_model.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$ErstellenModel {
@@ -178,11 +178,11 @@ class _$ErstellenModelCopyWithImpl<$Res, $Val extends ErstellenModel>
 }
 
 /// @nodoc
-abstract class _$$_ErstellenModelCopyWith<$Res>
+abstract class _$$ErstellenModelImplCopyWith<$Res>
     implements $ErstellenModelCopyWith<$Res> {
-  factory _$$_ErstellenModelCopyWith(
-          _$_ErstellenModel value, $Res Function(_$_ErstellenModel) then) =
-      __$$_ErstellenModelCopyWithImpl<$Res>;
+  factory _$$ErstellenModelImplCopyWith(_$ErstellenModelImpl value,
+          $Res Function(_$ErstellenModelImpl) then) =
+      __$$ErstellenModelImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -207,11 +207,11 @@ abstract class _$$_ErstellenModelCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_ErstellenModelCopyWithImpl<$Res>
-    extends _$ErstellenModelCopyWithImpl<$Res, _$_ErstellenModel>
-    implements _$$_ErstellenModelCopyWith<$Res> {
-  __$$_ErstellenModelCopyWithImpl(
-      _$_ErstellenModel _value, $Res Function(_$_ErstellenModel) _then)
+class __$$ErstellenModelImplCopyWithImpl<$Res>
+    extends _$ErstellenModelCopyWithImpl<$Res, _$ErstellenModelImpl>
+    implements _$$ErstellenModelImplCopyWith<$Res> {
+  __$$ErstellenModelImplCopyWithImpl(
+      _$ErstellenModelImpl _value, $Res Function(_$ErstellenModelImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -236,7 +236,7 @@ class __$$_ErstellenModelCopyWithImpl<$Res>
     Object? urlInvalid = null,
     Object? isEdit = null,
   }) {
-    return _then(_$_ErstellenModel(
+    return _then(_$ErstellenModelImpl(
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -315,8 +315,8 @@ class __$$_ErstellenModelCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_ErstellenModel implements _ErstellenModel {
-  const _$_ErstellenModel(
+class _$ErstellenModelImpl implements _ErstellenModel {
+  const _$ErstellenModelImpl(
       {required this.name,
       required this.id,
       required final List<Ingredient> requiredIngredients,
@@ -401,10 +401,10 @@ class _$_ErstellenModel implements _ErstellenModel {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ErstellenModel &&
+            other is _$ErstellenModelImpl &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.id, id) || other.id == id) &&
             const DeepCollectionEquality()
@@ -461,8 +461,9 @@ class _$_ErstellenModel implements _ErstellenModel {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ErstellenModelCopyWith<_$_ErstellenModel> get copyWith =>
-      __$$_ErstellenModelCopyWithImpl<_$_ErstellenModel>(this, _$identity);
+  _$$ErstellenModelImplCopyWith<_$ErstellenModelImpl> get copyWith =>
+      __$$ErstellenModelImplCopyWithImpl<_$ErstellenModelImpl>(
+          this, _$identity);
 }
 
 abstract class _ErstellenModel implements ErstellenModel {
@@ -484,7 +485,7 @@ abstract class _ErstellenModel implements ErstellenModel {
       required final bool isImport,
       required final String? webURL,
       required final bool urlInvalid,
-      required final bool isEdit}) = _$_ErstellenModel;
+      required final bool isEdit}) = _$ErstellenModelImpl;
 
   @override
   String get name;
@@ -524,6 +525,6 @@ abstract class _ErstellenModel implements ErstellenModel {
   bool get isEdit;
   @override
   @JsonKey(ignore: true)
-  _$$_ErstellenModelCopyWith<_$_ErstellenModel> get copyWith =>
+  _$$ErstellenModelImplCopyWith<_$ErstellenModelImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

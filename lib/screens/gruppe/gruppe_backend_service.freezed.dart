@@ -12,7 +12,7 @@ part of 'gruppe_backend_service.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$GruppeServiceReturn {
@@ -57,22 +57,22 @@ class _$GruppeServiceReturnCopyWithImpl<$Res, $Val extends GruppeServiceReturn>
 }
 
 /// @nodoc
-abstract class _$$_GruppeServiceReturnCopyWith<$Res>
+abstract class _$$GruppeServiceReturnImplCopyWith<$Res>
     implements $GruppeServiceReturnCopyWith<$Res> {
-  factory _$$_GruppeServiceReturnCopyWith(_$_GruppeServiceReturn value,
-          $Res Function(_$_GruppeServiceReturn) then) =
-      __$$_GruppeServiceReturnCopyWithImpl<$Res>;
+  factory _$$GruppeServiceReturnImplCopyWith(_$GruppeServiceReturnImpl value,
+          $Res Function(_$GruppeServiceReturnImpl) then) =
+      __$$GruppeServiceReturnImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({List<Member> members});
 }
 
 /// @nodoc
-class __$$_GruppeServiceReturnCopyWithImpl<$Res>
-    extends _$GruppeServiceReturnCopyWithImpl<$Res, _$_GruppeServiceReturn>
-    implements _$$_GruppeServiceReturnCopyWith<$Res> {
-  __$$_GruppeServiceReturnCopyWithImpl(_$_GruppeServiceReturn _value,
-      $Res Function(_$_GruppeServiceReturn) _then)
+class __$$GruppeServiceReturnImplCopyWithImpl<$Res>
+    extends _$GruppeServiceReturnCopyWithImpl<$Res, _$GruppeServiceReturnImpl>
+    implements _$$GruppeServiceReturnImplCopyWith<$Res> {
+  __$$GruppeServiceReturnImplCopyWithImpl(_$GruppeServiceReturnImpl _value,
+      $Res Function(_$GruppeServiceReturnImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -80,7 +80,7 @@ class __$$_GruppeServiceReturnCopyWithImpl<$Res>
   $Res call({
     Object? members = null,
   }) {
-    return _then(_$_GruppeServiceReturn(
+    return _then(_$GruppeServiceReturnImpl(
       members: null == members
           ? _value._members
           : members // ignore: cast_nullable_to_non_nullable
@@ -91,8 +91,8 @@ class __$$_GruppeServiceReturnCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_GruppeServiceReturn implements _GruppeServiceReturn {
-  const _$_GruppeServiceReturn({required final List<Member> members})
+class _$GruppeServiceReturnImpl implements _GruppeServiceReturn {
+  const _$GruppeServiceReturnImpl({required final List<Member> members})
       : _members = members;
 
   final List<Member> _members;
@@ -109,10 +109,10 @@ class _$_GruppeServiceReturn implements _GruppeServiceReturn {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_GruppeServiceReturn &&
+            other is _$GruppeServiceReturnImpl &&
             const DeepCollectionEquality().equals(other._members, _members));
   }
 
@@ -123,19 +123,19 @@ class _$_GruppeServiceReturn implements _GruppeServiceReturn {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_GruppeServiceReturnCopyWith<_$_GruppeServiceReturn> get copyWith =>
-      __$$_GruppeServiceReturnCopyWithImpl<_$_GruppeServiceReturn>(
+  _$$GruppeServiceReturnImplCopyWith<_$GruppeServiceReturnImpl> get copyWith =>
+      __$$GruppeServiceReturnImplCopyWithImpl<_$GruppeServiceReturnImpl>(
           this, _$identity);
 }
 
 abstract class _GruppeServiceReturn implements GruppeServiceReturn {
   const factory _GruppeServiceReturn({required final List<Member> members}) =
-      _$_GruppeServiceReturn;
+      _$GruppeServiceReturnImpl;
 
   @override
   List<Member> get members;
   @override
   @JsonKey(ignore: true)
-  _$$_GruppeServiceReturnCopyWith<_$_GruppeServiceReturn> get copyWith =>
+  _$$GruppeServiceReturnImplCopyWith<_$GruppeServiceReturnImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

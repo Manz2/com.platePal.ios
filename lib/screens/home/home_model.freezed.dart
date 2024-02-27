@@ -12,7 +12,7 @@ part of 'home_model.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$HomeModel {
@@ -62,21 +62,22 @@ class _$HomeModelCopyWithImpl<$Res, $Val extends HomeModel>
 }
 
 /// @nodoc
-abstract class _$$_HomeModelCopyWith<$Res> implements $HomeModelCopyWith<$Res> {
-  factory _$$_HomeModelCopyWith(
-          _$_HomeModel value, $Res Function(_$_HomeModel) then) =
-      __$$_HomeModelCopyWithImpl<$Res>;
+abstract class _$$HomeModelImplCopyWith<$Res>
+    implements $HomeModelCopyWith<$Res> {
+  factory _$$HomeModelImplCopyWith(
+          _$HomeModelImpl value, $Res Function(_$HomeModelImpl) then) =
+      __$$HomeModelImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({List<Recipe> recipes, bool hasFetchedOnInit});
 }
 
 /// @nodoc
-class __$$_HomeModelCopyWithImpl<$Res>
-    extends _$HomeModelCopyWithImpl<$Res, _$_HomeModel>
-    implements _$$_HomeModelCopyWith<$Res> {
-  __$$_HomeModelCopyWithImpl(
-      _$_HomeModel _value, $Res Function(_$_HomeModel) _then)
+class __$$HomeModelImplCopyWithImpl<$Res>
+    extends _$HomeModelCopyWithImpl<$Res, _$HomeModelImpl>
+    implements _$$HomeModelImplCopyWith<$Res> {
+  __$$HomeModelImplCopyWithImpl(
+      _$HomeModelImpl _value, $Res Function(_$HomeModelImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -85,7 +86,7 @@ class __$$_HomeModelCopyWithImpl<$Res>
     Object? recipes = null,
     Object? hasFetchedOnInit = null,
   }) {
-    return _then(_$_HomeModel(
+    return _then(_$HomeModelImpl(
       recipes: null == recipes
           ? _value._recipes
           : recipes // ignore: cast_nullable_to_non_nullable
@@ -100,8 +101,8 @@ class __$$_HomeModelCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_HomeModel implements _HomeModel {
-  const _$_HomeModel(
+class _$HomeModelImpl implements _HomeModel {
+  const _$HomeModelImpl(
       {required final List<Recipe> recipes, required this.hasFetchedOnInit})
       : _recipes = recipes;
 
@@ -122,10 +123,10 @@ class _$_HomeModel implements _HomeModel {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_HomeModel &&
+            other is _$HomeModelImpl &&
             const DeepCollectionEquality().equals(other._recipes, _recipes) &&
             (identical(other.hasFetchedOnInit, hasFetchedOnInit) ||
                 other.hasFetchedOnInit == hasFetchedOnInit));
@@ -138,14 +139,14 @@ class _$_HomeModel implements _HomeModel {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_HomeModelCopyWith<_$_HomeModel> get copyWith =>
-      __$$_HomeModelCopyWithImpl<_$_HomeModel>(this, _$identity);
+  _$$HomeModelImplCopyWith<_$HomeModelImpl> get copyWith =>
+      __$$HomeModelImplCopyWithImpl<_$HomeModelImpl>(this, _$identity);
 }
 
 abstract class _HomeModel implements HomeModel {
   const factory _HomeModel(
       {required final List<Recipe> recipes,
-      required final bool hasFetchedOnInit}) = _$_HomeModel;
+      required final bool hasFetchedOnInit}) = _$HomeModelImpl;
 
   @override
   List<Recipe> get recipes;
@@ -153,7 +154,7 @@ abstract class _HomeModel implements HomeModel {
   bool get hasFetchedOnInit;
   @override
   @JsonKey(ignore: true)
-  _$$_HomeModelCopyWith<_$_HomeModel> get copyWith =>
+  _$$HomeModelImplCopyWith<_$HomeModelImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -298,9 +299,10 @@ class _$RecipeCopyWithImpl<$Res, $Val extends Recipe>
 }
 
 /// @nodoc
-abstract class _$$_RecipeCopyWith<$Res> implements $RecipeCopyWith<$Res> {
-  factory _$$_RecipeCopyWith(_$_Recipe value, $Res Function(_$_Recipe) then) =
-      __$$_RecipeCopyWithImpl<$Res>;
+abstract class _$$RecipeImplCopyWith<$Res> implements $RecipeCopyWith<$Res> {
+  factory _$$RecipeImplCopyWith(
+          _$RecipeImpl value, $Res Function(_$RecipeImpl) then) =
+      __$$RecipeImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -321,10 +323,11 @@ abstract class _$$_RecipeCopyWith<$Res> implements $RecipeCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_RecipeCopyWithImpl<$Res>
-    extends _$RecipeCopyWithImpl<$Res, _$_Recipe>
-    implements _$$_RecipeCopyWith<$Res> {
-  __$$_RecipeCopyWithImpl(_$_Recipe _value, $Res Function(_$_Recipe) _then)
+class __$$RecipeImplCopyWithImpl<$Res>
+    extends _$RecipeCopyWithImpl<$Res, _$RecipeImpl>
+    implements _$$RecipeImplCopyWith<$Res> {
+  __$$RecipeImplCopyWithImpl(
+      _$RecipeImpl _value, $Res Function(_$RecipeImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -345,7 +348,7 @@ class __$$_RecipeCopyWithImpl<$Res>
     Object? glutenfrei = null,
     Object? webURL = freezed,
   }) {
-    return _then(_$_Recipe(
+    return _then(_$RecipeImpl(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -408,8 +411,8 @@ class __$$_RecipeCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_Recipe implements _Recipe {
-  const _$_Recipe(
+class _$RecipeImpl implements _Recipe {
+  const _$RecipeImpl(
       {required this.id,
       required this.creator,
       required this.isSubscription,
@@ -428,8 +431,8 @@ class _$_Recipe implements _Recipe {
         _ingredients = ingredients,
         _attachments = attachments;
 
-  factory _$_Recipe.fromJson(Map<String, dynamic> json) =>
-      _$$_RecipeFromJson(json);
+  factory _$RecipeImpl.fromJson(Map<String, dynamic> json) =>
+      _$$RecipeImplFromJson(json);
 
   @override
   final String id;
@@ -493,10 +496,10 @@ class _$_Recipe implements _Recipe {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Recipe &&
+            other is _$RecipeImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.creator, creator) || other.creator == creator) &&
             (identical(other.isSubscription, isSubscription) ||
@@ -543,12 +546,12 @@ class _$_Recipe implements _Recipe {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_RecipeCopyWith<_$_Recipe> get copyWith =>
-      __$$_RecipeCopyWithImpl<_$_Recipe>(this, _$identity);
+  _$$RecipeImplCopyWith<_$RecipeImpl> get copyWith =>
+      __$$RecipeImplCopyWithImpl<_$RecipeImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_RecipeToJson(
+    return _$$RecipeImplToJson(
       this,
     );
   }
@@ -569,9 +572,9 @@ abstract class _Recipe implements Recipe {
       required final bool vegetarisch,
       required final bool vegan,
       required final bool glutenfrei,
-      required final String? webURL}) = _$_Recipe;
+      required final String? webURL}) = _$RecipeImpl;
 
-  factory _Recipe.fromJson(Map<String, dynamic> json) = _$_Recipe.fromJson;
+  factory _Recipe.fromJson(Map<String, dynamic> json) = _$RecipeImpl.fromJson;
 
   @override
   String get id;
@@ -603,7 +606,7 @@ abstract class _Recipe implements Recipe {
   String? get webURL;
   @override
   @JsonKey(ignore: true)
-  _$$_RecipeCopyWith<_$_Recipe> get copyWith =>
+  _$$RecipeImplCopyWith<_$RecipeImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -661,22 +664,22 @@ class _$IngredientCopyWithImpl<$Res, $Val extends Ingredient>
 }
 
 /// @nodoc
-abstract class _$$_IngredientCopyWith<$Res>
+abstract class _$$IngredientImplCopyWith<$Res>
     implements $IngredientCopyWith<$Res> {
-  factory _$$_IngredientCopyWith(
-          _$_Ingredient value, $Res Function(_$_Ingredient) then) =
-      __$$_IngredientCopyWithImpl<$Res>;
+  factory _$$IngredientImplCopyWith(
+          _$IngredientImpl value, $Res Function(_$IngredientImpl) then) =
+      __$$IngredientImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String name, String amount});
 }
 
 /// @nodoc
-class __$$_IngredientCopyWithImpl<$Res>
-    extends _$IngredientCopyWithImpl<$Res, _$_Ingredient>
-    implements _$$_IngredientCopyWith<$Res> {
-  __$$_IngredientCopyWithImpl(
-      _$_Ingredient _value, $Res Function(_$_Ingredient) _then)
+class __$$IngredientImplCopyWithImpl<$Res>
+    extends _$IngredientCopyWithImpl<$Res, _$IngredientImpl>
+    implements _$$IngredientImplCopyWith<$Res> {
+  __$$IngredientImplCopyWithImpl(
+      _$IngredientImpl _value, $Res Function(_$IngredientImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -685,7 +688,7 @@ class __$$_IngredientCopyWithImpl<$Res>
     Object? name = null,
     Object? amount = null,
   }) {
-    return _then(_$_Ingredient(
+    return _then(_$IngredientImpl(
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -700,11 +703,11 @@ class __$$_IngredientCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_Ingredient implements _Ingredient {
-  _$_Ingredient({required this.name, required this.amount});
+class _$IngredientImpl implements _Ingredient {
+  _$IngredientImpl({required this.name, required this.amount});
 
-  factory _$_Ingredient.fromJson(Map<String, dynamic> json) =>
-      _$$_IngredientFromJson(json);
+  factory _$IngredientImpl.fromJson(Map<String, dynamic> json) =>
+      _$$IngredientImplFromJson(json);
 
   @override
   final String name;
@@ -717,10 +720,10 @@ class _$_Ingredient implements _Ingredient {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Ingredient &&
+            other is _$IngredientImpl &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.amount, amount) || other.amount == amount));
   }
@@ -732,12 +735,12 @@ class _$_Ingredient implements _Ingredient {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_IngredientCopyWith<_$_Ingredient> get copyWith =>
-      __$$_IngredientCopyWithImpl<_$_Ingredient>(this, _$identity);
+  _$$IngredientImplCopyWith<_$IngredientImpl> get copyWith =>
+      __$$IngredientImplCopyWithImpl<_$IngredientImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_IngredientToJson(
+    return _$$IngredientImplToJson(
       this,
     );
   }
@@ -746,10 +749,10 @@ class _$_Ingredient implements _Ingredient {
 abstract class _Ingredient implements Ingredient {
   factory _Ingredient(
       {required final String name,
-      required final String amount}) = _$_Ingredient;
+      required final String amount}) = _$IngredientImpl;
 
   factory _Ingredient.fromJson(Map<String, dynamic> json) =
-      _$_Ingredient.fromJson;
+      _$IngredientImpl.fromJson;
 
   @override
   String get name;
@@ -757,6 +760,6 @@ abstract class _Ingredient implements Ingredient {
   String get amount;
   @override
   @JsonKey(ignore: true)
-  _$$_IngredientCopyWith<_$_Ingredient> get copyWith =>
+  _$$IngredientImplCopyWith<_$IngredientImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
