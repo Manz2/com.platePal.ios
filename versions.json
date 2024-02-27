@@ -1,8 +1,16 @@
 [{
     "2.0.3" : {
-        "changes" : "Version Ubgrade, Bugfix #3"
+        "changes":{
+            "1" : "Version Ubgrades",
+            "2" : "Bugfix #3"
+        }
     },
     "2.1.0" : {
-        "changes" : "Details menu, zoomable Images in details view, fixed Problems"
+        "changes":{
+            "1" : "Details menu",
+            "2" : "Zoomable Images in details view",
+            "3" : "Fixed Problems with super keys",
+            "4" : "Rebuild freezed with new Version"
+        }
     }
 }]
