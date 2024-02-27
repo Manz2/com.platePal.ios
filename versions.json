@@ -1,16 +1,34 @@
 [{
     "2.0.3" : {
         "changes":{
-            "1" : "Version Ubgrades",
-            "2" : "Bugfix #3"
+            "1" : {
+                "author" : "Manz2",
+                "description" : "Version Ubgrades"
+            },
+            "2" : {
+                "author" : "Manz2",
+                "description" : "Bugfix IOS Abstürze #3"
+            }
         }
     },
     "2.1.0" : {
         "changes":{
-            "1" : "Details menu",
-            "2" : "Zoomable Images in details view",
-            "3" : "Fixed Problems with super keys",
-            "4" : "Rebuild freezed with new Version"
+            "1" : {
+                "author" : "Manz2",
+                "description" : "Details menu"
+            },
+            "2" : {
+                "author" : "Manz2",
+                "description" : "Zoomable Images in details view"
+            },
+            "3" : {
+                "author" : "Manz2",
+                "description" : "Fixed Warnings with super keys"
+            },
+            "4" : {
+                "author" : "Manz2",
+                "description" : "Rebuild freezed with new Version"
+            }
         }
     }
 }]
