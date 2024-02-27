@@ -86,11 +86,26 @@ class DetailsView extends ConsumerWidget {
                 padding: const EdgeInsets.fromLTRB(15, 4, 15, 4),
                 child: ClipRRect(
                   borderRadius: const BorderRadius.all(Radius.circular(10)),
-                  child: CachedNetworkImage(
-                    imageUrl: recipe.image,
-                    height: 300,
-                    width: double.infinity,
-                    fit: BoxFit.cover,
+                  child: GestureDetector(
+                    onTap: () => showDialog(
+                        context: context,
+                        builder: (context) => GestureDetector(
+                              onTap: () => Navigator.of(context).pop(),
+                              child: Container(
+                                color: Colors.black,
+                                child: InteractiveViewer(
+                                  child: CachedNetworkImage(
+                                    imageUrl: recipe.image,
+                                  ),
+                                ),
+                              ),
+                            )),
+                    child: CachedNetworkImage(
+                      imageUrl: recipe.image,
+                      height: 300,
+                      width: double.infinity,
+                      fit: BoxFit.cover,
+                    ),
                   ),
                 ),
               )
