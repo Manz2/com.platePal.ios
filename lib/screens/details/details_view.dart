@@ -35,11 +35,47 @@ class DetailsView extends ConsumerWidget {
           ),
           actions: <Widget>[
             GestureDetector(
-              onLongPress: () => controller.deleteRecipe(context,recipe),
               child: IconButton(
-                icon: const Icon(Icons.edit),
-                onPressed: () => controller.navigateCreate(
-                    context, controller.recipeToErstellenModel(recipe)),
+                icon: const Icon(Icons.menu),
+                onPressed: () => showDialog(
+                  context: context,
+                  builder: (context) => AlertDialog(
+                    title: Text(
+                      FlutterI18n.translate(context, "details.menu"),
+                    ),
+                    content: Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        ElevatedButton(
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                            controller.navigateCreate(
+                              context,
+                              controller.recipeToErstellenModel(recipe),
+                            );
+                          },
+                          child: Text(
+                            FlutterI18n.translate(context, "details.edit"),
+                          ),
+                        ),
+                        ElevatedButton(
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                            controller.deleteRecipe(context, recipe);
+                          },
+                          child: Text(
+                            FlutterI18n.translate(context, "details.ok_detete"),
+                            style: const TextStyle(
+                              color:
+                                  Colors.red, // Optional: Ändere die Textfarbe
+                            ),
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                ),
               ),
             ),
           ],
@@ -149,8 +185,7 @@ class DetailsView extends ConsumerWidget {
                 child: ListTile(
                   leading: const Icon(Icons.link),
                   title: Text(
-                      "  ${recipe.webURL!
-                              .substring(recipe.webURL!.indexOf("://") + 3)}",
+                      "  ${recipe.webURL!.substring(recipe.webURL!.indexOf("://") + 3)}",
                       style: TextStyle(
                           color: Colors.blue,
                           fontStyle: FontStyle.italic,

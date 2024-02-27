@@ -50,7 +50,9 @@
     "CancelButton": "Cancel",
     "delete": "Are you sure you want to delete the recipe?",
     "deleted": "The recipe was deleted.",
-    "undo": "Undo"
+    "undo": "Undo",
+    "menu" : "Menu",
+    "edit" : "Edit"
   },
   "favorites": {
     "none": "No favorites available"
