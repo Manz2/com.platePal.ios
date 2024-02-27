@@ -67,8 +67,7 @@ class DetailsView extends ConsumerWidget {
                           child: Text(
                             FlutterI18n.translate(context, "details.ok_detete"),
                             style: const TextStyle(
-                              color:
-                                  Colors.red, // Optional: Ändere die Textfarbe
+                              color: Colors.red,
                             ),
                           ),
                         )
