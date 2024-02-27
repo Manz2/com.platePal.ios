@@ -8,7 +8,7 @@ import 'filter_model.dart';
 
 class FilterView extends ConsumerWidget {
   final Function(List<bool>) function;
-  const FilterView({Key? key, required this.function}) : super(key: key);
+  const FilterView({super.key, required this.function});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -100,7 +100,7 @@ class FilterView extends ConsumerWidget {
 }
 
 abstract class FilterController extends StateNotifier<FilterModel> {
-  FilterController(FilterModel state) : super(state);
+  FilterController(super.state);
   void vegetarischChanged(bool bo);
   void veganChanged(bool bo);
   void glutenfreiChanged(bool bo);

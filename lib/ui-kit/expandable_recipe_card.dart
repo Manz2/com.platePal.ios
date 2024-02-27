@@ -13,8 +13,8 @@ class ExpandableRecipeCard extends StatefulWidget {
   const ExpandableRecipeCard({
     required this.recipe,
     required this.navigationService,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   MyCardState createState() => MyCardState();
@@ -74,7 +74,6 @@ class MyCardState extends State<ExpandableRecipeCard> {
                             borderRadius: BorderRadius.circular(8.0),
                             child: widget.recipe.image != ""
                                 ? CachedNetworkImage(
-                                    memCacheWidth: 67,
                                     memCacheHeight: 90,
                                     imageUrl: widget.recipe.image,
                                     fit: BoxFit.cover,

@@ -3,8 +3,8 @@ import 'package:flutter_i18n/flutter_i18n.dart';
 
 class NameInputController extends StatelessWidget {
   const NameInputController({
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {

@@ -13,8 +13,8 @@ class ExpandableRecipeCardFavorite extends StatefulWidget {
   const ExpandableRecipeCardFavorite({
     required this.recipe,
     required this.controller,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   MyCardState createState() => MyCardState();

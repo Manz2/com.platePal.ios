@@ -12,7 +12,7 @@ part of 'favorite_model.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$FavoriteModel {
@@ -63,22 +63,22 @@ class _$FavoriteModelCopyWithImpl<$Res, $Val extends FavoriteModel>
 }
 
 /// @nodoc
-abstract class _$$_FavoriteModelCopyWith<$Res>
+abstract class _$$FavoriteModelImplCopyWith<$Res>
     implements $FavoriteModelCopyWith<$Res> {
-  factory _$$_FavoriteModelCopyWith(
-          _$_FavoriteModel value, $Res Function(_$_FavoriteModel) then) =
-      __$$_FavoriteModelCopyWithImpl<$Res>;
+  factory _$$FavoriteModelImplCopyWith(
+          _$FavoriteModelImpl value, $Res Function(_$FavoriteModelImpl) then) =
+      __$$FavoriteModelImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({List<Recipe> favoriten, bool hasFetchedOnInit});
 }
 
 /// @nodoc
-class __$$_FavoriteModelCopyWithImpl<$Res>
-    extends _$FavoriteModelCopyWithImpl<$Res, _$_FavoriteModel>
-    implements _$$_FavoriteModelCopyWith<$Res> {
-  __$$_FavoriteModelCopyWithImpl(
-      _$_FavoriteModel _value, $Res Function(_$_FavoriteModel) _then)
+class __$$FavoriteModelImplCopyWithImpl<$Res>
+    extends _$FavoriteModelCopyWithImpl<$Res, _$FavoriteModelImpl>
+    implements _$$FavoriteModelImplCopyWith<$Res> {
+  __$$FavoriteModelImplCopyWithImpl(
+      _$FavoriteModelImpl _value, $Res Function(_$FavoriteModelImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -87,7 +87,7 @@ class __$$_FavoriteModelCopyWithImpl<$Res>
     Object? favoriten = null,
     Object? hasFetchedOnInit = null,
   }) {
-    return _then(_$_FavoriteModel(
+    return _then(_$FavoriteModelImpl(
       favoriten: null == favoriten
           ? _value._favoriten
           : favoriten // ignore: cast_nullable_to_non_nullable
@@ -102,8 +102,8 @@ class __$$_FavoriteModelCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_FavoriteModel implements _FavoriteModel {
-  const _$_FavoriteModel(
+class _$FavoriteModelImpl implements _FavoriteModel {
+  const _$FavoriteModelImpl(
       {required final List<Recipe> favoriten, required this.hasFetchedOnInit})
       : _favoriten = favoriten;
 
@@ -124,10 +124,10 @@ class _$_FavoriteModel implements _FavoriteModel {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_FavoriteModel &&
+            other is _$FavoriteModelImpl &&
             const DeepCollectionEquality()
                 .equals(other._favoriten, _favoriten) &&
             (identical(other.hasFetchedOnInit, hasFetchedOnInit) ||
@@ -141,14 +141,14 @@ class _$_FavoriteModel implements _FavoriteModel {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_FavoriteModelCopyWith<_$_FavoriteModel> get copyWith =>
-      __$$_FavoriteModelCopyWithImpl<_$_FavoriteModel>(this, _$identity);
+  _$$FavoriteModelImplCopyWith<_$FavoriteModelImpl> get copyWith =>
+      __$$FavoriteModelImplCopyWithImpl<_$FavoriteModelImpl>(this, _$identity);
 }
 
 abstract class _FavoriteModel implements FavoriteModel {
   const factory _FavoriteModel(
       {required final List<Recipe> favoriten,
-      required final bool hasFetchedOnInit}) = _$_FavoriteModel;
+      required final bool hasFetchedOnInit}) = _$FavoriteModelImpl;
 
   @override
   List<Recipe> get favoriten;
@@ -156,6 +156,6 @@ abstract class _FavoriteModel implements FavoriteModel {
   bool get hasFetchedOnInit;
   @override
   @JsonKey(ignore: true)
-  _$$_FavoriteModelCopyWith<_$_FavoriteModel> get copyWith =>
+  _$$FavoriteModelImplCopyWith<_$FavoriteModelImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

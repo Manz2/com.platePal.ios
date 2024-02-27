@@ -42,6 +42,8 @@ d2250437cd2797886fcf0d3395b1b8f5.cache.dill.track.dill
 /build/
 /public/
 /windows/flutter
+/linux/flutter
+/macos/flutter
 PlatePal/windows/flutter
 
 # Web related
@@ -67,3 +69,4 @@ lib/firebase_options.dart
 pubspec.lock
 firebase.json
 android/app/google-services.json
+/macos

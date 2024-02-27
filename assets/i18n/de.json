@@ -50,7 +50,9 @@
     "CancelButton": "Abbrechen",
     "delete": "Sind Sie sicher, dass Sie das Rezept löschen möchten?",
     "deleted": "Das Rezept wurde gelöscht.",
-    "undo": "Undo"
+    "undo": "Undo",
+    "menu" : "Menü",
+    "edit" : "Bearbeiten"
   },
   "favorites": {
     "none": "Keine Favoriten vorhanden"

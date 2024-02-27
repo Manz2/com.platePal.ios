@@ -12,7 +12,7 @@ part of 'favoriten_backend_service.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$FavoritenServiceReturn {
@@ -58,23 +58,25 @@ class _$FavoritenServiceReturnCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_FavoritenServiceReturnCopyWith<$Res>
+abstract class _$$FavoritenServiceReturnImplCopyWith<$Res>
     implements $FavoritenServiceReturnCopyWith<$Res> {
-  factory _$$_FavoritenServiceReturnCopyWith(_$_FavoritenServiceReturn value,
-          $Res Function(_$_FavoritenServiceReturn) then) =
-      __$$_FavoritenServiceReturnCopyWithImpl<$Res>;
+  factory _$$FavoritenServiceReturnImplCopyWith(
+          _$FavoritenServiceReturnImpl value,
+          $Res Function(_$FavoritenServiceReturnImpl) then) =
+      __$$FavoritenServiceReturnImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({List<Recipe> recipes});
 }
 
 /// @nodoc
-class __$$_FavoritenServiceReturnCopyWithImpl<$Res>
+class __$$FavoritenServiceReturnImplCopyWithImpl<$Res>
     extends _$FavoritenServiceReturnCopyWithImpl<$Res,
-        _$_FavoritenServiceReturn>
-    implements _$$_FavoritenServiceReturnCopyWith<$Res> {
-  __$$_FavoritenServiceReturnCopyWithImpl(_$_FavoritenServiceReturn _value,
-      $Res Function(_$_FavoritenServiceReturn) _then)
+        _$FavoritenServiceReturnImpl>
+    implements _$$FavoritenServiceReturnImplCopyWith<$Res> {
+  __$$FavoritenServiceReturnImplCopyWithImpl(
+      _$FavoritenServiceReturnImpl _value,
+      $Res Function(_$FavoritenServiceReturnImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -82,7 +84,7 @@ class __$$_FavoritenServiceReturnCopyWithImpl<$Res>
   $Res call({
     Object? recipes = null,
   }) {
-    return _then(_$_FavoritenServiceReturn(
+    return _then(_$FavoritenServiceReturnImpl(
       recipes: null == recipes
           ? _value._recipes
           : recipes // ignore: cast_nullable_to_non_nullable
@@ -93,8 +95,8 @@ class __$$_FavoritenServiceReturnCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_FavoritenServiceReturn implements _FavoritenServiceReturn {
-  const _$_FavoritenServiceReturn({required final List<Recipe> recipes})
+class _$FavoritenServiceReturnImpl implements _FavoritenServiceReturn {
+  const _$FavoritenServiceReturnImpl({required final List<Recipe> recipes})
       : _recipes = recipes;
 
   final List<Recipe> _recipes;
@@ -111,10 +113,10 @@ class _$_FavoritenServiceReturn implements _FavoritenServiceReturn {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_FavoritenServiceReturn &&
+            other is _$FavoritenServiceReturnImpl &&
             const DeepCollectionEquality().equals(other._recipes, _recipes));
   }
 
@@ -125,19 +127,19 @@ class _$_FavoritenServiceReturn implements _FavoritenServiceReturn {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_FavoritenServiceReturnCopyWith<_$_FavoritenServiceReturn> get copyWith =>
-      __$$_FavoritenServiceReturnCopyWithImpl<_$_FavoritenServiceReturn>(
-          this, _$identity);
+  _$$FavoritenServiceReturnImplCopyWith<_$FavoritenServiceReturnImpl>
+      get copyWith => __$$FavoritenServiceReturnImplCopyWithImpl<
+          _$FavoritenServiceReturnImpl>(this, _$identity);
 }
 
 abstract class _FavoritenServiceReturn implements FavoritenServiceReturn {
   const factory _FavoritenServiceReturn({required final List<Recipe> recipes}) =
-      _$_FavoritenServiceReturn;
+      _$FavoritenServiceReturnImpl;
 
   @override
   List<Recipe> get recipes;
   @override
   @JsonKey(ignore: true)
-  _$$_FavoritenServiceReturnCopyWith<_$_FavoritenServiceReturn> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$FavoritenServiceReturnImplCopyWith<_$FavoritenServiceReturnImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }

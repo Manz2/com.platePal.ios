@@ -12,7 +12,7 @@ part of 'gruppe_model.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$GruppeModel {
@@ -57,22 +57,22 @@ class _$GruppeModelCopyWithImpl<$Res, $Val extends GruppeModel>
 }
 
 /// @nodoc
-abstract class _$$_GruppeModelCopyWith<$Res>
+abstract class _$$GruppeModelImplCopyWith<$Res>
     implements $GruppeModelCopyWith<$Res> {
-  factory _$$_GruppeModelCopyWith(
-          _$_GruppeModel value, $Res Function(_$_GruppeModel) then) =
-      __$$_GruppeModelCopyWithImpl<$Res>;
+  factory _$$GruppeModelImplCopyWith(
+          _$GruppeModelImpl value, $Res Function(_$GruppeModelImpl) then) =
+      __$$GruppeModelImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({List<Member> members});
 }
 
 /// @nodoc
-class __$$_GruppeModelCopyWithImpl<$Res>
-    extends _$GruppeModelCopyWithImpl<$Res, _$_GruppeModel>
-    implements _$$_GruppeModelCopyWith<$Res> {
-  __$$_GruppeModelCopyWithImpl(
-      _$_GruppeModel _value, $Res Function(_$_GruppeModel) _then)
+class __$$GruppeModelImplCopyWithImpl<$Res>
+    extends _$GruppeModelCopyWithImpl<$Res, _$GruppeModelImpl>
+    implements _$$GruppeModelImplCopyWith<$Res> {
+  __$$GruppeModelImplCopyWithImpl(
+      _$GruppeModelImpl _value, $Res Function(_$GruppeModelImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -80,7 +80,7 @@ class __$$_GruppeModelCopyWithImpl<$Res>
   $Res call({
     Object? members = null,
   }) {
-    return _then(_$_GruppeModel(
+    return _then(_$GruppeModelImpl(
       members: null == members
           ? _value._members
           : members // ignore: cast_nullable_to_non_nullable
@@ -91,8 +91,8 @@ class __$$_GruppeModelCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_GruppeModel implements _GruppeModel {
-  const _$_GruppeModel({required final List<Member> members})
+class _$GruppeModelImpl implements _GruppeModel {
+  const _$GruppeModelImpl({required final List<Member> members})
       : _members = members;
 
   final List<Member> _members;
@@ -109,10 +109,10 @@ class _$_GruppeModel implements _GruppeModel {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_GruppeModel &&
+            other is _$GruppeModelImpl &&
             const DeepCollectionEquality().equals(other._members, _members));
   }
 
@@ -123,19 +123,19 @@ class _$_GruppeModel implements _GruppeModel {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_GruppeModelCopyWith<_$_GruppeModel> get copyWith =>
-      __$$_GruppeModelCopyWithImpl<_$_GruppeModel>(this, _$identity);
+  _$$GruppeModelImplCopyWith<_$GruppeModelImpl> get copyWith =>
+      __$$GruppeModelImplCopyWithImpl<_$GruppeModelImpl>(this, _$identity);
 }
 
 abstract class _GruppeModel implements GruppeModel {
   const factory _GruppeModel({required final List<Member> members}) =
-      _$_GruppeModel;
+      _$GruppeModelImpl;
 
   @override
   List<Member> get members;
   @override
   @JsonKey(ignore: true)
-  _$$_GruppeModelCopyWith<_$_GruppeModel> get copyWith =>
+  _$$GruppeModelImplCopyWith<_$GruppeModelImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -198,19 +198,21 @@ class _$MemberCopyWithImpl<$Res, $Val extends Member>
 }
 
 /// @nodoc
-abstract class _$$_MemberCopyWith<$Res> implements $MemberCopyWith<$Res> {
-  factory _$$_MemberCopyWith(_$_Member value, $Res Function(_$_Member) then) =
-      __$$_MemberCopyWithImpl<$Res>;
+abstract class _$$MemberImplCopyWith<$Res> implements $MemberCopyWith<$Res> {
+  factory _$$MemberImplCopyWith(
+          _$MemberImpl value, $Res Function(_$MemberImpl) then) =
+      __$$MemberImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String name, String id, String image, int ammount});
 }
 
 /// @nodoc
-class __$$_MemberCopyWithImpl<$Res>
-    extends _$MemberCopyWithImpl<$Res, _$_Member>
-    implements _$$_MemberCopyWith<$Res> {
-  __$$_MemberCopyWithImpl(_$_Member _value, $Res Function(_$_Member) _then)
+class __$$MemberImplCopyWithImpl<$Res>
+    extends _$MemberCopyWithImpl<$Res, _$MemberImpl>
+    implements _$$MemberImplCopyWith<$Res> {
+  __$$MemberImplCopyWithImpl(
+      _$MemberImpl _value, $Res Function(_$MemberImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -221,7 +223,7 @@ class __$$_MemberCopyWithImpl<$Res>
     Object? image = null,
     Object? ammount = null,
   }) {
-    return _then(_$_Member(
+    return _then(_$MemberImpl(
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -244,8 +246,8 @@ class __$$_MemberCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_Member implements _Member {
-  const _$_Member(
+class _$MemberImpl implements _Member {
+  const _$MemberImpl(
       {required this.name,
       required this.id,
       required this.image,
@@ -266,10 +268,10 @@ class _$_Member implements _Member {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Member &&
+            other is _$MemberImpl &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.image, image) || other.image == image) &&
@@ -282,8 +284,8 @@ class _$_Member implements _Member {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_MemberCopyWith<_$_Member> get copyWith =>
-      __$$_MemberCopyWithImpl<_$_Member>(this, _$identity);
+  _$$MemberImplCopyWith<_$MemberImpl> get copyWith =>
+      __$$MemberImplCopyWithImpl<_$MemberImpl>(this, _$identity);
 }
 
 abstract class _Member implements Member {
@@ -291,7 +293,7 @@ abstract class _Member implements Member {
       {required final String name,
       required final String id,
       required final String image,
-      required final int ammount}) = _$_Member;
+      required final int ammount}) = _$MemberImpl;
 
   @override
   String get name;
@@ -303,6 +305,6 @@ abstract class _Member implements Member {
   int get ammount;
   @override
   @JsonKey(ignore: true)
-  _$$_MemberCopyWith<_$_Member> get copyWith =>
+  _$$MemberImplCopyWith<_$MemberImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

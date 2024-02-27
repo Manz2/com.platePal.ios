@@ -2,7 +2,7 @@ name: plate_pal
 description: "PlatePal is a mobile application that allows users to organize their recipes effectively."
 
 publish_to: 'none'
-version: 2.0.3+2
+version: 2.1.0+1
 
 environment:
   sdk: '>=3.3.0 <4.0.0'

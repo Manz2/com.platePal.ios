@@ -8,7 +8,7 @@ import 'package:plate_pal/ui-kit/expandable_recipe_card_favorite.dart';
 import '../../config.dart';
 
 class FavoriteView extends ConsumerWidget {
-  const FavoriteView({Key? key}) : super(key: key);
+  const FavoriteView({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -107,7 +107,7 @@ class FavoriteView extends ConsumerWidget {
 }
 
 abstract class FavoriteController extends StateNotifier<FavoriteModel> {
-  FavoriteController(FavoriteModel state) : super(state);
+  FavoriteController(super.state);
   Future<void> getFavorites();
   void search(String term);
   void filter(BuildContext context);

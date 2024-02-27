@@ -8,8 +8,8 @@ class SmallRecipeCard extends StatelessWidget {
     required this.image,
     required this.title,
     required this.description,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {

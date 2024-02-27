@@ -9,7 +9,7 @@ import 'package:plate_pal/ui-kit/error_dialog.dart';
 import 'account_model.dart';
 
 class AccountView extends ConsumerWidget {
-  const AccountView({Key? key}) : super(key: key);
+  const AccountView({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -329,7 +329,7 @@ class AccountView extends ConsumerWidget {
 }
 
 abstract class AccountController extends StateNotifier<AccountModel> {
-  AccountController(AccountModel state) : super(state);
+  AccountController(super.state);
   void init();
   Future<void> getUsername();
   Future<void> getUserImage();

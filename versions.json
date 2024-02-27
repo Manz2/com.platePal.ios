@@ -1,0 +1,38 @@
+{
+    "2.0.3" : {
+        "changes":{
+            "1" : {
+                "author" : "Manz2",
+                "description" : "Version Ubgrades"
+            },
+            "2" : {
+                "author" : "Manz2",
+                "description" : "Bugfix IOS Abstürze #3"
+            }
+        }
+    },
+    "2.1.0" : {
+        "changes":{
+            "1" : {
+                "author" : "Manz2",
+                "description" : "Details menu"
+            },
+            "2" : {
+                "author" : "Manz2",
+                "description" : "Zoomable Images in details view"
+            },
+            "3" : {
+                "author" : "Manz2",
+                "description" : "Fixed Warnings with super keys"
+            },
+            "4" : {
+                "author" : "Manz2",
+                "description" : "Rebuild freezed with new Version"
+            },
+            "5" : {
+                "author" : "Manz2",
+                "description" : "removed memCacheWidth for image aspect ratio"
+            }
+        }
+    }
+}

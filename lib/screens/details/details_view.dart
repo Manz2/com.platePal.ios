@@ -11,7 +11,7 @@ import 'package:url_launcher/url_launcher_string.dart';
 
 class DetailsView extends ConsumerWidget {
   final Recipe recipe;
-  const DetailsView({Key? key, required this.recipe}) : super(key: key);
+  const DetailsView({super.key, required this.recipe});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -35,11 +35,46 @@ class DetailsView extends ConsumerWidget {
           ),
           actions: <Widget>[
             GestureDetector(
-              onLongPress: () => controller.deleteRecipe(context,recipe),
               child: IconButton(
-                icon: const Icon(Icons.edit),
-                onPressed: () => controller.navigateCreate(
-                    context, controller.recipeToErstellenModel(recipe)),
+                icon: const Icon(Icons.menu),
+                onPressed: () => showDialog(
+                  context: context,
+                  builder: (context) => AlertDialog(
+                    title: Text(
+                      FlutterI18n.translate(context, "details.menu"),
+                    ),
+                    content: Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        ElevatedButton(
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                            controller.navigateCreate(
+                              context,
+                              controller.recipeToErstellenModel(recipe),
+                            );
+                          },
+                          child: Text(
+                            FlutterI18n.translate(context, "details.edit"),
+                          ),
+                        ),
+                        ElevatedButton(
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                            controller.deleteRecipe(context, recipe);
+                          },
+                          child: Text(
+                            FlutterI18n.translate(context, "details.ok_detete"),
+                            style: const TextStyle(
+                              color: Colors.red,
+                            ),
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                ),
               ),
             ),
           ],
@@ -51,11 +86,23 @@ class DetailsView extends ConsumerWidget {
                 padding: const EdgeInsets.fromLTRB(15, 4, 15, 4),
                 child: ClipRRect(
                   borderRadius: const BorderRadius.all(Radius.circular(10)),
-                  child: CachedNetworkImage(
-                    imageUrl: recipe.image,
-                    height: 300,
-                    width: double.infinity,
-                    fit: BoxFit.cover,
+                  child: GestureDetector(
+                    onTap: () => showDialog(
+                        context: context,
+                        builder: (context) => GestureDetector(
+                              onTap: () => Navigator.of(context).pop(),
+                              child: InteractiveViewer(
+                                child: CachedNetworkImage(
+                                  imageUrl: recipe.image,
+                                ),
+                              ),
+                            )),
+                    child: CachedNetworkImage(
+                      imageUrl: recipe.image,
+                      height: 300,
+                      width: double.infinity,
+                      fit: BoxFit.cover,
+                    ),
                   ),
                 ),
               )
@@ -149,8 +196,7 @@ class DetailsView extends ConsumerWidget {
                 child: ListTile(
                   leading: const Icon(Icons.link),
                   title: Text(
-                      "  ${recipe.webURL!
-                              .substring(recipe.webURL!.indexOf("://") + 3)}",
+                      "  ${recipe.webURL!.substring(recipe.webURL!.indexOf("://") + 3)}",
                       style: TextStyle(
                           color: Colors.blue,
                           fontStyle: FontStyle.italic,
@@ -165,7 +211,7 @@ class DetailsView extends ConsumerWidget {
 }
 
 abstract class DetailsController extends StateNotifier<DetailsModel> {
-  DetailsController(DetailsModel state) : super(state);
+  DetailsController(super.state);
   void navigateCreate(BuildContext context, ErstellenModel model);
   void navigateBack(BuildContext context);
   void check(int index);
