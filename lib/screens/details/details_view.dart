@@ -92,8 +92,11 @@ class DetailsView extends ConsumerWidget {
                         builder: (context) => GestureDetector(
                               onTap: () => Navigator.of(context).pop(),
                               child: InteractiveViewer(
-                                child: CachedNetworkImage(
-                                  imageUrl: recipe.image,
+                                child: Padding(
+                                  padding: const EdgeInsets.all(14.0),
+                                  child: CachedNetworkImage(
+                                    imageUrl: recipe.image,
+                                  ),
                                 ),
                               ),
                             )),
