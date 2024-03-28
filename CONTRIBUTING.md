@@ -1,6 +1,6 @@
 # Welcome to PlatePal contributing guide
 
-## If you want to contribute, follow this workflow
+## If you would like to contribute, please follow this workflow
 
 If you are working on an existing issue, you can skip steps 1-3 & 5.
 1. Create an issue with sufficient information in the description, if possible include a screenshot.
