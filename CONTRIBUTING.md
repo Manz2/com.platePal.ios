@@ -21,7 +21,7 @@ If you are working on an existing issue, you can skip steps 1-3 & 5.
 10. At the very least, test your changes on an Android emulator. Also test your changes on an ISO emulator, if available.
 11. Maintain the version.json and add the name and number of your issue.
 
-    ![image](https://github.com/Manz2/com.platePal.ios/assets/92571626/82129c66-be58-4b1e-9f8c-230f659fdf18)
+    ![image](https://github.com/Manz2/com.platePal.ios/assets/92571626/0f7bd5dc-3eb2-4223-a51b-4c8d3ac77ff0)
    
 12. Describe your changes in a comment under the issue.
 13. Create a Pull request. 
