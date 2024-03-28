@@ -17,7 +17,7 @@ If you are working on an existing issue, you can skip steps 1-3 & 5.
 
    ![image](https://github.com/Manz2/com.platePal.ios/assets/92571626/34750027-082d-4daa-b111-e8ffd5b0ac13)
 
-9. Implement your fix/enhancement. Flutter must not show any new warnings.
+9. Implement your fix/enhancement. Flutter must not show any new warnings. Pay attention to the currently used Flutter version, which is specified in the README 
 10. At the very least, test your changes on an Android emulator. Also test your changes on an ISO emulator, if available.
 11. Maintain the version.json and add the name and number of your issue.
 
