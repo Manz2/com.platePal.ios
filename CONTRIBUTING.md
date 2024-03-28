@@ -9,8 +9,8 @@
 
    ![image](https://github.com/Manz2/com.platePal.ios/assets/92571626/7245bc58-c393-4c70-85b9-354f60c8ea04)
 
-6. Submityour issue
-7. Assign issue
+6. Submit your issue
+7. Assign your issue
 8. create a feature branch from your issue
 
    ![image](https://github.com/Manz2/com.platePal.ios/assets/92571626/34750027-082d-4daa-b111-e8ffd5b0ac13)
