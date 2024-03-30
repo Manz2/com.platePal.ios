@@ -34,5 +34,17 @@
                 "description" : "removed memCacheWidth for image aspect ratio"
             }
         }
+    },
+    "2.1.1" : {
+        "changes":{
+            "1" : {
+                "author" : "Manz2",
+                "description" : "Added padding for Big Images"
+            },
+            "2" : {
+                "author" : "Manz2",
+                "description" : "Fixed Ios Icons Icon in IOS #7"
+            }
+        }
     }
 }
