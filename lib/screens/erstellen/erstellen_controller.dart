@@ -299,6 +299,7 @@ class ErstellenControllerImplementation extends ErstellenController {
     }
 
     try {
+      if (!context.mounted) return false;
       showDialog(
         context: context,
         barrierDismissible: false,
