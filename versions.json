@@ -44,6 +44,10 @@
             "2" : {
                 "author" : "Manz2",
                 "description" : "Fixed Ios Icons Icon in IOS #7"
+            },
+            "3" : {
+                "author" : "Manz2",
+                "description" : "fixed warning: Do not use BuildContexts across async gaps#9"
             }
         }
     }
