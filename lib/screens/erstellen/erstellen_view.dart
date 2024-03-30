@@ -46,6 +46,7 @@ class ErstellenView extends ConsumerWidget {
         leading: IconButton(
           onPressed: () async {
             if (await controller.deleteAll(context)) {
+              if (!context.mounted) return;
               controller.navigateBack(context);
             }
           },

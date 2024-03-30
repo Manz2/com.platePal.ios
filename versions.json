@@ -3,7 +3,7 @@
         "changes":{
             "1" : {
                 "author" : "Manz2",
-                "description" : "Version Ubgrades"
+                "description" : "Version Updates"
             },
             "2" : {
                 "author" : "Manz2",
@@ -32,6 +32,22 @@
             "5" : {
                 "author" : "Manz2",
                 "description" : "removed memCacheWidth for image aspect ratio"
+            }
+        }
+    },
+    "2.1.1" : {
+        "changes":{
+            "1" : {
+                "author" : "Manz2",
+                "description" : "Added padding for Big Images"
+            },
+            "2" : {
+                "author" : "Manz2",
+                "description" : "Fixed Ios Icons Icon in IOS #7"
+            },
+            "3" : {
+                "author" : "Manz2",
+                "description" : "fixed warning: Do not use BuildContexts across async gaps#9"
             }
         }
     }

@@ -9,8 +9,8 @@
 PlatePal recipe app for ios and android
 <br>
 
-
 [![Flutter](https://img.shields.io/badge/Flutter-3.19.0-blue?style=plastic&link=https://docs.flutter.dev/release/archive?tab=windows)](https://docs.flutter.dev/release/archive?tab=windows)
+
 <br>
 
 [![License: CC BY-NC-ND 4.0](https://img.shields.io/badge/License-CC%20BY--NC--ND%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by-nc-nd/4.0/)

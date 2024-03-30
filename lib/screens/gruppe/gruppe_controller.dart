@@ -45,14 +45,14 @@ class GruppeControllerImplmentation extends GruppeController {
       if (valueFromDialog == "Abbruch") {
         return;
       } else {
-        await addMemberToGroup(
-            valueFromDialog, ScaffoldMessenger.of(context),FlutterI18n.translate(context, "account.noAccountFound"));
+        await addMemberToGroup(valueFromDialog, ScaffoldMessenger.of(context),
+            FlutterI18n.translate(context, "account.noAccountFound"));
       }
     });
   }
 
   Future<void> addMemberToGroup(valueFromDialog,
-      ScaffoldMessengerState scaffoldMessenger,String failureText) async {
+      ScaffoldMessengerState scaffoldMessenger, String failureText) async {
     final snackBar = SnackBar(
       content: Text(failureText),
       action: SnackBarAction(
@@ -100,6 +100,7 @@ class GruppeControllerImplmentation extends GruppeController {
     bool returnVal = await _backendService.removeMember(
         id, FirebaseAuth.instance.currentUser!.uid);
     if (returnVal) {
+      if (!context.mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(snackBar);
       setup = true;
       getGroupMembers();
@@ -112,10 +113,11 @@ class GruppeControllerImplmentation extends GruppeController {
   }
 
   @override
-  Future<void> pasteIdQuickly(ScaffoldMessengerState scaffoldMessengerState,String failureText) async {
+  Future<void> pasteIdQuickly(
+      ScaffoldMessengerState scaffoldMessengerState, String failureText) async {
     ClipboardData? cdata = await Clipboard.getData(Clipboard.kTextPlain);
     if (cdata != null) {
-      addMemberToGroup(cdata.text,scaffoldMessengerState,failureText);
+      addMemberToGroup(cdata.text, scaffoldMessengerState, failureText);
     }
   }
 }

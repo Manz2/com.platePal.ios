@@ -34,6 +34,7 @@ class LoginControllerImplmentation extends LoginController {
           .signInWithEmailAndPassword(
               email: state.username, password: state.password);
       if (await _backendService.firstLogin(user.user!.uid)) {
+        if (!context.mounted) return;
         await showDialog(
                 context: context,
                 builder: (context) => const NameInputController())
@@ -52,6 +53,7 @@ class LoginControllerImplmentation extends LoginController {
       if (usernameSet) {
         state =
             state.copyWith(username: "", password: "", passwordVisible: false);
+        if (!context.mounted) return;
         _navigationService.routeHome(context);
       }
     } on FirebaseAuthException catch (e) {
@@ -60,6 +62,7 @@ class LoginControllerImplmentation extends LoginController {
       } else if (e.code == 'wrong-password') {
         logger.e("Wrong password provided for that user.");
       }
+      if (!context.mounted) return;
       ErrorDialog(
               title: FlutterI18n.translate(context, "error.signin.title"),
               message: FlutterI18n.translate(context, "error.signin.message"))
@@ -89,6 +92,7 @@ class LoginControllerImplmentation extends LoginController {
         email: state.username,
         password: state.password,
       );
+      if (!context.mounted) return;
       loginWithMail(context);
     } on FirebaseAuthException catch (e) {
       if (!checkError(e.message!, context)) {
