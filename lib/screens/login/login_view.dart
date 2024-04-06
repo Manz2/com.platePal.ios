@@ -119,17 +119,6 @@ class LoginView extends ConsumerWidget {
                     child: Text(FlutterI18n.translate(context, "login.signup")),
                   ),
                 ),
-              ),
-              const Padding(
-                padding: EdgeInsets.fromLTRB(30, 0, 30, 0),
-                child: Divider(),
-              ),
-              Padding(
-                padding: const EdgeInsets.fromLTRB(30, 15, 30, 10),
-                child: SignInButton(
-                  Buttons.google,
-                  onPressed: () {},
-                ),
               )
             ],
           ),
