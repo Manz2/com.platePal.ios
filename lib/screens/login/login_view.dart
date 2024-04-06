@@ -3,7 +3,6 @@ import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:plate_pal/common/providers.dart';
 import 'package:plate_pal/screens/login/login_model.dart';
-import 'package:sign_in_button/sign_in_button.dart';
 import '../../config.dart';
 import 'dart:math';
 
@@ -118,17 +117,6 @@ class LoginView extends ConsumerWidget {
                     onPressed: () => controller.addUser(context),
                     child: Text(FlutterI18n.translate(context, "login.signup")),
                   ),
-                ),
-              ),
-              const Padding(
-                padding: EdgeInsets.fromLTRB(30, 0, 30, 0),
-                child: Divider(),
-              ),
-              Padding(
-                padding: const EdgeInsets.fromLTRB(30, 15, 30, 10),
-                child: SignInButton(
-                  Buttons.google,
-                  onPressed: () {},
                 ),
               )
             ],

@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:logger/logger.dart';
 import 'package:plate_pal/config.dart';
 import 'package:plate_pal/screens/account/account_backend_service.dart';
@@ -114,5 +115,40 @@ class AccountControllerImplmentation extends AccountController {
   @override
   void navigateHome(BuildContext context) {
     _navigationService.routeHome(context);
+  }
+
+  @override
+  void deleteAccount(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text(FlutterI18n.translate(context, "account.delete")),
+          content:
+              Text(FlutterI18n.translate(context, "account.deleteContent")),
+          actions: <Widget>[
+            TextButton(
+              child:
+                  Text(FlutterI18n.translate(context, "details.CancelButton")),
+              onPressed: () {
+                Navigator.of(context).pop(); // Dialog schließen
+              },
+            ),
+            TextButton(
+              child: Text(FlutterI18n.translate(context, "details.ok_detete")),
+              onPressed: () async {
+                await _backendService.deleteAccount(
+                    userId: FirebaseAuth.instance.currentUser!.uid);
+                FirebaseAuth.instance.signOut();
+                setup = false;
+                setup2 = false;
+                if (!context.mounted) return;
+                _navigationService.routeLogin(context);
+              },
+            ),
+          ],
+        );
+      },
+    );
   }
 }

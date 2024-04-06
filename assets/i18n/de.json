@@ -10,7 +10,9 @@
     "enterId": "Um ein neues Mitglied hinzuzufügen, geben Sie bitte die Nutzer-ID ein.",
     "idCopied": "Ihre Nutzer-ID wurde in die Zwischenablage kopiert",
     "noAccountFound": "Es wurde kein Nutzer mit der ID in der Zwischenablage gefunden",
-    "memberRemoved": "Mitglied entfernt"
+    "memberRemoved": "Mitglied entfernt",
+    "delete": "Account löschen",
+    "deleteContent": "Sind Sie sicher, dass Sie ihren Account löschen möchten?"
   },
   "create": {
     "noValidUrl": "Keine gültige http:// oder https:// URL",

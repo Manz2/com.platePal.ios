@@ -10,7 +10,9 @@
     "enterId": "To add a new member, please enter the user ID.",
     "idCopied": "Your user ID has been copied to clipboard",
     "noAccountFound": "No user found with the ID in your clipboard",
-    "memberRemoved": "Member removed"
+    "memberRemoved": "Member removed",
+    "delete": "Delete account",
+    "deleteContent": "Are you sure you want to delete your account?"
   },
   "create": {
     "noValidUrl": "Not a valid http:// oder https:// URL",

@@ -407,4 +407,18 @@ class BackendService implements BackendServiceAggregator {
         .child(recipe.id)
         .remove();
   }
+
+  @override
+  Future<void> deleteAccount({required String userId}) async {
+    try {
+      FirebaseAuth.instance.currentUser!.delete();
+    } catch (e) {
+      logger.e(e);
+    }
+    DatabaseReference ref = FirebaseDatabase.instance.ref();
+    ref
+        .child("users")
+        .child(FirebaseAuth.instance.currentUser!.uid)
+        .update({"deleted": true});
+  }
 }

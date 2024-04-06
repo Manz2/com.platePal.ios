@@ -321,6 +321,54 @@ class AccountView extends ConsumerWidget {
                         ),
                       ),
                     )),
+                Padding(
+                    padding: const EdgeInsets.fromLTRB(30, 15, 30, 15),
+                    child: InkWell(
+                      onTap: () {},
+                      onHover: (value) {},
+                      child: GestureDetector(
+                        behavior: HitTestBehavior.translucent,
+                        onTap: () => controller.deleteAccount(context),
+                        child: Container(
+                          decoration: BoxDecoration(
+                            borderRadius:
+                                const BorderRadius.all(Radius.circular(10)),
+                            border: Border.all(
+                                color: currentScheme.getScheme().primary),
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.only(top: 8, bottom: 8),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.only(
+                                      left: 30, right: 30),
+                                  child: Icon(
+                                      size: 50,
+                                      Icons.delete,
+                                      color: currentScheme.getScheme().error),
+                                ),
+                                Flexible(
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(right: 10),
+                                    child: Text(
+                                      FlutterI18n.translate(
+                                          context, "account.delete"),
+                                      style: TextStyle(
+                                          fontSize: currentFontSize.toDouble(),
+                                          fontWeight: FontWeight.bold,
+                                          color:
+                                              currentScheme.getScheme().error),
+                                    ),
+                                  ),
+                                )
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                    )),
               ],
             ),
           ),
@@ -334,6 +382,7 @@ abstract class AccountController extends StateNotifier<AccountModel> {
   Future<void> getUsername();
   Future<void> getUserImage();
   Future<bool> changeImage();
+  void deleteAccount(BuildContext context);
   void logout(BuildContext context);
   void setFontSize(int fontSize);
   void navigateHome(BuildContext context);

@@ -24,7 +24,6 @@ dependencies:
   flutter_svg: ^2.0.10
   cached_network_image: ^3.3.1
   firebase_auth: ^4.17.0
-  sign_in_button: ^3.2.0
   file_picker: ^6.1.0
   shared_preferences: ^2.2.1
   flutter_i18n: ^0.35.0

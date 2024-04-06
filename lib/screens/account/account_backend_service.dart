@@ -5,6 +5,7 @@ abstract class AccountBackendService {
   Future<String> getUserImage({required String userId});
   Future<void> setUserImage({required String uid, required String imageString});
   Future<AccountServiceReturn> getUserName(String uid);
+  Future<void> deleteAccount({required String userId});
 }
 
 @freezed
