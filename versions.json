@@ -50,5 +50,13 @@
                 "description" : "fixed warning: Do not use BuildContexts across async gaps#9"
             }
         }
+    },
+    "2.2.0" : {
+        "changes":{
+            "1" : {
+                "author" : "Manz2",
+                "description" : "Remove sign in with Google button #14"
+            }
+        }
     }
 }
