@@ -72,7 +72,11 @@
             "2" : {
                 "author" : "Manz2",
                 "description" : "Fixed Space in username #20"
-            }
+            },
+            "3" : {
+                "author" : "Manz2",
+                "description" : "New Theme #12"
+            },
         }
     }
 }

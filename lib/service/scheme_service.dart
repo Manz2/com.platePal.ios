@@ -3,7 +3,11 @@ import '../config.dart';
 
 class SchemeService with ChangeNotifier {
   static int _counter = prefs.getInt('counter') ?? 0;
-  final List<ColorScheme> _list = [darkColorScheme, lightColorScheme, newDarkColorScheme];
+  final List<ColorScheme> _list = [
+    darkColorScheme,
+    lightColorScheme,
+    newDarkColorScheme
+  ];
 
   ColorScheme getScheme() {
     return _list[_counter];
@@ -90,34 +94,34 @@ const darkColorScheme = ColorScheme(
 
 const newDarkColorScheme = ColorScheme(
   brightness: Brightness.dark,
-  primary: Color(0xFFEBB2FF),
-  onPrimary: Color(0xFF520072),
-  primaryContainer: Color(0xFF7400A0),
-  onPrimaryContainer: Color(0xFFF8D8FF),
-  secondary: Color(0xFFD4C0D7),
-  onSecondary: Color(0xFF392C3D),
-  secondaryContainer: Color(0xFF504255),
-  onSecondaryContainer: Color(0xFFF1DCF4),
-  tertiary: Color(0xFFEBB2FF),
-  onTertiary: Color(0xFF520072),
-  tertiaryContainer: Color(0xFF7400A0),
-  onTertiaryContainer: Color(0xFFF8D8FF),
-  error: Color(0xFFFFB4AB),
-  errorContainer: Color(0xFF93000A),
-  onError: Color(0xFF690005),
-  onErrorContainer: Color(0xFFFFDAD6),
-  background: Color(0xFF24005A),
-  onBackground: Color(0xFFEADDFF),
-  surface: Color(0xFF24005A),
-  onSurface: Color(0xFFEADDFF),
-  surfaceVariant: Color(0xFF4C444D),
-  onSurfaceVariant: Color(0xFFCEC3CD),
-  outline: Color(0xFF978E97),
-  onInverseSurface: Color(0xFF24005A),
-  inverseSurface: Color(0xFFEADDFF),
-  inversePrimary: Color(0xFF9800D0),
-  shadow: Color(0xFF000000),
-  surfaceTint: Color(0xFFEBB2FF),
-  outlineVariant: Color(0xFF4C444D),
-  scrim: Color(0xFF000000),
+  background: Colors.black,
+  error: Color.fromARGB(255, 255, 0, 0),
+  errorContainer: Colors.black,
+  inversePrimary: Colors.white,
+  inverseSurface: Colors.black,
+  onBackground: Colors.white,
+  onError: Colors.black,
+  onErrorContainer: Colors.white,
+  onInverseSurface: Colors.white,
+  onPrimary: Colors.black,
+  onPrimaryContainer: Colors.white,
+  onSecondary: Colors.black,
+  onSecondaryContainer: Colors.white,
+  onSurface: Colors.white,
+  onSurfaceVariant: Color.fromARGB(255, 255, 255, 255),
+  onTertiary: Colors.black,
+  onTertiaryContainer: Colors.white,
+  outline: Colors.white,
+  outlineVariant: Colors.black,
+  primary: Color(0xFF95D86C),
+  primaryContainer: Colors.black,
+  scrim: Colors.black,
+  secondary: Colors.white,
+  secondaryContainer: Colors.black,
+  shadow: Colors.black,
+  surface: Color.fromARGB(255, 12, 12, 12),
+  surfaceTint: Colors.white,
+  surfaceVariant: Color.fromARGB(255, 255, 255, 255),
+  tertiary: Colors.black,
+  tertiaryContainer: Colors.white,
 );
