@@ -68,6 +68,10 @@
             "1" : {
                 "author" : "Manz2",
                 "description" : "Fixed empty search results #11"
+            },
+            "2" : {
+                "author" : "Manz2",
+                "description" : "Fixed Space in username #20"
             }
         }
     }

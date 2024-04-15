@@ -82,6 +82,7 @@ class LoginControllerImplmentation extends LoginController {
 
   @override
   void setUsername(String username) {
+    if(username.endsWith(" ")) username = username.trim();
     state = state.copyWith(username: username);
   }
 
