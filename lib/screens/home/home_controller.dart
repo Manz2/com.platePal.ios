@@ -33,7 +33,7 @@ class HomeControllerImplmentation extends HomeController {
         temp.add(rec);
       }
     }
-    if (temp.isEmpty || term == "" || term == " ") {
+    if (term == "" || term == " ") {
       getRecipes(FirebaseAuth.instance.currentUser!.uid);
     } else {
       state = state.copyWith(recipes: temp);
