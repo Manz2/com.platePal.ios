@@ -88,7 +88,7 @@ class ErstellenView extends ConsumerWidget {
           child: Padding(
             padding: (!model.isEdit)
                 ? const EdgeInsets.only(bottom: 0)
-                : const EdgeInsets.only(bottom: 40),
+                : const EdgeInsets.only(bottom: 60),
             child: Column(
               children: [
                 model.image != ""
