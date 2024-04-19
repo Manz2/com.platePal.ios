@@ -39,7 +39,6 @@ class HomeView extends ConsumerWidget {
                 constraints: BoxConstraints(
                     maxWidth: (MediaQuery.of(context).size.width) - 140),
                 controller: searchController,
-                focusNode: focusNode,
                 onChanged: (text) {
                   controller.search(text);
                 },

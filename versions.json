@@ -76,6 +76,14 @@
             "3" : {
                 "author" : "Manz2",
                 "description" : "New Theme #12"
+            },
+            "4" : {
+                "author" : "Manz2",
+                "description" : "Update Recipes button #21 at bottom of screen fixed"
+            },
+            "5" : {
+                "author" : "Manz2",
+                "description" : "Fixed Keyboard won't close after search #27"
             }
         }
     }
