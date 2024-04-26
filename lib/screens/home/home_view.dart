@@ -16,7 +16,6 @@ class HomeView extends ConsumerWidget {
         ref.read(providers.homeControllerProvider.notifier);
     final HomeModel model = ref.watch(providers.homeControllerProvider);
     TextEditingController? searchController;
-    final focusNode = FocusNode();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       if (!model.hasFetchedOnInit) {
         controller.getRecipes(FirebaseAuth.instance.currentUser!.uid);

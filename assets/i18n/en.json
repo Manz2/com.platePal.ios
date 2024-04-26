@@ -80,7 +80,11 @@
     "email-already-in-use-title": "Email Already in Use",
     "email-already-in-use-message": "An account already exists for that email. Please use a different email address.",
     "invalid-email-title": "Invalid Email Address",
-    "invalid-email-message": "The email address is badly formatted. Please enter a valid email address."
+    "invalid-email-message": "The email address is badly formatted. Please enter a valid email address.",
+    "verify-error-title": "Email Verification Required",
+    "verify-error-message": "Your e-mail address has not yet been verified. Please check your mailbox and click on the confirmation link.",
+    "verify-title": "Email Verification",
+    "verify-message": "Please check your mailbox and click on the confirmation link."
   },
   "error": {
     "upload": {

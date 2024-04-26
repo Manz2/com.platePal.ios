@@ -80,7 +80,12 @@
     "email-already-in-use-title": "E-Mail bereits in Verwendung",
     "email-already-in-use-message": "Es existiert bereits ein Konto für diese E-Mail-Adresse. Bitte verwende eine andere E-Mail-Adresse.",
     "invalid-email-title": "Ungültige E-Mail-Adresse",
-    "invalid-email-message": "Die E-Mail-Adresse ist ungültig formatiert. Bitte gib eine gültige E-Mail-Adresse ein."
+    "invalid-email-message": "Die E-Mail-Adresse ist ungültig formatiert. Bitte gib eine gültige E-Mail-Adresse ein.",
+    "verify-error-title": "E-Mail-Adresse nicht verifiziert",
+    "verify-error-message": "Ihre E-Mail-Adresse wurde noch nicht verifiziert. Bitte überprüfen Sie Ihr Postfach und klicken Sie auf den Bestätigungslink.",
+    "verify-title": "E-Mail-Adresse verifizieren",
+    "verify-message": "Bitte überprüfen Sie Ihr Postfach und klicken Sie auf den Bestätigungslink."
+
   },
   "error": {
     "upload": {
