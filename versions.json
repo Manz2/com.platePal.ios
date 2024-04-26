@@ -88,6 +88,10 @@
             "6" : {
                 "author" : "Manz2",
                 "description" : "Refine registration #22"
+            },
+            "7" : {
+                "author" : "Manz2",
+                "description" : "Change Navigate to details #28"
             }
         }
     }

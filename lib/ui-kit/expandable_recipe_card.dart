@@ -39,51 +39,60 @@ class MyCardState extends State<ExpandableRecipeCard> {
         children: <Widget>[
           InkWell(
               onTap: () async {
-                bool f = await BackendService().isFavorite(
-                    FirebaseAuth.instance.currentUser!.uid, widget.recipe.id);
-                setState(() {
-                  isFavorite = f;
-                  isExpanded = !isExpanded;
-                });
+                widget.navigationService.routeDetails(context, widget.recipe);
               },
               child: isExpanded
-                  ? ClipRRect(
-                      borderRadius: const BorderRadius.only(
-                          topLeft: Radius.circular(8.0),
-                          topRight: Radius.circular(8.0)),
-                      child: widget.recipe.image != ""
-                          ? CachedNetworkImage(
-                              imageUrl: widget.recipe.image,
-                              height: 200,
-                              width: double.infinity,
-                              fit: BoxFit.cover,
-                            )
-                          : const Image(
-                              height: 200,
-                              width: double.infinity,
-                              fit: BoxFit.cover,
-                              image:
-                                  AssetImage("assets/images/placeholder.png")))
+                  ? GestureDetector(
+                      onTap: () {
+                        setState(() {
+                          isExpanded = !isExpanded;
+                        });
+                      },
+                      child: ClipRRect(
+                          borderRadius: const BorderRadius.only(
+                              topLeft: Radius.circular(8.0),
+                              topRight: Radius.circular(8.0)),
+                          child: widget.recipe.image != ""
+                              ? CachedNetworkImage(
+                                  imageUrl: widget.recipe.image,
+                                  height: 200,
+                                  width: double.infinity,
+                                  fit: BoxFit.cover,
+                                )
+                              : const Image(
+                                  height: 200,
+                                  width: double.infinity,
+                                  fit: BoxFit.cover,
+                                  image: AssetImage(
+                                      "assets/images/placeholder.png"))),
+                    )
                   : Padding(
                       padding: const EdgeInsets.all(2),
                       child: ListTile(
                         leading: SizedBox(
                           width: 70,
                           height: 50,
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(8.0),
-                            child: widget.recipe.image != ""
-                                ? CachedNetworkImage(
-                                    memCacheHeight: 90,
-                                    imageUrl: widget.recipe.image,
-                                    fit: BoxFit.cover,
-                                  )
-                                : const Image(
-                                    height: 200,
-                                    width: double.infinity,
-                                    fit: BoxFit.cover,
-                                    image: AssetImage(
-                                        "assets/images/placeholder.png")),
+                          child: GestureDetector(
+                            onTap: () async {
+                              setState(() {
+                                isExpanded = !isExpanded;
+                              });
+                            },
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(8.0),
+                              child: widget.recipe.image != ""
+                                  ? CachedNetworkImage(
+                                      memCacheHeight: 90,
+                                      imageUrl: widget.recipe.image,
+                                      fit: BoxFit.cover,
+                                    )
+                                  : const Image(
+                                      height: 200,
+                                      width: double.infinity,
+                                      fit: BoxFit.cover,
+                                      image: AssetImage(
+                                          "assets/images/placeholder.png")),
+                            ),
                           ),
                         ),
                         title: Text(
@@ -136,20 +145,12 @@ class MyCardState extends State<ExpandableRecipeCard> {
                               ? currentScheme.getScheme().primary
                               : currentScheme.getScheme().onSurfaceVariant,
                         ),
-                        IconButton(
-                          iconSize: 30,
-                          onPressed: () {
-                            widget.navigationService
-                                .routeDetails(context, widget.recipe);
-                          },
-                          icon: const Icon(Icons.info),
-                        ),
                       ]),
                     ),
                   ],
                 ),
                 onTap: () => setState(() {
-                  isExpanded = !isExpanded;
+                  widget.navigationService.routeDetails(context, widget.recipe);
                 }),
               ),
             ),
