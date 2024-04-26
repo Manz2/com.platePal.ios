@@ -33,26 +33,31 @@ class MyCardState extends State<ExpandableRecipeCardFavorite> {
         children: <Widget>[
           InkWell(
               onTap: () async {
-                setState(() {
-                  isExpanded = !isExpanded;
-                });
+                widget.controller.navigateDetail(context, widget.recipe);
               },
               child: isExpanded
-                  ? ClipRRect(
-                      borderRadius: const BorderRadius.only(
-                          topLeft: Radius.circular(8.0),
-                          topRight: Radius.circular(8.0)),
-                      child: widget.recipe.image != ""
-                          ? CachedNetworkImage(
-                              imageUrl: widget.recipe.image,
-                              height: 200,
-                              width: double.infinity,
-                              fit: BoxFit.cover,
-                            )
-                          : const Image(
-                              fit: BoxFit.cover,
-                              image:
-                                  AssetImage("assets/images/placeholder.png")),
+                  ? GestureDetector(
+                      onTap: () {
+                        setState(() {
+                          isExpanded = !isExpanded;
+                        });
+                      },
+                      child: ClipRRect(
+                        borderRadius: const BorderRadius.only(
+                            topLeft: Radius.circular(8.0),
+                            topRight: Radius.circular(8.0)),
+                        child: widget.recipe.image != ""
+                            ? CachedNetworkImage(
+                                imageUrl: widget.recipe.image,
+                                height: 200,
+                                width: double.infinity,
+                                fit: BoxFit.cover,
+                              )
+                            : const Image(
+                                fit: BoxFit.cover,
+                                image: AssetImage(
+                                    "assets/images/placeholder.png")),
+                      ),
                     )
                   : Padding(
                       padding: const EdgeInsets.all(2),
@@ -60,19 +65,26 @@ class MyCardState extends State<ExpandableRecipeCardFavorite> {
                         leading: SizedBox(
                           width: 70,
                           height: 50,
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(8.0),
-                            child: widget.recipe.image != ""
-                                ? CachedNetworkImage(
-                                    memCacheWidth: 67,
-                                    memCacheHeight: 90,
-                                    imageUrl: widget.recipe.image,
-                                    fit: BoxFit.cover,
-                                  )
-                                : const Image(
-                                    fit: BoxFit.cover,
-                                    image: AssetImage(
-                                        "assets/images/placeholder.png")),
+                          child: GestureDetector(
+                            onTap: () {
+                              setState(() {
+                                isExpanded = !isExpanded;
+                              });
+                            },
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(8.0),
+                              child: widget.recipe.image != ""
+                                  ? CachedNetworkImage(
+                                      memCacheWidth: 67,
+                                      memCacheHeight: 90,
+                                      imageUrl: widget.recipe.image,
+                                      fit: BoxFit.cover,
+                                    )
+                                  : const Image(
+                                      fit: BoxFit.cover,
+                                      image: AssetImage(
+                                          "assets/images/placeholder.png")),
+                            ),
                           ),
                         ),
                         title: Text(
@@ -102,41 +114,40 @@ class MyCardState extends State<ExpandableRecipeCardFavorite> {
           if (isExpanded)
             Padding(
               padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
-              child: Column(
-                children: [
-                  ListTile(
-                    title: Text(
-                      widget.recipe.title,
-                      style: TextStyle(
-                          fontSize: currentFontSize.toDouble(),
-                          fontWeight: FontWeight.bold),
+              child: GestureDetector(
+                onTap: () {
+                  setState(() {
+                    widget.controller.navigateDetail(context, widget.recipe);
+                  });
+                },
+                child: Column(
+                  children: [
+                    ListTile(
+                      title: Text(
+                        widget.recipe.title,
+                        style: TextStyle(
+                            fontSize: currentFontSize.toDouble(),
+                            fontWeight: FontWeight.bold),
+                      ),
+                      subtitle: Text(widget.recipe.description),
+                      trailing: Row(mainAxisSize: MainAxisSize.min, children: [
+                        IconButton(
+                          iconSize: 30,
+                          onPressed: () async {
+                            BackendService().removeFavorites(
+                                FirebaseAuth.instance.currentUser!.uid,
+                                widget.recipe.id);
+                            widget.controller.getFavorites();
+                          },
+                          icon: const Icon(Icons.star),
+                          color: (isFavorite)
+                              ? currentScheme.getScheme().primary
+                              : currentScheme.getScheme().onSurfaceVariant,
+                        ),
+                      ]),
                     ),
-                    subtitle: Text(widget.recipe.description),
-                    trailing: Row(mainAxisSize: MainAxisSize.min, children: [
-                      IconButton(
-                        iconSize: 30,
-                        onPressed: () async {
-                          BackendService().removeFavorites(
-                              FirebaseAuth.instance.currentUser!.uid,
-                              widget.recipe.id);
-                          widget.controller.getFavorites();
-                        },
-                        icon: const Icon(Icons.star),
-                        color: (isFavorite)
-                            ? currentScheme.getScheme().primary
-                            : currentScheme.getScheme().onSurfaceVariant,
-                      ),
-                      IconButton(
-                        iconSize: 30,
-                        onPressed: () {
-                          widget.controller
-                              .navigateDetail(context, widget.recipe);
-                        },
-                        icon: const Icon(Icons.info),
-                      ),
-                    ]),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
         ],

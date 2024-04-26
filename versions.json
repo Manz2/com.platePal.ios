@@ -62,5 +62,37 @@
                 "description" : "Added Delete account function #13"
             }
         }
+    },
+    "2.3.0" : {
+        "changes":{
+            "1" : {
+                "author" : "Manz2",
+                "description" : "Fixed empty search results #11"
+            },
+            "2" : {
+                "author" : "Manz2",
+                "description" : "Fixed Space in username #20"
+            },
+            "3" : {
+                "author" : "Manz2",
+                "description" : "New Theme #12"
+            },
+            "4" : {
+                "author" : "Manz2",
+                "description" : "Update Recipes button #21 at bottom of screen fixed"
+            },
+            "5" : {
+                "author" : "Manz2",
+                "description" : "Fixed Keyboard won't close after search #27"
+            },
+            "6" : {
+                "author" : "Manz2",
+                "description" : "Refine registration #22"
+            },
+            "7" : {
+                "author" : "Manz2",
+                "description" : "Change Navigate to details #28"
+            }
+        }
     }
 }

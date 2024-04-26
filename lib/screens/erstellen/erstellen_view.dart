@@ -60,237 +60,272 @@ class ErstellenView extends ConsumerWidget {
               fontWeight: FontWeight.bold),
         ),
       ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      floatingActionButton: (!model.isEdit)
+          ? null
+          : FloatingActionButton.extended(
+              label: Text(FlutterI18n.translate(context, "create.update"),
+                  style: TextStyle(fontSize: currentFontSize.toDouble())),
+              onPressed: () {
+                if (controller.createRecipe(context)) {
+                  controller.navigateBack(context);
+                } else {
+                  final snackBar = SnackBar(
+                    content: Text(
+                        FlutterI18n.translate(context, "create.notAllFields")),
+                    action: SnackBarAction(
+                      label: 'OK',
+                      onPressed: () {},
+                    ),
+                  );
+                  ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                }
+              },
+            ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: SingleChildScrollView(
-          child: Column(
-            children: [
-              model.image != ""
-                  ? GestureDetector(
-                      onTap: () =>
-                          controller.addImage(model.image).then((value) => {
-                                if (!value)
-                                  {
-                                    ErrorDialog(
-                                            message: FlutterI18n.translate(
-                                                context,
-                                                "error.upload.message"),
-                                            title: FlutterI18n.translate(
-                                                context, "error.upload.title"))
-                                        .display(context),
-                                  }
-                              }),
-                      child: CachedNetworkImage(
-                        height: MediaQuery.of(context).size.height / 5,
-                        width: MediaQuery.of(context).size.width - 100,
-                        imageUrl: model.image,
-                        fit: BoxFit.cover,
-                      ),
-                    )
-                  : IconButton(
-                      onPressed: () =>
-                          controller.addImage(model.image).then((value) => {
-                                if (!value)
-                                  {
-                                    ErrorDialog(
-                                            message: FlutterI18n.translate(
-                                                context,
-                                                "error.upload.message"),
-                                            title: FlutterI18n.translate(
-                                                context, "error.upload.title"))
-                                        .display(context)
-                                  }
-                              }),
-                      icon: Icon(
-                        Icons.add_photo_alternate_outlined,
-                        size: MediaQuery.of(context).size.height / 5,
-                      )),
-              const SizedBox(height: 16.0),
-              TextField(
-                style: TextStyle(fontSize: currentFontSize.toDouble()),
-                decoration: InputDecoration(
-                    labelText: FlutterI18n.translate(context, "create.name"),
-                    border: const OutlineInputBorder(),
-                    contentPadding: const EdgeInsets.symmetric(
-                        vertical: 12.0, horizontal: 16.0),
-                    labelStyle: TextStyle(
-                        fontSize: currentFontSize.toDouble(),
-                        color: model.nameNotSet
-                            ? currentScheme.getScheme().error
-                            : currentScheme.getScheme().onSurfaceVariant)),
-                textInputAction: TextInputAction.next,
-                controller: _nameController,
-                onChanged: (_) => {
-                  controller.setTitle(_),
-                },
-              ),
-              const SizedBox(height: 16.0),
-              AddTextFieldWidget(
-                con: controller,
-                ingredients: model.requiredIngredients,
-              ),
-              const SizedBox(height: 16.0),
-              AddTextFieldWidgetSteps(con: controller, steps: model.steps),
-              const SizedBox(height: 16.0),
-              TextField(
-                style: TextStyle(fontSize: currentFontSize.toDouble()),
-                decoration: InputDecoration(
-                    labelText:
-                        FlutterI18n.translate(context, "create.description"),
-                    border: const OutlineInputBorder(),
-                    contentPadding: const EdgeInsets.symmetric(
-                        vertical: 12.0, horizontal: 16.0),
-                    labelStyle: TextStyle(
-                        fontSize: currentFontSize.toDouble(),
-                        color: model.descriptionNotSet
-                            ? currentScheme.getScheme().error
-                            : currentScheme.getScheme().onSurfaceVariant)),
-                controller: _descriptionController,
-                onChanged: (_) => {
-                  controller.setDescription(_),
-                },
-                textInputAction: TextInputAction.done,
-              ),
-              const SizedBox(height: 16.0),
-              TextField(
-                style: TextStyle(fontSize: currentFontSize.toDouble()),
-                decoration: InputDecoration(
-                  labelText: 'WebUrl (optional)',
-                  border: const OutlineInputBorder(),
-                  contentPadding: const EdgeInsets.symmetric(
-                      vertical: 12.0, horizontal: 16.0),
-                  labelStyle: TextStyle(
-                    fontSize: currentFontSize.toDouble(),
-                    color: model.urlInvalid
-                        ? currentScheme.getScheme().error
-                        : currentScheme.getScheme().onSurfaceVariant,
-                  ),
+          child: Padding(
+            padding: (!model.isEdit)
+                ? const EdgeInsets.only(bottom: 0)
+                : const EdgeInsets.only(bottom: 60),
+            child: Column(
+              children: [
+                model.image != ""
+                    ? GestureDetector(
+                        onTap: () =>
+                            controller.addImage(model.image).then((value) => {
+                                  if (!value)
+                                    {
+                                      ErrorDialog(
+                                              message: FlutterI18n.translate(
+                                                  context,
+                                                  "error.upload.message"),
+                                              title: FlutterI18n.translate(
+                                                  context,
+                                                  "error.upload.title"))
+                                          .display(context),
+                                    }
+                                }),
+                        child: CachedNetworkImage(
+                          height: MediaQuery.of(context).size.height / 5,
+                          width: MediaQuery.of(context).size.width - 100,
+                          imageUrl: model.image,
+                          fit: BoxFit.cover,
+                        ),
+                      )
+                    : IconButton(
+                        onPressed: () =>
+                            controller.addImage(model.image).then((value) => {
+                                  if (!value)
+                                    {
+                                      ErrorDialog(
+                                              message: FlutterI18n.translate(
+                                                  context,
+                                                  "error.upload.message"),
+                                              title: FlutterI18n.translate(
+                                                  context,
+                                                  "error.upload.title"))
+                                          .display(context)
+                                    }
+                                }),
+                        icon: Icon(
+                          Icons.add_photo_alternate_outlined,
+                          size: MediaQuery.of(context).size.height / 5,
+                        )),
+                const SizedBox(height: 16.0),
+                TextField(
+                  style: TextStyle(fontSize: currentFontSize.toDouble()),
+                  decoration: InputDecoration(
+                      labelText: FlutterI18n.translate(context, "create.name"),
+                      border: const OutlineInputBorder(),
+                      contentPadding: const EdgeInsets.symmetric(
+                          vertical: 12.0, horizontal: 16.0),
+                      labelStyle: TextStyle(
+                          fontSize: currentFontSize.toDouble(),
+                          color: model.nameNotSet
+                              ? currentScheme.getScheme().error
+                              : currentScheme.getScheme().onSurfaceVariant)),
+                  textInputAction: TextInputAction.next,
+                  controller: _nameController,
+                  onChanged: (_) => {
+                    controller.setTitle(_),
+                  },
                 ),
-                controller: _linkController,
-                onChanged: (_) {
-                  controller.setlink(_);
-                },
-              ),
-              const SizedBox(height: 16.0),
-              Wrap(
-                children: [
-                  GestureDetector(
-                    onTap: () => controller.setVegan(!model.vegan),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Checkbox(
-                          value: model.vegan,
-                          onChanged: (value) => controller.setVegan(value),
-                        ),
-                        Text(
-                          FlutterI18n.translate(context, "create.vegan"),
-                          style:
-                              TextStyle(fontSize: currentFontSize.toDouble()),
-                        ),
-                      ],
+                const SizedBox(height: 16.0),
+                AddTextFieldWidget(
+                  con: controller,
+                  ingredients: model.requiredIngredients,
+                ),
+                const SizedBox(height: 16.0),
+                AddTextFieldWidgetSteps(con: controller, steps: model.steps),
+                const SizedBox(height: 16.0),
+                TextField(
+                  style: TextStyle(fontSize: currentFontSize.toDouble()),
+                  decoration: InputDecoration(
+                      labelText:
+                          FlutterI18n.translate(context, "create.description"),
+                      border: const OutlineInputBorder(),
+                      contentPadding: const EdgeInsets.symmetric(
+                          vertical: 12.0, horizontal: 16.0),
+                      labelStyle: TextStyle(
+                          fontSize: currentFontSize.toDouble(),
+                          color: model.descriptionNotSet
+                              ? currentScheme.getScheme().error
+                              : currentScheme.getScheme().onSurfaceVariant)),
+                  controller: _descriptionController,
+                  onChanged: (_) => {
+                    controller.setDescription(_),
+                  },
+                  textInputAction: TextInputAction.done,
+                ),
+                const SizedBox(height: 16.0),
+                TextField(
+                  style: TextStyle(fontSize: currentFontSize.toDouble()),
+                  decoration: InputDecoration(
+                    labelText: 'WebUrl (optional)',
+                    border: const OutlineInputBorder(),
+                    contentPadding: const EdgeInsets.symmetric(
+                        vertical: 12.0, horizontal: 16.0),
+                    labelStyle: TextStyle(
+                      fontSize: currentFontSize.toDouble(),
+                      color: model.urlInvalid
+                          ? currentScheme.getScheme().error
+                          : currentScheme.getScheme().onSurfaceVariant,
                     ),
                   ),
-                  GestureDetector(
-                    onTap: () => controller.setVegetarisch(!model.vegetarisch),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Checkbox(
-                          value: model.vegetarisch,
-                          onChanged: (value) =>
-                              controller.setVegetarisch(value),
-                        ),
-                        Text(
-                            FlutterI18n.translate(context, "create.vegetarian"),
-                            style: TextStyle(
-                                fontSize: currentFontSize.toDouble())),
-                      ],
+                  controller: _linkController,
+                  onChanged: (_) {
+                    controller.setlink(_);
+                  },
+                ),
+                const SizedBox(height: 16.0),
+                Wrap(
+                  children: [
+                    GestureDetector(
+                      onTap: () => controller.setVegan(!model.vegan),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Checkbox(
+                            value: model.vegan,
+                            onChanged: (value) => controller.setVegan(value),
+                          ),
+                          Text(
+                            FlutterI18n.translate(context, "create.vegan"),
+                            style:
+                                TextStyle(fontSize: currentFontSize.toDouble()),
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
-                  GestureDetector(
-                    onTap: () => controller.setGlutenfrei(!model.glutenfrei),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Checkbox(
-                          value: model.glutenfrei,
-                          onChanged: (value) => controller.setGlutenfrei(value),
-                        ),
-                        Text(FlutterI18n.translate(context, "create.gluten"),
-                            style: TextStyle(
-                                fontSize: currentFontSize.toDouble())),
-                      ],
+                    GestureDetector(
+                      onTap: () =>
+                          controller.setVegetarisch(!model.vegetarisch),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Checkbox(
+                            value: model.vegetarisch,
+                            onChanged: (value) =>
+                                controller.setVegetarisch(value),
+                          ),
+                          Text(
+                              FlutterI18n.translate(
+                                  context, "create.vegetarian"),
+                              style: TextStyle(
+                                  fontSize: currentFontSize.toDouble())),
+                        ],
+                      ),
                     ),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 16.0),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  if (!kIsWeb && !model.isEdit)
-                    Padding(
-                      padding: const EdgeInsets.only(right: 20),
-                      child: ElevatedButton(
-                        onPressed: () async {
-                          Text successText = Text(FlutterI18n.translate(
-                              context, "create.ai.success"));
-                          Text failureText = Text(FlutterI18n.translate(
-                              context, "create.ai.failure"));
-                          ScaffoldMessengerState scaffoldManager =
-                              ScaffoldMessenger.of(context);
-                          if (await controller.kiImport(context,
-                              Navigator.of(context, rootNavigator: true))) {
-                            final snackBar = SnackBar(
-                              content: successText,
-                              action: SnackBarAction(
-                                label: 'OK',
-                                onPressed: () {},
-                              ),
-                            );
-                            scaffoldManager.showSnackBar(snackBar);
+                    GestureDetector(
+                      onTap: () => controller.setGlutenfrei(!model.glutenfrei),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Checkbox(
+                            value: model.glutenfrei,
+                            onChanged: (value) =>
+                                controller.setGlutenfrei(value),
+                          ),
+                          Text(FlutterI18n.translate(context, "create.gluten"),
+                              style: TextStyle(
+                                  fontSize: currentFontSize.toDouble())),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 16.0),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    if (!kIsWeb && !model.isEdit)
+                      Padding(
+                        padding: const EdgeInsets.only(right: 20),
+                        child: ElevatedButton(
+                          onPressed: () async {
+                            Text successText = Text(FlutterI18n.translate(
+                                context, "create.ai.success"));
+                            Text failureText = Text(FlutterI18n.translate(
+                                context, "create.ai.failure"));
+                            ScaffoldMessengerState scaffoldManager =
+                                ScaffoldMessenger.of(context);
+                            if (await controller.kiImport(context,
+                                Navigator.of(context, rootNavigator: true))) {
+                              final snackBar = SnackBar(
+                                content: successText,
+                                action: SnackBarAction(
+                                  label: 'OK',
+                                  onPressed: () {},
+                                ),
+                              );
+                              scaffoldManager.showSnackBar(snackBar);
+                            } else {
+                              final snackBar = SnackBar(
+                                content: failureText,
+                                action: SnackBarAction(
+                                  label: 'OK',
+                                  onPressed: () {},
+                                ),
+                              );
+                              scaffoldManager.showSnackBar(snackBar);
+                            }
+                          },
+                          child: Text(
+                              FlutterI18n.translate(
+                                  context, "create.ai.import"),
+                              style: TextStyle(
+                                  fontSize: currentFontSize.toDouble())),
+                        ),
+                      ),
+                    if (!model.isEdit)
+                      ElevatedButton(
+                        onPressed: () {
+                          if (controller.createRecipe(context)) {
+                            controller.navigateBack(context);
                           } else {
                             final snackBar = SnackBar(
-                              content: failureText,
+                              content: Text(FlutterI18n.translate(
+                                  context, "create.notAllFields")),
                               action: SnackBarAction(
                                 label: 'OK',
                                 onPressed: () {},
                               ),
                             );
-                            scaffoldManager.showSnackBar(snackBar);
+                            ScaffoldMessenger.of(context)
+                                .showSnackBar(snackBar);
                           }
                         },
                         child: Text(
-                            FlutterI18n.translate(context, "create.ai.import"),
+                            FlutterI18n.translate(context, "create.create"),
                             style: TextStyle(
                                 fontSize: currentFontSize.toDouble())),
                       ),
-                    ),
-                  ElevatedButton(
-                    onPressed: () {
-                      if (controller.createRecipe(context)) {
-                        controller.navigateBack(context);
-                      } else {
-                        final snackBar = SnackBar(
-                          content: Text(FlutterI18n.translate(
-                              context, "create.notAllFields")),
-                          action: SnackBarAction(
-                            label: 'OK',
-                            onPressed: () {},
-                          ),
-                        );
-                        ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                      }
-                    },
-                    child: Text(
-                        FlutterI18n.translate(context,
-                            model.isEdit ? "create.update" : "create.create"),
-                        style: TextStyle(fontSize: currentFontSize.toDouble())),
-                  ),
-                ],
-              ),
-            ],
+                  ],
+                ),
+              ],
+            ),
           ),
         ),
       ),

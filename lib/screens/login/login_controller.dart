@@ -7,6 +7,7 @@ import 'package:plate_pal/screens/login/login_model.dart';
 import 'package:plate_pal/screens/login/login_view.dart';
 import 'package:plate_pal/service/my_app_navigation_service.dart';
 import 'package:plate_pal/ui-kit/error_dialog.dart';
+import 'package:plate_pal/ui-kit/info_dialog.dart';
 import 'package:plate_pal/ui-kit/name_input_dialog.dart';
 
 class LoginControllerImplmentation extends LoginController {
@@ -33,6 +34,18 @@ class LoginControllerImplmentation extends LoginController {
       UserCredential user = await FirebaseAuth.instance
           .signInWithEmailAndPassword(
               email: state.username, password: state.password);
+      if (!user.user!.emailVerified) {
+        await user.user!.sendEmailVerification();
+        await FirebaseAuth.instance.signOut();
+        if (!context.mounted) return;
+        ErrorDialog(
+                title:
+                    FlutterI18n.translate(context, "login.verify-error-title"),
+                message: FlutterI18n.translate(
+                    context, "login.verify-error-message"))
+            .display(context);
+        return;
+      }
       if (await _backendService.firstLogin(user.user!.uid)) {
         if (!context.mounted) return;
         await showDialog(
@@ -56,12 +69,8 @@ class LoginControllerImplmentation extends LoginController {
         if (!context.mounted) return;
         _navigationService.routeHome(context);
       }
-    } on FirebaseAuthException catch (e) {
-      if (e.code == 'user-not-found') {
-        logger.e("No user found for that email.");
-      } else if (e.code == 'wrong-password') {
-        logger.e("Wrong password provided for that user.");
-      }
+    } on FirebaseAuthException {
+      await FirebaseAuth.instance.signOut();
       if (!context.mounted) return;
       ErrorDialog(
               title: FlutterI18n.translate(context, "error.signin.title"),
@@ -82,6 +91,7 @@ class LoginControllerImplmentation extends LoginController {
 
   @override
   void setUsername(String username) {
+    if (username.endsWith(" ")) username = username.trim();
     state = state.copyWith(username: username);
   }
 
@@ -92,8 +102,16 @@ class LoginControllerImplmentation extends LoginController {
         email: state.username,
         password: state.password,
       );
+      UserCredential user = await FirebaseAuth.instance
+          .signInWithEmailAndPassword(
+              email: state.username, password: state.password);
+      await user.user!.sendEmailVerification();
+      await FirebaseAuth.instance.signOut();
       if (!context.mounted) return;
-      loginWithMail(context);
+      InfoDialog(
+              title: FlutterI18n.translate(context, "login.verify-title"),
+              message: FlutterI18n.translate(context, "login.verify-message"))
+          .display(context);
     } on FirebaseAuthException catch (e) {
       if (!checkError(e.message!, context)) {
         //fist check for web
