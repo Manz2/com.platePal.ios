@@ -95,6 +95,12 @@ class HomeView extends ConsumerWidget {
                   navigationService: controller.getNavigationservice(),
                   recipe: rec,
                 ),
+              if (model.recipes.length > 8)
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 20, top: 10),
+                  child: Text(
+                      "${model.recipes.length} ${FlutterI18n.translate(context, "home.found")}"),
+                )
             ],
           ),
         ),

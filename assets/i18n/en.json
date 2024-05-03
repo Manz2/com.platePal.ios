@@ -67,7 +67,8 @@
   },
   "home": {
     "search": "Search",
-    "none": "No Recipes available"
+    "none": "No Recipes available",
+    "found": "Recipes found"
   },
   "login": {
     "firstlogin": "Welcome! This is your first login. Please choose a username.",

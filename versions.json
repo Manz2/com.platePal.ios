@@ -94,5 +94,17 @@
                 "description" : "Change Navigate to details #28"
             }
         }
+    },
+    "2.4.0" : {
+        "changes":{
+            "1" : {
+                "author" : "Manz2",
+                "description" : "OpenAi API update #23"
+            },
+            "2" : {
+                "author" : "Manz2",
+                "description" : "Number of recipes #31"
+            }
+        }
     }
 }
