@@ -108,6 +108,10 @@
             "3" : {
                 "author" : "Manz2",
                 "description" : "Dark theme as standard #35"
+            },
+            "4" : {
+                "author" : "Manz2",
+                "description" : "Login loading animation #32"
             }
         }
     }

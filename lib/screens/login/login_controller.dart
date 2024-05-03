@@ -29,6 +29,14 @@ class LoginControllerImplmentation extends LoginController {
 
   @override
   void loginWithMail(BuildContext context) async {
+    showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (BuildContext dialogContext) {
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
+        });
     bool usernameSet = false;
     try {
       UserCredential user = await FirebaseAuth.instance
@@ -70,6 +78,8 @@ class LoginControllerImplmentation extends LoginController {
         _navigationService.routeHome(context);
       }
     } on FirebaseAuthException {
+      if (!context.mounted) return;
+      Navigator.of(context, rootNavigator: true).pop();
       await FirebaseAuth.instance.signOut();
       if (!context.mounted) return;
       ErrorDialog(
@@ -97,6 +107,14 @@ class LoginControllerImplmentation extends LoginController {
 
   @override
   Future<void> addUser(BuildContext context) async {
+    showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (BuildContext dialogContext) {
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
+        });
     try {
       await FirebaseAuth.instance.createUserWithEmailAndPassword(
         email: state.username,
@@ -108,17 +126,22 @@ class LoginControllerImplmentation extends LoginController {
       await user.user!.sendEmailVerification();
       await FirebaseAuth.instance.signOut();
       if (!context.mounted) return;
+      Navigator.of(context, rootNavigator: true).pop();
       InfoDialog(
               title: FlutterI18n.translate(context, "login.verify-title"),
               message: FlutterI18n.translate(context, "login.verify-message"))
           .display(context);
     } on FirebaseAuthException catch (e) {
+      if (!context.mounted) return;
+      Navigator.of(context, rootNavigator: true).pop();
       if (!checkError(e.message!, context)) {
         //fist check for web
         checkError(e.code, context);
         //seccon check for app
       }
     } catch (e) {
+      if (!context.mounted) return;
+      Navigator.of(context, rootNavigator: true).pop();
       logger.e(e);
     }
   }
