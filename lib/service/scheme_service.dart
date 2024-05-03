@@ -4,9 +4,9 @@ import '../config.dart';
 class SchemeService with ChangeNotifier {
   static int _counter = prefs.getInt('counter') ?? 0;
   final List<ColorScheme> _list = [
+    newDarkColorScheme,
     darkColorScheme,
-    lightColorScheme,
-    newDarkColorScheme
+    lightColorScheme
   ];
 
   ColorScheme getScheme() {

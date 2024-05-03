@@ -104,6 +104,10 @@
             "2" : {
                 "author" : "Manz2",
                 "description" : "Number of recipes #31"
+            },
+            "3" : {
+                "author" : "Manz2",
+                "description" : "Dark theme as standard #35"
             }
         }
     }
