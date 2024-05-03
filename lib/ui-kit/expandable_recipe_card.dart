@@ -32,6 +32,8 @@ class MyCardState extends State<ExpandableRecipeCard> {
 
   @override
   Widget build(BuildContext context) {
+    double width = MediaQuery.of(context).size.width;
+    bool isWide = width > 600;
     return Card(
       margin: const EdgeInsets.fromLTRB(20, 8, 20, 8),
       child: Column(
@@ -55,23 +57,24 @@ class MyCardState extends State<ExpandableRecipeCard> {
                           child: widget.recipe.image != ""
                               ? CachedNetworkImage(
                                   imageUrl: widget.recipe.image,
-                                  height: 200,
+                                  height: isWide ? 400 : 200,
                                   width: double.infinity,
                                   fit: BoxFit.cover,
                                 )
-                              : const Image(
-                                  height: 200,
+                              : Image(
+                                  height: isWide ? 400 : 200,
                                   width: double.infinity,
                                   fit: BoxFit.cover,
-                                  image: AssetImage(
+                                  image: const AssetImage(
                                       "assets/images/placeholder.png"))),
                     )
                   : Padding(
                       padding: const EdgeInsets.all(2),
                       child: ListTile(
+                        visualDensity: VisualDensity(vertical: isWide ? 4 : 0),
                         leading: SizedBox(
-                          width: 70,
-                          height: 50,
+                          width: isWide ? 210 : 70,
+                          height: isWide ? 80 : 50,
                           child: GestureDetector(
                             onTap: () async {
                               setState(() {
@@ -82,13 +85,11 @@ class MyCardState extends State<ExpandableRecipeCard> {
                               borderRadius: BorderRadius.circular(8.0),
                               child: widget.recipe.image != ""
                                   ? CachedNetworkImage(
-                                      memCacheHeight: 90,
+                                      memCacheHeight: isWide ? 250 : 150,
                                       imageUrl: widget.recipe.image,
                                       fit: BoxFit.cover,
                                     )
                                   : const Image(
-                                      height: 200,
-                                      width: double.infinity,
                                       fit: BoxFit.cover,
                                       image: AssetImage(
                                           "assets/images/placeholder.png")),

@@ -15,6 +15,9 @@ class DetailsView extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    double width = MediaQuery.of(context).size.width;
+    bool isWide = width > 600;
+    double sidePadding = isWide ? width / 6 : 15;
     final DetailsController controller =
         ref.read(providers.detailsViewControllerProvider.notifier);
     final DetailsModel model =
@@ -59,15 +62,19 @@ class DetailsView extends ConsumerWidget {
                             FlutterI18n.translate(context, "details.edit"),
                           ),
                         ),
-                        ElevatedButton(
-                          onPressed: () {
-                            Navigator.of(context).pop();
-                            controller.deleteRecipe(context, recipe);
-                          },
-                          child: Text(
-                            FlutterI18n.translate(context, "details.ok_detete"),
-                            style: const TextStyle(
-                              color: Colors.red,
+                        Padding(
+                          padding: const EdgeInsets.only(top: 15),
+                          child: ElevatedButton(
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                              controller.deleteRecipe(context, recipe);
+                            },
+                            child: Text(
+                              FlutterI18n.translate(
+                                  context, "details.ok_detete"),
+                              style: const TextStyle(
+                                color: Colors.red,
+                              ),
                             ),
                           ),
                         )
@@ -83,7 +90,7 @@ class DetailsView extends ConsumerWidget {
           child: Column(children: [
             if (recipe.image != "")
               Padding(
-                padding: const EdgeInsets.fromLTRB(15, 4, 15, 4),
+                padding: EdgeInsets.fromLTRB(sidePadding, 4, sidePadding, 4),
                 child: ClipRRect(
                   borderRadius: const BorderRadius.all(Radius.circular(10)),
                   child: GestureDetector(
@@ -113,7 +120,7 @@ class DetailsView extends ConsumerWidget {
               const Text(""),
             for (Ingredient i in ingredients)
               Card(
-                margin: const EdgeInsets.fromLTRB(15, 4, 15, 4),
+                margin: EdgeInsets.fromLTRB(sidePadding, 4, sidePadding, 4),
                 child: ListTile(
                   selected: (model.checked.contains(ingredients.indexOf(i))),
                   onTap: () => controller.check(ingredients.indexOf(i)),
@@ -159,7 +166,7 @@ class DetailsView extends ConsumerWidget {
                   Text(FlutterI18n.translate(context, "details.instructions")),
             ),
             Card(
-              margin: const EdgeInsets.fromLTRB(15, 4, 15, 4),
+              margin: EdgeInsets.fromLTRB(sidePadding, 4, sidePadding, 4),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: List.generate(
@@ -195,7 +202,7 @@ class DetailsView extends ConsumerWidget {
             ),
             if (recipe.webURL != null)
               Card(
-                margin: const EdgeInsets.fromLTRB(15, 4, 15, 4),
+                margin: EdgeInsets.fromLTRB(sidePadding, 4, sidePadding, 4),
                 child: ListTile(
                   leading: const Icon(Icons.link),
                   title: Text(

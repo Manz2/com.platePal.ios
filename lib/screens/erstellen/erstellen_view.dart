@@ -21,6 +21,9 @@ class ErstellenView extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    double width = MediaQuery.of(context).size.width;
+    bool isWide = width > 600;
+    double sidePadding = isWide ? width / 5 : 16;
     final ErstellenModel model;
     final ErstellenController controller;
     if (recipe != null) {
@@ -83,7 +86,7 @@ class ErstellenView extends ConsumerWidget {
               },
             ),
       body: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding: EdgeInsets.fromLTRB(sidePadding, 16.0, sidePadding, 16),
         child: SingleChildScrollView(
           child: Padding(
             padding: (!model.isEdit)

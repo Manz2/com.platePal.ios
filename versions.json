@@ -112,6 +112,10 @@
             "4" : {
                 "author" : "Manz2",
                 "description" : "Login loading animation #32"
+            },
+            "5" : {
+                "author" : "Manz2",
+                "description" : "Web/ iPad version #24"
             }
         }
     }

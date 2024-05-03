@@ -19,6 +19,9 @@ class LoginView extends ConsumerWidget {
     ];
     final random = Random();
     int index = random.nextInt(pictures.length);
+    double width = MediaQuery.of(context).size.width;
+    bool isWide = width > 600;
+    double sidePadding = isWide ? width / 5 : 30;
 
     return Scaffold(
       appBar: null,
@@ -27,12 +30,12 @@ class LoginView extends ConsumerWidget {
           child: Column(
             children: <Widget>[
               Padding(
-                padding: const EdgeInsets.fromLTRB(30, 15, 30, 30),
+                padding: EdgeInsets.fromLTRB(sidePadding, 15, sidePadding, 30),
                 child: ClipRRect(
                     borderRadius: BorderRadius.circular(8.0),
                     child: SizedBox(
                       width: double.infinity,
-                      height: 250,
+                      height: isWide ? min(500, width / 2) : 250,
                       child: Image.asset(
                         pictures[index],
                         fit: BoxFit.cover,
@@ -40,7 +43,7 @@ class LoginView extends ConsumerWidget {
                     )),
               ),
               Padding(
-                padding: const EdgeInsets.fromLTRB(30, 20, 30, 15),
+                padding: EdgeInsets.fromLTRB(sidePadding, 20, sidePadding, 15),
                 child: TextField(
                   obscureText: false,
                   onChanged: (value) {
@@ -54,7 +57,7 @@ class LoginView extends ConsumerWidget {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.fromLTRB(30, 0, 30, 15),
+                padding: EdgeInsets.fromLTRB(sidePadding, 20, sidePadding, 15),
                 child: TextField(
                   obscureText: !model.passwordVisible,
                   onChanged: (value) {
@@ -81,7 +84,7 @@ class LoginView extends ConsumerWidget {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.fromLTRB(30, 15, 30, 15),
+                padding: EdgeInsets.fromLTRB(sidePadding, 20, sidePadding, 15),
                 child: SizedBox(
                   width: double.infinity,
                   height: 50,
@@ -103,7 +106,7 @@ class LoginView extends ConsumerWidget {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.fromLTRB(30, 0, 30, 15),
+                padding: EdgeInsets.fromLTRB(sidePadding, 0, sidePadding, 15),
                 child: SizedBox(
                   width: double.infinity,
                   height: 50,
