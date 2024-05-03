@@ -305,20 +305,43 @@ class BackendService implements BackendServiceAggregator {
 
   @override
   Future<Recipe> recipeFromGPT(String rezept) async {
-    String prompt = "$promptOne\n$rezept\n$promptTwo";
-    logger.d(prompt);
     OpenAI.apiKey = openAiKey;
-    final chatCompletion = await OpenAI.instance.chat.create(
-      presencePenalty: -2.0,
-      model: 'gpt-3.5-turbo',
-      messages: [
-        OpenAIChatCompletionChoiceMessageModel(
-          content: prompt,
-          role: OpenAIChatMessageRole.user,
+    final systemMessage = OpenAIChatCompletionChoiceMessageModel(
+      content: [
+        OpenAIChatCompletionChoiceMessageContentItemModel.text(
+          prompt,
         ),
       ],
+      role: OpenAIChatMessageRole.assistant,
     );
-    String jsonString = chatCompletion.choices.first.message.content;
+
+    final userMessage = OpenAIChatCompletionChoiceMessageModel(
+      content: [
+        OpenAIChatCompletionChoiceMessageContentItemModel.text(rezept),
+      ],
+      role: OpenAIChatMessageRole.user,
+    );
+
+    final requestMessages = [
+      systemMessage,
+      userMessage,
+    ];
+    OpenAIChatCompletionModel chatCompletion =
+        await OpenAI.instance.chat.create(
+      model: "gpt-3.5-turbo-1106",
+      responseFormat: {"type": "json_object"},
+      seed: 6,
+      messages: requestMessages,
+      temperature: 0.2,
+      maxTokens: 500,
+    );
+    String? jsonString =
+        chatCompletion.choices.first.message.content?.first.text;
+
+    if (jsonString == null) {
+      throw Exception("No JSON String returned from GPT");
+    }
+
     logger.d("Rezept von GPT");
     Map<String, dynamic> json = jsonDecode(jsonString);
     logger.d(json);

@@ -9,8 +9,9 @@ LocaleService localeS = LocaleService();
 int currentFontSize = prefs.getInt('fontSize') ?? 18;
 late SharedPreferences prefs;
 
-String promptOne = "Hier ist ein Rezept beschrieben:";
-String promptTwo = '''Hier ist eine beispielhafte Darstellung, wie ein Rezept im JSON Format aussehen soll:
+String prompt = '''
+    Wende folgende Anweisung auf alle Rezepte an die du bekommst.
+    Hier ist eine beispielhafte Darstellung, wie ein Rezept im JSON Format aussehen soll:
     {
     "title": "Titel",
     "description": "beschreibung",
