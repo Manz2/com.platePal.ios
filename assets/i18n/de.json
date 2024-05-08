@@ -35,6 +35,7 @@
     "create": "Erstellen",
     "update": "Aktualisieren",
     "ammount": "Anzahl",
+    "attachmentMax": "Pro Rezept können maximal 5 Dateien angehängt werden.",
     "ai": {
       "estimate": "Geschätzte Zeit: 30 sec",
       "wait": "Bitte warten",

@@ -378,9 +378,19 @@ class ErstellenControllerImplementation extends ErstellenController {
         });
 
     if (result != null) {
+      if (result.count + state.attachments.length > 5) {
+        Navigator.of(context, rootNavigator: true).pop();
+        final snackBar = SnackBar(
+          content: Text(FlutterI18n.translate(context, "create.attachmentMax")),
+        );
+        ScaffoldMessenger.of(context).showSnackBar(snackBar);
+        return false;
+      }
       List<String> attachments = List<String>.from(state.attachments);
       for (PlatformFile file in result.files) {
         if (file.size >= 5000000) {
+          if (!context.mounted) return true;
+          Navigator.of(context, rootNavigator: true).pop();
           return false;
         }
 
