@@ -378,7 +378,7 @@ class ErstellenControllerImplementation extends ErstellenController {
         });
 
     if (result != null) {
-      if (result.count + state.attachments.length > 5) {
+      if (result.count + state.attachments.length > 8) {
         Navigator.of(context, rootNavigator: true).pop();
         final snackBar = SnackBar(
           content: Text(FlutterI18n.translate(context, "create.attachmentMax")),

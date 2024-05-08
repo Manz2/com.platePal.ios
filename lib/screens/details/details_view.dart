@@ -200,6 +200,47 @@ class DetailsView extends ConsumerWidget {
                 ),
               ),
             ),
+            if (recipe.attachments != null && recipe.attachments!.isNotEmpty)
+              Padding(
+                padding: EdgeInsets.fromLTRB(sidePadding, 10, sidePadding, 10),
+                child: SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Row(
+                    children: [
+                      for (String attachment in recipe.attachments!)
+                        Padding(
+                          padding: const EdgeInsets.only(right: 8),
+                          child: ClipRRect(
+                            borderRadius:
+                                const BorderRadius.all(Radius.circular(10)),
+                            child: GestureDetector(
+                              onTap: () => showDialog(
+                                  context: context,
+                                  builder: (context) => GestureDetector(
+                                        onTap: () =>
+                                            Navigator.of(context).pop(),
+                                        child: InteractiveViewer(
+                                          child: Padding(
+                                            padding: const EdgeInsets.all(14),
+                                            child: CachedNetworkImage(
+                                              imageUrl: attachment,
+                                            ),
+                                          ),
+                                        ),
+                                      )),
+                              child: CachedNetworkImage(
+                                imageUrl: attachment,
+                                height: 80,
+                                width: 80,
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                          ),
+                        ),
+                    ],
+                  ),
+                ),
+              ),
             if (recipe.webURL != null)
               Card(
                 margin: EdgeInsets.fromLTRB(sidePadding, 4, sidePadding, 4),

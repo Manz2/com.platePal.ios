@@ -35,7 +35,7 @@
     "create": "Create",
     "update": "Update",
     "ammount": "Quantity",
-    "attachmentMax": "A maximum of 5 files can be attached per recipe.",
+    "attachmentMax": "A maximum of 8 files can be attached per recipe.",
     "ai": {
       "estimate": "Estimated Time: 30 sec",
       "wait": "Please wait",
