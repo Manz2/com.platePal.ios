@@ -72,6 +72,7 @@ class ErstellenView extends ConsumerWidget {
                 label: Text(FlutterI18n.translate(context, "create.update"),
                     style: TextStyle(fontSize: currentFontSize.toDouble())),
                 onPressed: () {
+                  controller.removeAttachmentsRemote();
                   if (controller.createRecipe(context)) {
                     controller.navigateBack(context);
                   } else {
@@ -269,6 +270,62 @@ class ErstellenView extends ConsumerWidget {
                           await controller.addAttachments(context),
                       icon: const Icon(Icons.attach_file)),
                   const SizedBox(height: 10.0),
+                  if (model.attachments.isNotEmpty)
+                    Padding(
+                      padding:
+                          EdgeInsets.fromLTRB(sidePadding, 10, sidePadding, 10),
+                      child: SingleChildScrollView(
+                        scrollDirection: Axis.horizontal,
+                        child: Row(
+                          children: [
+                            for (String attachment in model.attachments)
+                              Padding(
+                                padding: const EdgeInsets.only(right: 8),
+                                child: ClipRRect(
+                                  borderRadius: const BorderRadius.all(
+                                      Radius.circular(10)),
+                                  child: GestureDetector(
+                                    onTap: () => model.isEdit
+                                        ? controller
+                                            .removeAttachmentlocal(attachment)
+                                        : controller
+                                            .removeAttachmentRemote(attachment),
+                                    child: Stack(
+                                        alignment: Alignment.center,
+                                        children: [
+                                          CachedNetworkImage(
+                                            imageUrl: attachment,
+                                            height: 80,
+                                            width: 80,
+                                            fit: BoxFit.cover,
+                                          ),
+                                          Align(
+                                            child: Container(
+                                              width: 35,
+                                              height: 35,
+                                              decoration: BoxDecoration(
+                                                shape: BoxShape.circle,
+                                                color: currentScheme
+                                                    .getScheme()
+                                                    .error,
+                                              ),
+                                            ),
+                                          ),
+                                          Align(
+                                            child: Icon(Icons.delete_forever,
+                                                size: 30,
+                                                color: currentScheme
+                                                    .getScheme()
+                                                    .onError),
+                                          ),
+                                        ]),
+                                  ),
+                                ),
+                              ),
+                          ],
+                        ),
+                      ),
+                    ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -390,4 +447,10 @@ abstract class ErstellenController extends StateNotifier<ErstellenModel> {
   void navigateBack(BuildContext context);
 
   Future<bool> addAttachments(BuildContext context);
+
+  void removeAttachmentlocal(String attachment);
+
+  void removeAttachmentsRemote();
+
+  void removeAttachmentRemote(String attachment);
 }

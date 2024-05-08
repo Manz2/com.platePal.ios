@@ -46,6 +46,7 @@ class ErstellenControllerImplementation extends ErstellenController {
                 urlInvalid: false,
                 isImport: false,
                 isEdit: false));
+  List removedAttachments = [];
 
   @override
   void setModel(ErstellenModel? model) {
@@ -419,6 +420,40 @@ class ErstellenControllerImplementation extends ErstellenController {
       Navigator.of(context, rootNavigator: true).pop();
       logger.d("Failed to get Attachments");
       return false;
+    }
+  }
+
+  @override
+  void removeAttachmentlocal(String attachment) {
+    for (String att in state.attachments) {
+      if (att == attachment) {
+        removedAttachments.add(att);
+        List<String> attachments = List<String>.from(state.attachments);
+        attachments.remove(att);
+        state = state.copyWith(attachments: attachments);
+
+        break;
+      }
+    }
+  }
+
+  @override
+  void removeAttachmentsRemote() {
+    for (String att in removedAttachments) {
+      FirebaseStorage.instance.refFromURL(att).delete();
+    }
+  }
+
+  @override
+  void removeAttachmentRemote(String attachment) {
+    for (String att in state.attachments) {
+      if (att == attachment) {
+        FirebaseStorage.instance.refFromURL(att).delete();
+        List<String> attachments = List<String>.from(state.attachments);
+        attachments.remove(att);
+        state = state.copyWith(attachments: attachments);
+        break;
+      }
     }
   }
 }
