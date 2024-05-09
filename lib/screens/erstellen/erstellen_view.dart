@@ -5,6 +5,7 @@ import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:plate_pal/common/providers.dart';
 import 'package:plate_pal/config.dart';
+import 'package:plate_pal/screens/erstellen/erstellen_component_attachments.dart';
 import 'package:plate_pal/screens/erstellen/erstellen_model.dart';
 import 'package:plate_pal/screens/home/home_model.dart';
 import 'package:plate_pal/ui-kit/add_text_field_widget.dart';
@@ -271,60 +272,11 @@ class ErstellenView extends ConsumerWidget {
                       icon: const Icon(Icons.attach_file)),
                   const SizedBox(height: 10.0),
                   if (model.attachments.isNotEmpty)
-                    Padding(
-                      padding:
-                          EdgeInsets.fromLTRB(sidePadding, 10, sidePadding, 10),
-                      child: SingleChildScrollView(
-                        scrollDirection: Axis.horizontal,
-                        child: Row(
-                          children: [
-                            for (String attachment in model.attachments)
-                              Padding(
-                                padding: const EdgeInsets.only(right: 8),
-                                child: ClipRRect(
-                                  borderRadius: const BorderRadius.all(
-                                      Radius.circular(10)),
-                                  child: GestureDetector(
-                                    onTap: () => model.isEdit
-                                        ? controller
-                                            .removeAttachmentlocal(attachment)
-                                        : controller
-                                            .removeAttachmentRemote(attachment),
-                                    child: Stack(
-                                        alignment: Alignment.center,
-                                        children: [
-                                          CachedNetworkImage(
-                                            imageUrl: attachment,
-                                            height: 80,
-                                            width: 80,
-                                            fit: BoxFit.cover,
-                                          ),
-                                          Align(
-                                            child: Container(
-                                              width: 35,
-                                              height: 35,
-                                              decoration: BoxDecoration(
-                                                shape: BoxShape.circle,
-                                                color: currentScheme
-                                                    .getScheme()
-                                                    .error,
-                                              ),
-                                            ),
-                                          ),
-                                          Align(
-                                            child: Icon(Icons.delete_forever,
-                                                size: 30,
-                                                color: currentScheme
-                                                    .getScheme()
-                                                    .onError),
-                                          ),
-                                        ]),
-                                  ),
-                                ),
-                              ),
-                          ],
-                        ),
-                      ),
+                    ErstellenAttachments(
+                      attachments: model.attachments,
+                      isEdit: model.isEdit,
+                      controller: controller,
+                      sidePadding: sidePadding,
                     ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
