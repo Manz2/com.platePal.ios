@@ -202,7 +202,12 @@ class DetailsView extends ConsumerWidget {
             ),
             if (recipe.attachments != null && recipe.attachments!.isNotEmpty)
               Padding(
-                padding: EdgeInsets.fromLTRB(sidePadding, 10, sidePadding, 10),
+                padding: EdgeInsets.fromLTRB(
+                  sidePadding,
+                  10,
+                  sidePadding,
+                  30,
+                ),
                 child: SingleChildScrollView(
                   scrollDirection: Axis.horizontal,
                   child: Row(

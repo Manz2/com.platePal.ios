@@ -345,6 +345,7 @@ class ErstellenView extends ConsumerWidget {
                         ),
                     ],
                   ),
+                  const SizedBox(height: 80)
                 ],
               ),
             ),

@@ -27,7 +27,7 @@ class ErstellenAttachments extends StatelessWidget {
           children: [
             for (String attachment in attachments)
               Padding(
-                padding: const EdgeInsets.only(right: 8),
+                padding: const EdgeInsets.only(right: 8, bottom: 20),
                 child: ClipRRect(
                   borderRadius: const BorderRadius.all(Radius.circular(10)),
                   child: GestureDetector(
