@@ -46,6 +46,7 @@ class ErstellenControllerImplementation extends ErstellenController {
                 urlInvalid: false,
                 isImport: false,
                 isEdit: false));
+  List removedAttachments = [];
 
   @override
   void setModel(ErstellenModel? model) {
@@ -255,7 +256,8 @@ class ErstellenControllerImplementation extends ErstellenController {
         state.requiredIngredients.isNotEmpty ||
         state.steps.isNotEmpty ||
         state.webURL != "" ||
-        state.image != "") {
+        state.image != "" ||
+        state.attachments.isNotEmpty) {
       final bool? result = await ErrorDialogChoice(
               ok: FlutterI18n.translate(context, "create.delete"),
               dismiss: FlutterI18n.translate(context, "create.keep"),
@@ -268,6 +270,11 @@ class ErstellenControllerImplementation extends ErstellenController {
     }
     if (!state.isEdit && state.image != "") {
       FirebaseStorage.instance.refFromURL(state.image).delete();
+    }
+    if (!state.isEdit && state.attachments.isNotEmpty) {
+      for (String attachment in state.attachments) {
+        FirebaseStorage.instance.refFromURL(attachment).delete();
+      }
     }
     state = state.copyWith(
         name: '',
@@ -352,34 +359,101 @@ class ErstellenControllerImplementation extends ErstellenController {
   }
 
   @override
-  void helper(BuildContext context) {
-    Recipe recipe = Recipe(
-      id: "",
-      creator: "test",
-      isSubscription: false,
-      privateRecipe: false,
-      image: "",
-      title: "Rezept von ${DateTime.now()}",
-      description: "Test Beschreibung",
-      guideText: ["Test Step 1", "Test Step 2"],
-      ingredients: [
-        Ingredient(name: "Test Zutat 1", amount: "1stck"),
-        Ingredient(name: "Test Zutat 2", amount: "2stck")
-      ],
-      vegetarisch: false,
-      vegan: false,
-      glutenfrei: false,
-      webURL: "Test Url",
-      attachments: [],
-    );
-    ErstellenModel tmp = _backendService.recipeToErstellenModel(recipe);
-    logger.e("Helper ErstellenModel");
-    debugPrint("$tmp/n");
-    state = tmp;
+  void navigateBack(BuildContext context) {
+    _navigationService.routeHome(context);
   }
 
   @override
-  void navigateBack(BuildContext context) {
-    _navigationService.routeHome(context);
+  Future<bool> addAttachments(BuildContext context) async {
+    Uuid uuid = const Uuid();
+    FilePickerResult? result = await FilePicker.platform
+        .pickFiles(withData: true, allowMultiple: true, type: FileType.image);
+    if (!context.mounted) return false;
+    showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (BuildContext dialogContext) {
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
+        });
+
+    if (result != null) {
+      if (result.count + state.attachments.length > 8) {
+        Navigator.of(context, rootNavigator: true).pop();
+        final snackBar = SnackBar(
+          content: Text(FlutterI18n.translate(context, "create.attachmentMax")),
+        );
+        ScaffoldMessenger.of(context).showSnackBar(snackBar);
+        return false;
+      }
+      List<String> attachments = List<String>.from(state.attachments);
+      for (PlatformFile file in result.files) {
+        if (file.size >= 5000000) {
+          if (!context.mounted) return true;
+          Navigator.of(context, rootNavigator: true).pop();
+          return false;
+        }
+
+        Uint8List uploadfile = file.bytes!;
+        String extension = file.extension!;
+        String? name = uuid.v1();
+        String fileName = "$name.$extension";
+
+        await FirebaseStorage.instance
+            .ref("attachments")
+            .child(fileName)
+            .putData(uploadfile);
+        String downloadUrl = await FirebaseStorage.instance
+            .ref("attachments")
+            .child(fileName)
+            .getDownloadURL();
+
+        attachments.add(downloadUrl);
+      }
+      state = state.copyWith(attachments: attachments);
+      if (!context.mounted) return true;
+      Navigator.of(context, rootNavigator: true).pop();
+      return true;
+    } else {
+      if (!context.mounted) return false;
+      Navigator.of(context, rootNavigator: true).pop();
+      logger.d("Failed to get Attachments");
+      return false;
+    }
+  }
+
+  @override
+  void removeAttachmentlocal(String attachment) {
+    for (String att in state.attachments) {
+      if (att == attachment) {
+        removedAttachments.add(att);
+        List<String> attachments = List<String>.from(state.attachments);
+        attachments.remove(att);
+        state = state.copyWith(attachments: attachments);
+
+        break;
+      }
+    }
+  }
+
+  @override
+  void removeAttachmentsRemote() {
+    for (String att in removedAttachments) {
+      FirebaseStorage.instance.refFromURL(att).delete();
+    }
+  }
+
+  @override
+  void removeAttachmentRemote(String attachment) {
+    for (String att in state.attachments) {
+      if (att == attachment) {
+        FirebaseStorage.instance.refFromURL(att).delete();
+        List<String> attachments = List<String>.from(state.attachments);
+        attachments.remove(att);
+        state = state.copyWith(attachments: attachments);
+        break;
+      }
+    }
   }
 }

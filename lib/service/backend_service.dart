@@ -423,6 +423,11 @@ class BackendService implements BackendServiceAggregator {
     if (recipe.image != "") {
       FirebaseStorage.instance.refFromURL(recipe.image).delete();
     }
+    if (recipe.attachments != null) {
+      for (String attachment in recipe.attachments!) {
+        FirebaseStorage.instance.refFromURL(attachment).delete();
+      }
+    }
     ref
         .child("users")
         .child(FirebaseAuth.instance.currentUser!.uid)
